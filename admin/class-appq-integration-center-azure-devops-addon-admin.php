@@ -61,8 +61,16 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_type($integrations) {
-		$integrations[] = 'azure-devops';
+		$integrations[] = array(
+			'slug' => 'azure-devops',
+			'name' => 'Azure Devops',
+			'class' => $this
+		);
 		return $integrations;
+	}
+	
+	public function settings(){
+		$this->partial('settings');
 	}
 	
 	/** 
@@ -70,7 +78,7 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 * @var $slug
 	 */
 	public function get_partial($slug) {
-		return $this->plugin_name . '/admin/partials/appq-integration-center-admin-'. $slug .'.php';
+		return $this->plugin_name . '/admin/partials/'.$this->plugin_name.'-admin-'. $slug .'.php';
 	}
 	/** 
 	 * Include admin partial
