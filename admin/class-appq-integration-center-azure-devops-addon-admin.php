@@ -76,7 +76,12 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 * Include admin partial
 	 * @var $slug
 	 */
-	public function partial($slug) {
-	   include(WP_PLUGIN_DIR . '/' . $this->get_partial($slug));
+	public function partial($slug,$variables = false) {
+		if ($variables) {
+			foreach ($variables as $key => $value) {
+				${$key} = $value;
+			}
+		}
+		include(WP_PLUGIN_DIR . '/' . $this->get_partial($slug));
 	}
 }
