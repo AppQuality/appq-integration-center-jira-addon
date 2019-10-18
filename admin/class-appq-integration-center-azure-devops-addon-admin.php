@@ -6,8 +6,8 @@
  * @link       https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
  * @since      1.0.0
  *
- * @package    Appq_Integration_Center_Jira_Addon
- * @subpackage Appq_Integration_Center_Jira_Addon/admin
+ * @package    Appq_Integration_Center_Azure_Devops_Addon
+ * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Appq_Integration_Center_Jira_Addon
- * @subpackage Appq_Integration_Center_Jira_Addon/admin
+ * @package    Appq_Integration_Center_Azure_Devops_Addon
+ * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin
  * @author     Davide Bizzi <davide.bizzi@app-quality.com>
  */
-class Appq_Integration_Center_Jira_Addon_Admin {
+class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -56,12 +56,12 @@ class Appq_Integration_Center_Jira_Addon_Admin {
 
 
 	/**
-	 * Register JIRA integration type
+	 * Register Azure DevOps integration type
 	 *
 	 * @since    1.0.0
 	 */
 	public function register_type($integrations) {
-		$integrations[] = 'jira';
+		$integrations[] = 'azure-devops';
 		return $integrations;
 	}
 	
