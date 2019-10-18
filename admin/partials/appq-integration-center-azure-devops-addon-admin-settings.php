@@ -12,4 +12,25 @@
  * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin/partials
  */
 ?>
-<h2> Azure DevOps Integration Settings</h2>
+<div class="container-flud">
+	<h3> Azure DevOps Integration Settings</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group row">
+                <label for="azure_devops_endpoint" class="col-sm-2 col-form-label">Endpoint</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="ssh_username"placeholder="Username">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group row">
+                <label for="azure_devops_pat" class="col-sm-3 col-form-label">Personal Access Token</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="ssh_password" placeholder="••••••••••">
+                </div>
+            </div>
+        </div>
+    </div>
+	<?php $this->partial('settings/field-mapping') ?>
+</div>
