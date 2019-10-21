@@ -114,6 +114,11 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-appq-integration-center-azure-devops-addon-admin.php';
 
+		/**
+		 * The class responsible for communication with azure devops rest api
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-azure-devops-api.php';
+
 		$this->loader = new Appq_Integration_Center_Azure_Devops_Addon_Loader();
 
 	}
