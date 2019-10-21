@@ -119,6 +119,15 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-azure-devops-api.php';
 
+		
+		/**
+		 * Require ajax actions
+		 */		
+	    foreach (glob(plugin_dir_path( dirname( __FILE__ ) ) . 'ajax/*.php') as $filename)
+	    {
+			require_once $filename;
+	    }
+
 		$this->loader = new Appq_Integration_Center_Azure_Devops_Addon_Loader();
 
 	}
@@ -150,7 +159,10 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Appq_Integration_Center_Azure_Devops_Addon_Admin( $this->get_plugin_name(), $this->get_version() );
-
+		
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		
 		$this->loader->add_filter( 'register_integrations', $plugin_admin, 'register_type', 15 );
 
 	}

@@ -53,7 +53,28 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 		$this->version = $version;
 
 	}
+	
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/appq-integration-center-azure-devops-addon-admin.css', array(), $this->version, 'all' );
 
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/appq-integration-center-azure-devops-addon-admin.js', array( 'jquery' ), $this->version, false );
+	    wp_localize_script( $this->plugin_name, 'custom_object',array( 
+			'ajax_url' => admin_url( 'admin-ajax.php' ) 
+		) );
+	}
 
 	/**
 	 * Register Azure DevOps integration type
