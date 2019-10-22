@@ -32,7 +32,12 @@
             </div>
         </div>
     </div>
-	<?php $this->partial('settings/field-mapping', array(
-		'field_mapping' => !empty($config) ? json_decode($config->field_mapping,true) : array()
+	<?php 
+	$field_mapping = !empty($config) ? json_decode($config->field_mapping,true) : array();
+	if (empty($field_mapping)) {
+		$field_mapping = array();
+	}
+	$this->partial('settings/field-mapping', array(
+		'field_mapping' => $field_mapping
 	)) ?>
 </div>
