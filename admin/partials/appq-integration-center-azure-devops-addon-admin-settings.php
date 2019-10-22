@@ -12,7 +12,7 @@
  * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin/partials
  */
 ?>
-<div class="container-flud">
+<form id="azure_devops_settings" class="container-fluid">
 	<h3> Azure DevOps Integration Settings</h3>
     <div class="row">
         <div class="col-sm-4">
@@ -40,4 +40,4 @@
 	$this->partial('settings/field-mapping', array(
 		'field_mapping' => $field_mapping
 	)) ?>
-</div>
+</form>
