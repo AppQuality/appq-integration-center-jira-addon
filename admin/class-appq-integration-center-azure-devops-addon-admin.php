@@ -63,9 +63,11 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/appq-integration-center-azure-devops-addon-admin.css', array(), $this->version, 'all' );
-
+	public function enqueue_styles($hook) {
+		if (strpos($hook, 'integration-center') !== false)
+		{
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/appq-integration-center-azure-devops-addon-admin.css', array(), $this->version, 'all' );
+		}
 	}
 
 	/**
@@ -73,11 +75,14 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/appq-integration-center-azure-devops-addon-admin.js', array( 'jquery' ), $this->version, false );
-	    wp_localize_script( $this->plugin_name, 'custom_object',array( 
-			'ajax_url' => admin_url( 'admin-ajax.php' ) 
-		) );
+	public function enqueue_scripts($hook) {
+		if (strpos($hook, 'integration-center') !== false)
+		{
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/appq-integration-center-azure-devops-addon-admin.js', array( 'jquery' ), $this->version, false );
+			wp_localize_script( $this->plugin_name, 'custom_object',array( 
+				'ajax_url' => admin_url( 'admin-ajax.php' ) 
+			) );
+		}
 	}
 
 	/**
