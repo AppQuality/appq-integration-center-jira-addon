@@ -2,10 +2,12 @@
 <h3> Field Mapping</h3>
 <div class="row">
 	<div class="col-sm-9">
-		<div class="form-group row">
-			<label for="value" class="col-sm-2">Work Item Value</label>
-			<input type="text" class="col-sm-10 form-control" id="value" placeholder="Title: {Bug.title}">
-		</div>
+		<?php foreach ($field_mapping as $key => $value) : ?>
+			<div class="form-group row">
+				<label for="value" class="col-sm-2"><?= $key ?></label>
+				<input type="text" class="col-sm-10 form-control" id="value" value="<?= $value ?>" placeholder="Title: {Bug.title}">
+			</div>
+		<?php endforeach ?>
 	</div>
 	<div class="col-sm-3">
 		<div class="row">

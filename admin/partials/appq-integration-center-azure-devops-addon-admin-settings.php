@@ -19,7 +19,7 @@
             <div class="form-group row">
                 <label for="azure_devops_endpoint" class="col-sm-2 col-form-label">Endpoint</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="ssh_username"placeholder="Username">
+                    <input type="text" class="form-control" name="azure_devops_endpoint" id="azure_devops_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="httpx://xxx.xxxxxx.xx/xxx/">
                 </div>
             </div>
         </div>
@@ -27,10 +27,12 @@
             <div class="form-group row">
                 <label for="azure_devops_pat" class="col-sm-3 col-form-label">Personal Access Token</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="ssh_password" placeholder="••••••••••">
+                    <input type="password" class="form-control" name="azure_devops_apikey" id="azure_devops_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="••••••••••">
                 </div>
             </div>
         </div>
     </div>
-	<?php $this->partial('settings/field-mapping') ?>
+	<?php $this->partial('settings/field-mapping', array(
+		'field_mapping' => !empty($config) ? json_decode($config->field_mapping,true) : array()
+	)) ?>
 </div>

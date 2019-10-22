@@ -50,6 +50,10 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
+		$this->integration = array(
+			'slug' => 'azure-devops',
+			'name' => 'Azure Devops'
+		);
 		$this->version = $version;
 
 	}
@@ -82,16 +86,23 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_type($integrations) {
-		$integrations[] = array(
-			'slug' => 'azure-devops',
-			'name' => 'Azure Devops',
-			'class' => $this
+		$integrations[] = array_merge(
+			$this->integration,
+			array(
+				'class' => $this
+			)
 		);
 		return $integrations;
 	}
 	
-	public function settings(){
-		$this->partial('settings');
+	public function settings($campaign){
+		global $wpdb;
+		$config = $wpdb->get_row(
+			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix .'appq_integration_center_config WHERE campaign_id = %d AND integration = %s',$campaign->id,$this->integration['slug'])
+		);
+		$this->partial('settings',array(
+			'config' => $config
+		));
 	}
 	
 	/** 
