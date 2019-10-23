@@ -17,11 +17,11 @@
 				var new_input = $(`
 				<div class="form-group row">
 					<label class="col-sm-2"></label>
-					<input type="text" class="col-sm-9 form-control" placeholder="Title: {Bug.title}">
+					<textarea class="col-sm-9 form-control" placeholder="Title: {Bug.title}"></textarea>
 					<button class="col-sm-1 remove btn btn-danger">-</button>
 				</div>`)
 				new_input.find('label').attr('for','field_mapping['+key+']').text(key)
-				new_input.find('input').attr('name','field_mapping['+key+']').val(value)
+				new_input.find('textarea').attr('name','field_mapping['+key+']').val(value)
 				new_input.find('.remove').click(function(){
 					$(this).parent().remove()
 				})
