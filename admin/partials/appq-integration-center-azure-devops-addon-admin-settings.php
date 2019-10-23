@@ -19,7 +19,7 @@
             <div class="form-group row">
                 <label for="azure_devops_endpoint" class="col-sm-2 col-form-label">Endpoint</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="azure_devops_endpoint" id="azure_devops_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="httpx://xxx.xxxxxx.xx/xxx/">
+                    <input type="text" class="form-control" name="azure_devops_endpoint" id="azure_devops_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="https://dev.azure.com/{organization}/{project}/_apis">
                 </div>
             </div>
         </div>
