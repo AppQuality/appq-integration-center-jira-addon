@@ -162,6 +162,10 @@ class AzureDevOpsRestApi
 				'message' => $res
 			);
 		}
+		return array(
+			'status' => false,
+			'message' => 'Generic error'
+		);
 	}
 
 	public function get_issue_by_id($id)
