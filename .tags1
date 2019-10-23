@@ -4,6 +4,4 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-appq_azure_devops_upload_bugs	/home/clochard/dev/local-docker-infrastructure/web/src/wp-content/plugins/appq-integration-center-azure-devops-addon/ajax/upload_bugs.php	/^function appq_azure_devops_upload_bugs($cp_id, $bug_id){$/;"	function	line:3
-api	/home/clochard/dev/local-docker-infrastructure/web/src/wp-content/plugins/appq-integration-center-azure-devops-addon/ajax/upload_bugs.php	/^	$api = new AzureDevOpsRestApi($cp_id);$/;"	variable	line:4
-bug	/home/clochard/dev/local-docker-infrastructure/web/src/wp-content/plugins/appq-integration-center-azure-devops-addon/ajax/upload_bugs.php	/^	$bug = $api->get_bug($bug_id);$/;"	variable	line:6
+success	/home/clochard/dev/local-docker-infrastructure/web/src/wp-content/plugins/appq-integration-center-azure-devops-addon/admin/js/appq-integration-center-azure-devops-addon-admin.js	/^				success: function(msg) {$/;"	function	line:56
