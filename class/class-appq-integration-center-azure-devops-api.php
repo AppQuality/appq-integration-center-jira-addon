@@ -69,10 +69,10 @@ class AzureDevOpsRestApi
 		$value = str_replace('{Bug.type_id}',$bug->bug_type_id,$value);
 		
 		
-		$type = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_type WHERE id = %d',$bug->bug_type_id),OBJECT_K);
-		$severity = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_severity WHERE id = %d',$bug->severity_id),OBJECT_K);
-		$status = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_status WHERE id = %d',$bug->status_id),OBJECT_K);
-		$replicability = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_replicability WHERE id = %d',$bug->bug_replicability_id),OBJECT_K);
+		$type = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_type WHERE id = %d',$bug->bug_type_id));
+		$severity = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_severity WHERE id = %d',$bug->severity_id));
+		$status = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_status WHERE id = %d',$bug->status_id));
+		$replicability = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_replicability WHERE id = %d',$bug->bug_replicability_id));
 		
 		$value = str_replace('{Bug.severity}',$severity,$value);
 		$value = str_replace('{Bug.replicability}',$replicability,$value);
