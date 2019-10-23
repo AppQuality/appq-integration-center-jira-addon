@@ -84,7 +84,7 @@ class AzureDevOpsRestApi
 		$value = str_replace('{Bug.os}',$bug->os,$value);
 		$value = str_replace('{Bug.os_version}',$bug->os_version,$value);
 		
-		if (sizeof($bug->fields) > 0)
+		if (property_exists($bug,'fields') && sizeof($bug->fields) > 0)
 		{
 			foreach ($bug->fields as $slug => $field_value) {
 				$value = str_replace('{Bug.field.'.$slug.'}',$field_value,$value);
