@@ -7,7 +7,7 @@ function appq_azure_devops_edit_settings()
 	$endpoint = array_key_exists('azure_devops_endpoint', $_POST) ? $_POST['azure_devops_endpoint'] : '';
 	$apikey = array_key_exists('azure_devops_apikey', $_POST) ? $_POST['azure_devops_apikey'] : '';
 	$field_mapping = array_key_exists('field_mapping', $_POST) ? $_POST['field_mapping'] : new stdClass();
-	$field_mapping = stripslashes(json_encode($field_mapping));
+	$field_mapping = (json_encode($field_mapping));
 
 	$has_value = intval($wpdb->get_var(
 		$wpdb->prepare('SELECT COUNT(*) FROM ' .$wpdb->prefix .'appq_integration_center_config WHERE integration = "azure-devops" AND campaign_id = %d', $cp_id)

@@ -5,7 +5,7 @@
 		<?php foreach ($field_mapping as $key => $value) : ?>
 			<div class="form-group row">
 				<label for="field_mapping[<?= $key ?>]" class="col-sm-2"><?= $key ?></label>
-				<input name="field_mapping[<?= $key ?>]" type="text" class="col-sm-9 form-control" id="value" value="<?= $value ?>" placeholder="Title: {Bug.title}">
+				<textarea name="field_mapping[<?= $key ?>]" class="col-sm-9 form-control" placeholder="Title: {Bug.title}"><?= $value ?></textarea>
 				<button class="col-sm-1 remove btn btn-danger">-</button>
 			</div>
 		<?php endforeach ?>
