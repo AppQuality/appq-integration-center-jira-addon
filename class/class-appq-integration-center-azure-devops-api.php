@@ -90,6 +90,7 @@ class AzureDevOpsRestApi
 				$value = str_replace('{Bug.field.'.$slug.'}',$field_value,$value);
 			}
 		}
+		$value = nl2br($value);
 		$value = stripslashes($value);
 		return $value;
 	}
