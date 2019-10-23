@@ -52,11 +52,51 @@ class AzureDevOpsRestApi
 		return 'Microsoft.VSTS.WorkItemTypes.Issue';
 	}
 
-	public function map_key_and_value($bug,$key, $value)
+	public function bug_data_replace($bug,$value)
 	{
-		$key = $key;
-		
+		global $wpdb;
 		$value = str_replace('{Bug.message}',$bug->message,$value);
+		$value = str_replace('{Bug.steps}',$bug->description,$value);
+		$value = str_replace('{Bug.expected}',$bug->expected_result,$value);
+		$value = str_replace('{Bug.actual}',$bug->current_result,$value);
+		$value = str_replace('{Bug.note}',$bug->note,$value);
+		$value = str_replace('{Bug.id}',$bug->id,$value);
+		$value = str_replace('{Bug.internal_id}',$bug->internal_id,$value);
+		
+		$value = str_replace('{Bug.status_id}',$bug->status_id,$value);
+		$value = str_replace('{Bug.severity_id}',$bug->severity_id,$value);
+		$value = str_replace('{Bug.replicability_id}',$bug->bug_replicability_id,$value);
+		$value = str_replace('{Bug.type_id}',$bug->bug_type_id,$value);
+		
+		
+		$type = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_type WHERE id = %d',$bug->bug_type_id),OBJECT_K);
+		$severity = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_severity WHERE id = %d',$bug->severity_id),OBJECT_K);
+		$status = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_status WHERE id = %d',$bug->status_id),OBJECT_K);
+		$replicability = $wpdb->get_var($wpdb->prepare('SELECT name FROM ' . $wpdb->prefix . 'appq_evd_bug_replicability WHERE id = %d',$bug->bug_replicability_id),OBJECT_K);
+		
+		$value = str_replace('{Bug.severity}',$severity,$value);
+		$value = str_replace('{Bug.replicability}',$replicability,$value);
+		$value = str_replace('{Bug.type}',$type,$value);
+		$value = str_replace('{Bug.status}',$status,$value);
+		
+		$value = str_replace('{Bug.manufacturer}',$bug->manufacturer,$value);
+		$value = str_replace('{Bug.model}',$bug->model,$value);
+		$value = str_replace('{Bug.os}',$bug->os,$value);
+		$value = str_replace('{Bug.os_version}',$bug->os_version,$value);
+		
+		if (sizeof($bug->fields) > 0)
+		{
+			foreach ($bug->fields as $slug => $field_value) {
+				$value = str_replace('{Bug.field.'.$slug.'}',$field_value,$value);
+			}
+		}
+		return $value;
+	}
+	
+	public function map_key_and_value($bug,$key,$value)
+	{
+		$key = $this->bug_data_replace($bug,$key);
+		$value = $this->bug_data_replace($bug,$value);
 		
 		return array(
 			'key' => $key,
@@ -117,6 +157,17 @@ class AzureDevOpsRestApi
 	{
 		$bug_model = mvc_model('Bug');
 		$bug = $bug_model->find_by_id($bug_id);
+		$additional_fields = appq_get_campaign_additional_fields_data($bug_id);
+		
+		if (sizeof($additional_fields) > 0)
+		{
+			$bug->fields = array();
+		}
+		
+		foreach ($additional_fields as $additional_field) 
+		{
+			$bug->fields[$additional_field->slug] = $additional_field->value;
+		}
 
 		return $bug;
 	}

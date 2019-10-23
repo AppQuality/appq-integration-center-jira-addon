@@ -105,8 +105,10 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 		$config = $wpdb->get_row(
 			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix .'appq_integration_center_config WHERE campaign_id = %d AND integration = %s',$campaign->id,$this->integration['slug'])
 		);
+		$additional_fields = appq_get_campaign_additional_fields($campaign->id);
 		$this->partial('settings',array(
-			'config' => $config
+			'config' => $config,
+			'additional_fields' => $additional_fields
 		));
 	}
 	
