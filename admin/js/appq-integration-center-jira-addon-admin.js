@@ -2,10 +2,10 @@
 	'use strict';
 
 	$(document).ready(function() {
-		$('#azure_devops_settings .field_mapping .remove').click(function(){
+		$('#jira_settings .field_mapping .remove').click(function(){
 			$(this).parent().remove()
 		})
-		$('#azure_devops_settings .add_field_mapping').click(function(){
+		$('#jira_settings .add_field_mapping').click(function(){
 			var button = $(this)
 			button.attr('disabled','disabled')
 			var proto = $('<div><input type="text" placeholder="key" name="key"><input type="text" placeholder="value" name="value"><button class="btn btn-primary">OK</button></div>')
@@ -32,15 +32,15 @@
 			})
 			proto.insertBefore($(this))
 		})
-		$('#azure_devops_settings .save').click(function(){
+		$('#jira_settings .save').click(function(){
 			var srcParams = new URLSearchParams(window.location.search)
 			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
 			var button = $(this)
 			var text = button.text()
-			var data = $('#azure_devops_settings').serializeArray()
+			var data = $('#jira_settings').serializeArray()
 			data.push({
 				'name' : 'action',
-				'value': 'appq_azure_devops_edit_settings'
+				'value': 'appq_jira_edit_settings'
 			})
 			data.push({
 				'name' : 'cp_id',

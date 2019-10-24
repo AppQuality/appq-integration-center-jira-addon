@@ -1,6 +1,6 @@
 <?php
 
-class AzureDevOpsRestApi
+class JiraRestApi
 {
 
 	private $cp_id;
@@ -12,8 +12,8 @@ class AzureDevOpsRestApi
 		$this->api_version = '5.1';
 		$this->cp_id = $cp_id;
 		$this->integration = array(
-			'slug' => 'azure-devops',
-			'name' => 'Azure Devops',
+			'slug' => 'jira',
+			'name' => 'Jira',
 		);
 
 		$this->configuration = $this->get_configuration($this->cp_id);

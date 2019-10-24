@@ -6,8 +6,8 @@
  * @link       https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
  * @since      1.0.0
  *
- * @package    Appq_Integration_Center_Azure_Devops_Addon
- * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin
+ * @package    Appq_Integration_Center_Jira_Addon
+ * @subpackage Appq_Integration_Center_Jira_Addon/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Appq_Integration_Center_Azure_Devops_Addon
- * @subpackage Appq_Integration_Center_Azure_Devops_Addon/admin
+ * @package    Appq_Integration_Center_Jira_Addon
+ * @subpackage Appq_Integration_Center_Jira_Addon/admin
  * @author     Davide Bizzi <davide.bizzi@app-quality.com>
  */
-class Appq_Integration_Center_Azure_Devops_Addon_Admin {
+class Appq_Integration_Center_Jira_Addon_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -51,8 +51,8 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->integration = array(
-			'slug' => 'azure-devops',
-			'name' => 'Azure Devops'
+			'slug' => 'jira',
+			'name' => 'Jira'
 		);
 		$this->version = $version;
 
@@ -66,7 +66,7 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	public function enqueue_styles($hook) {
 		if (strpos($hook, 'integration-center') !== false)
 		{
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/appq-integration-center-azure-devops-addon-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/appq-integration-center-jira-addon-admin.css', array(), $this->version, 'all' );
 		}
 	}
 
@@ -78,7 +78,7 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	public function enqueue_scripts($hook) {
 		if (strpos($hook, 'integration-center') !== false)
 		{
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/appq-integration-center-azure-devops-addon-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/appq-integration-center-jira-addon-admin.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( $this->plugin_name, 'custom_object',array( 
 				'ajax_url' => admin_url( 'admin-ajax.php' ) 
 			) );
@@ -86,7 +86,7 @@ class Appq_Integration_Center_Azure_Devops_Addon_Admin {
 	}
 
 	/**
-	 * Register Azure DevOps integration type
+	 * Register Jira integration type
 	 *
 	 * @since    1.0.0
 	 */

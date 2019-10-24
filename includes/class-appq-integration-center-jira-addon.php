@@ -9,8 +9,8 @@
  * @link       https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
  * @since      1.0.0
  *
- * @package    Appq_Integration_Center_Azure_Devops_Addon
- * @subpackage Appq_Integration_Center_Azure_Devops_Addon/includes
+ * @package    Appq_Integration_Center_Jira_Addon
+ * @subpackage Appq_Integration_Center_Jira_Addon/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Appq_Integration_Center_Azure_Devops_Addon
- * @subpackage Appq_Integration_Center_Azure_Devops_Addon/includes
+ * @package    Appq_Integration_Center_Jira_Addon
+ * @subpackage Appq_Integration_Center_Jira_Addon/includes
  * @author     Davide Bizzi <davide.bizzi@app-quality.com>
  */
-class Appq_Integration_Center_Azure_Devops_Addon {
+class Appq_Integration_Center_Jira_Addon {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Appq_Integration_Center_Azure_Devops_Addon_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Appq_Integration_Center_Jira_Addon_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -67,12 +67,12 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'APPQ_INTEGRATION_CENTER_AZURE_DEVOPS_ADDON_VERSION' ) ) {
-			$this->version = APPQ_INTEGRATION_CENTER_AZURE_DEVOPS_ADDON_VERSION;
+		if ( defined( 'APPQ_INTEGRATION_CENTER_JIRA_ADDON_VERSION' ) ) {
+			$this->version = APPQ_INTEGRATION_CENTER_JIRA_ADDON_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'appq-integration-center-azure-devops-addon';
+		$this->plugin_name = 'appq-integration-center-jira-addon';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -85,9 +85,9 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Appq_Integration_Center_Azure_Devops_Addon_Loader. Orchestrates the hooks of the plugin.
-	 * - Appq_Integration_Center_Azure_Devops_Addon_i18n. Defines internationalization functionality.
-	 * - Appq_Integration_Center_Azure_Devops_Addon_Admin. Defines all hooks for the admin area.
+	 * - Appq_Integration_Center_Jira_Addon_Loader. Orchestrates the hooks of the plugin.
+	 * - Appq_Integration_Center_Jira_Addon_i18n. Defines internationalization functionality.
+	 * - Appq_Integration_Center_Jira_Addon_Admin. Defines all hooks for the admin area.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -101,23 +101,23 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-appq-integration-center-azure-devops-addon-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-appq-integration-center-jira-addon-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-appq-integration-center-azure-devops-addon-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-appq-integration-center-jira-addon-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-appq-integration-center-azure-devops-addon-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-appq-integration-center-jira-addon-admin.php';
 
 		/**
-		 * The class responsible for communication with azure devops rest api
+		 * The class responsible for communication with jira rest api
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-azure-devops-api.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-jira-api.php';
 
 		
 		/**
@@ -128,14 +128,14 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 			require_once $filename;
 	    }
 
-		$this->loader = new Appq_Integration_Center_Azure_Devops_Addon_Loader();
+		$this->loader = new Appq_Integration_Center_Jira_Addon_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Appq_Integration_Center_Azure_Devops_Addon_i18n class in order to set the domain and to register the hook
+	 * Uses the Appq_Integration_Center_Jira_Addon_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -143,7 +143,7 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Appq_Integration_Center_Azure_Devops_Addon_i18n();
+		$plugin_i18n = new Appq_Integration_Center_Jira_Addon_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -158,7 +158,7 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Appq_Integration_Center_Azure_Devops_Addon_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Appq_Integration_Center_Jira_Addon_Admin( $this->get_plugin_name(), $this->get_version() );
 		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -192,7 +192,7 @@ class Appq_Integration_Center_Azure_Devops_Addon {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Appq_Integration_Center_Azure_Devops_Addon_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Appq_Integration_Center_Jira_Addon_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
