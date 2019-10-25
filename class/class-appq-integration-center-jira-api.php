@@ -162,9 +162,6 @@ class JiraRestApi
 			);
 		}
 		
-		return array(
-			'status' => false
-		);
 		if (property_exists($res, 'key'))
 		{
 			$wpdb->insert($wpdb->prefix . 'appq_integration_center_bugs', array(
