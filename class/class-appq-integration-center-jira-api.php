@@ -19,8 +19,14 @@ class JiraRestApi
 		$this->configuration = $this->get_configuration($this->cp_id);
 
 		$this->basic_configuration = array(
-			'summary' => '{Bug.message}',
-			'description' => '{Bug.message}'
+			'summary' => array(
+				'value' => '{Bug.message}',
+				'sanitize' => 'off'
+			),
+			'description' => array(
+				'value' => '{Bug.message}',
+				'sanitize' => 'on'
+			),
 		);
 	}
 
@@ -52,7 +58,7 @@ class JiraRestApi
 		return 'Task';
 	}
 
-	public function bug_data_replace($bug, $value)
+	public function bug_data_replace($bug, $value,$sanitize)
 	{
 		global $wpdb;
 		$value = str_replace('{Bug.message}', $bug->message, $value);
@@ -92,16 +98,19 @@ class JiraRestApi
 		$value = nl2br($value);
 		$value = stripslashes($value);
 		
-		$value = str_replace('_','\\_',$value);
-		$value = str_replace('*','\\*',$value);
+		if ($sanitize)
+		{
+			$value = str_replace('_','\\_',$value);
+			$value = str_replace('*','\\*',$value);
+		}
 
 		return $value;
 	}
 
-	public function map_key_and_value($bug, $key, $value)
+	public function map_key_and_value($bug, $key, $value,$sanitize)
 	{
-		$key = $this->bug_data_replace($bug, $key);
-		$value = $this->bug_data_replace($bug, $value);
+		$key = $this->bug_data_replace($bug, $key,$sanitize);
+		$value = $this->bug_data_replace($bug, $value,$sanitize);
 
 		return array(
 			'key' => $key,
@@ -115,8 +124,10 @@ class JiraRestApi
 		$field_mapping = property_exists($this->configuration, 'field_mapping') ? json_decode($this->configuration->field_mapping, true) : array();
 		$field_mapping = array_merge($this->basic_configuration, $field_mapping);
 
-		foreach ($field_mapping as $key => $value) {
-			$map = $this->map_key_and_value($bug, $key, $value);
+		foreach ($field_mapping as $key => $item) {
+			$value = $item['value'];
+			$sanitize = array_key_exists('sanitize', $item) && $item['sanitize'] === 'on';
+			$map = $this->map_key_and_value($bug, $key, $value, $sanitize);
 			$data[$map['key']] = $map['value'];
 		}
 
@@ -151,6 +162,22 @@ class JiraRestApi
 			);
 		}
 		
+		return array(
+			'status' => false
+		);
+		if (property_exists($res, 'key'))
+		{
+			$wpdb->insert($wpdb->prefix . 'appq_integration_center_bugs', array(
+				'bug_id' => $bug->id,
+				'integration' => $this->integration['slug']
+			));
+
+			return array(
+				'status' => true,
+				'message' => $res
+			);
+		}
+		
 		if ($res->{"status-code"} == 404) {
 			return array(
 				'status' => false,
@@ -165,18 +192,6 @@ class JiraRestApi
 			);
 		}
 
-		if (property_exists($res, 'fields'))
-		{
-			$wpdb->insert($wpdb->prefix . 'appq_integration_center_bugs', array(
-				'bug_id' => $bug->id,
-				'integration' => $this->integration['slug']
-			));
-
-			return array(
-				'status' => true,
-				'message' => $res
-			);
-		}
 		return array(
 			'status' => false,
 			'message' => 'Generic error'

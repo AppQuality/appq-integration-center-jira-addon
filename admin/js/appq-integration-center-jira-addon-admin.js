@@ -17,11 +17,13 @@
 				var new_input = $(`
 				<div class="form-group row">
 					<label class="col-sm-2"></label>
-					<textarea class="col-sm-9 form-control" placeholder="Title: {Bug.title}"></textarea>
+					<textarea class="col-sm-8 form-control" placeholder="Title: {Bug.title}"></textarea>
+  					<input class="form-check-input" type="checkbox">
 					<button class="col-sm-1 remove btn btn-danger">-</button>
 				</div>`)
 				new_input.find('label').attr('for','field_mapping['+key+']').text(key)
-				new_input.find('textarea').attr('name','field_mapping['+key+']').val(value)
+				new_input.find('textarea').attr('name','field_mapping['+key+'][value]').val(value)
+				new_input.find('.form-check-input').attr('name','field_mapping['+key+'][sanitize]')
 				new_input.find('.remove').click(function(){
 					$(this).parent().remove()
 				})
@@ -57,6 +59,11 @@
 			 		button.text(text)
 				}
 			});
+		})
+		
+		$('.custom-checkbox').click(function(){
+			var input = $(this).find("input")
+        	input.prop("checked", !input.prop("checked"));
 		})
 	})
 })(jQuery);

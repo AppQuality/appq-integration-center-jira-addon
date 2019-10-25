@@ -6,3 +6,11 @@
 #bugs-tabs-content .fa.fa-upload:not(.text-secondary) {
 	cursor: pointer;
 }
+#jira_settings .custom-control{
+    padding-left: 15px;
+}
+#jira_settings .custom-control-label::after,
+#jira_settings .custom-control-label::before {
+    top: 2em;
+    left: 30%;
+}
