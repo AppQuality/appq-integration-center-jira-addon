@@ -111,6 +111,8 @@ class JiraRestApi
 		$value = nl2br($value);
 		$value = stripslashes($value);
 		
+		$value = strip_tags($value);
+		
 		if ($sanitize)
 		{
 			$value = str_replace('_','\\_',$value);
