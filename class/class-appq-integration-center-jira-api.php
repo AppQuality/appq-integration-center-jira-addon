@@ -33,7 +33,20 @@ class JiraRestApi
 
 	public function get_apiurl()
 	{
-		return $this->configuration->endpoint;
+		$endpoint_data = json_decode($this->configuration->endpoint);
+		if (empty($endpoint_data)) {
+			return '';
+		}
+		return $endpoint_data->endpoint;
+	}
+
+	public function get_project()
+	{
+		$endpoint_data = json_decode($this->configuration->endpoint);
+		if (empty($endpoint_data)) {
+			return '';
+		}
+		return $endpoint_data->project;
 	}
 	public function get_token()
 	{
@@ -142,7 +155,7 @@ class JiraRestApi
 			'name' => $this->get_issue_type()
 		);
 		$data['project'] = array(
-			'key' => 'IC'
+			'key' => $this->get_project()
 		);
 		$body = new stdClass();
 		$body->update = new stdClass();

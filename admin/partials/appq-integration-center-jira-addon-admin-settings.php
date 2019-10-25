@@ -11,6 +11,12 @@
  * @package    Appq_Integration_Center_Jira_Addon
  * @subpackage Appq_Integration_Center_Jira_Addon/admin/partials
  */
+ 
+$field_mapping = !empty($config) ? json_decode($config->field_mapping,true) : array();
+if (empty($field_mapping)) {
+    $field_mapping = array();
+}
+$endpoint_data = !empty($config) && property_exists($config,'endpoint') ? json_decode($config->endpoint,true) : array();
 ?>
 <form id="jira_settings" class="container-fluid">
 	<h3> Jira Integration Settings</h3>
@@ -19,24 +25,28 @@
             <div class="form-group row">
                 <label for="jira_endpoint" class="col-sm-2 col-form-label">Endpoint</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="https://{organization}.atlassian.net">
+                    <input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" value="<?= !empty($endpoint_data) ? $endpoint_data['endpoint'] : ''?>" placeholder="https://{organization}.atlassian.net">
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-5">
             <div class="form-group row">
-                <label for="jira_pat" class="col-sm-3 col-form-label">User email : api token</label>
+                <label for="jira_apikey" class="col-sm-3 col-form-label">User email : api token</label>
                 <div class="col-sm-9">
                     <input type="password" class="form-control" name="jira_apikey" id="jira_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="username@email.com:xxxxxxxxxxxxxxxxxx">
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="form-group row">
+                <label for="jira_project" class="col-sm-3 col-form-label">Project</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="jira_project" id="jira_project" value="<?= !empty($endpoint_data) ? $endpoint_data['project'] : ''?>"  placeholder="CAQ">
+                </div>
+            </div>
+        </div>
     </div>
 	<?php 
-	$field_mapping = !empty($config) ? json_decode($config->field_mapping,true) : array();
-	if (empty($field_mapping)) {
-		$field_mapping = array();
-	}
 	$this->partial('settings/field-mapping', array(
 		'field_mapping' => $field_mapping,
 		'additional_fields' => $additional_fields
