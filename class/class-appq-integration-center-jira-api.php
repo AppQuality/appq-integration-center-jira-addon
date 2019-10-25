@@ -9,7 +9,7 @@ class JiraRestApi
 
 	public function __construct($cp_id)
 	{
-		$this->api_version = '5.1';
+		$this->api_version = '2';
 		$this->cp_id = $cp_id;
 		$this->integration = array(
 			'slug' => 'jira',
@@ -19,8 +19,8 @@ class JiraRestApi
 		$this->configuration = $this->get_configuration($this->cp_id);
 
 		$this->basic_configuration = array(
-			'/fields/System.Title' => '{Bug.message}',
-			'/fields/System.Description' => '{Bug.message}'
+			'summary' => '{Bug.message}',
+			'description' => '{Bug.message}'
 		);
 	}
 
@@ -35,7 +35,7 @@ class JiraRestApi
 	}
 	public function get_authorization()
 	{
-		return "Basic ".base64_encode(':' .$this->get_token());
+		return $this->get_token();
 	}
 
 	public function get_configuration($cp_id)
@@ -49,7 +49,7 @@ class JiraRestApi
 
 	public function get_issue_type()
 	{
-		return 'Microsoft.VSTS.WorkItemTypes.Issue';
+		return 'Task';
 	}
 
 	public function bug_data_replace($bug, $value)
@@ -91,6 +91,9 @@ class JiraRestApi
 		}
 		$value = nl2br($value);
 		$value = stripslashes($value);
+		
+		$value = str_replace('_','\\_',$value);
+		$value = str_replace('*','\\*',$value);
 
 		return $value;
 	}
@@ -114,12 +117,7 @@ class JiraRestApi
 
 		foreach ($field_mapping as $key => $value) {
 			$map = $this->map_key_and_value($bug, $key, $value);
-			$data[] = array(
-				"path" => $map['key'],
-				"op" => "add",
-				"from" => null,
-				"value" => $map['value']
-			);
+			$data[$map['key']] = $map['value'];
 		}
 
 		return $data;
@@ -129,10 +127,20 @@ class JiraRestApi
 	{
 		global $wpdb;
 		$data = $this->map_fields($bug);
-		$req = Requests::post($this->get_apiurl() . '/wit/workitems/$' . $this->get_issue_type() . '?api-version=' . $this->api_version, array(
-			'Authorization' => $this->get_authorization(),
-			'Content-Type' => 'application/json-patch+json'
-		), json_encode($data));
+		$data['issuetype'] = array(
+			'name' => $this->get_issue_type()
+		);
+		$data['project'] = array(
+			'key' => 'IC'
+		);
+		$body = new stdClass();
+		$body->update = new stdClass();
+		$body->fields = (object) $data;
+		$url = parse_url($this->get_apiurl());
+		$req = Requests::post($url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue'  , array(
+			'Content-Type' => 'application/json',
+			'Accept' => 'application/json'
+		), json_encode($body));
 
 		$res = json_decode($req->body);
 
@@ -142,11 +150,18 @@ class JiraRestApi
 				'message' => 'Error on upload bug'
 			);
 		}
-
-		if (property_exists($res, 'innerException') && property_exists($res, 'message')) {
+		
+		if ($res->{"status-code"} == 404) {
 			return array(
 				'status' => false,
 				'message' => $res->message
+			);
+		}
+		
+		if (property_exists($res,'errorMessages')) {
+			return array(
+				'status' => false,
+				'message' => implode(',',$res->errorMessages) . ' - ' . implode(',', (array) $res->errors)
 			);
 		}
 
@@ -170,12 +185,7 @@ class JiraRestApi
 
 	public function get_issue_by_id($id)
 	{
-		$id = intval($id);
-		$req = Requests::get($this->get_apiurl() . '/wit/workitems/'. $id .'?api-version=' . $this->api_version, array(
-			'Authorization' => $this->get_authorization()
-		));
-
-		return json_decode($req->body);
+		return false;
 	}
 
 
