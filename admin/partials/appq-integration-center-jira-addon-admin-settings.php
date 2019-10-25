@@ -19,15 +19,15 @@
             <div class="form-group row">
                 <label for="jira_endpoint" class="col-sm-2 col-form-label">Endpoint</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="https://dev.azure.com/{organization}/{project}/_apis">
+                    <input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" value="<?= !empty($config) ? $config->endpoint : ''?>" placeholder="https://{organization}.atlassian.net">
                 </div>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="form-group row">
-                <label for="jira_pat" class="col-sm-3 col-form-label">Personal Access Token</label>
+                <label for="jira_pat" class="col-sm-3 col-form-label">User email : api token</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" name="jira_apikey" id="jira_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="••••••••••">
+                    <input type="password" class="form-control" name="jira_apikey" id="jira_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="username@email.com:xxxxxxxxxxxxxxxxxx">
                 </div>
             </div>
         </div>
