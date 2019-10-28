@@ -48,6 +48,22 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 	public function bug_data_replace_jira($bug, $value,$sanitize)
 	{
+		global $wpdb;
+		
+		if (strpos($value,'{Bug.media}') !== false)
+		{
+			$media =  $wpdb->get_results($wpdb->prepare('SELECT type,location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+			$media_items = array();
+			foreach ($media as $media_item) 
+			{
+				if ($media_item->type == 'image') {
+					$media_items[] = '!' . $media_item->location . '! - ' . $media_item->location;
+				} else {
+					$media_items[] = $media_item->location;
+				}
+			}
+			$value = str_replace('{Bug.media}', implode(', ',$media_items), $value);
+		}
 		$value = parent::bug_data_replace($bug, $value);
 		
 		$value = strip_tags($value);
