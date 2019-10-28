@@ -114,10 +114,12 @@ class Appq_Integration_Center_Jira_Addon {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-appq-integration-center-jira-addon-admin.php';
 
+		add_action('appq_integration_center_run',function(){
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-jira-api.php';
+		});
 		/**
 		 * The class responsible for communication with jira rest api
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class/class-appq-integration-center-jira-api.php';
 
 		
 		/**
