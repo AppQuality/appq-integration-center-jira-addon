@@ -104,6 +104,19 @@ class JiraRestApi extends IntegrationCenterRestApi
 	public function send_issue($bug)
 	{
 		global $wpdb;
+		
+		// TODO: Remove this control when old bugtracker will be discontinued
+		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"',$bug->id));
+		$is_uploaded = intval($is_uploaded);
+		if ($is_uploaded > 0)
+		{
+			return array(
+				'status' => false,
+				'message' => "This bug is already uploaded with old bugtracker"
+			);
+		}
+		
+		
 		$data = $this->map_fields($bug);
 		$data['issuetype'] = array(
 			'name' => $this->get_issue_type()
