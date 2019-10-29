@@ -64,7 +64,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 					$media_items[] = $media_item->location;
 				}
 			}
-			$value = str_replace('{Bug.media}', implode(', ', $media_items), $value);
+			$value = str_replace('{Bug.media}', implode(' , ', $media_items), $value);
 		}
 		$value = parent::bug_data_replace($bug, $value);
 
