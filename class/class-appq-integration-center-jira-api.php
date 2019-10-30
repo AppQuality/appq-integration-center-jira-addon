@@ -129,7 +129,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 		$body->update = new stdClass();
 		$body->fields = (object) $data;
 		$url = parse_url($this->get_apiurl());
-		$req = Requests::post($url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue', array(
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue';
+		$req = $this->http_post($url, array(
 			'Content-Type' => 'application/json',
 			'Accept' => 'application/json'
 		), json_encode($body));
@@ -151,10 +152,24 @@ class JiraRestApi extends IntegrationCenterRestApi
 			));
 			if (property_exists($this->configuration, 'upload_media') && intval($this->configuration->upload_media) > 0)
 			{
+				$return = array(
+					'status' => true,
+					'message' => ''
+				);
 				$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 				foreach ($media as $media_item)
 				{
-					$this->add_attachment($bug, $res->key, $media_item);
+					$result = $this->add_attachment($bug, $res->key, $media_item);
+					if (!$result['status'])
+					{
+						$return['status'] = false;
+						$return['message'] = $return['message'] . ' <br> '. $result['message'];
+					}
+				}
+				
+				if (!$return['status'])
+				{
+					return $return;
 				}
 			}
 
@@ -198,49 +213,44 @@ class JiraRestApi extends IntegrationCenterRestApi
 		file_put_contents(ABSPATH . 'wp-content/plugins/appq-integration-center/tmp/' . $basename, fopen($media, 'r'));
 
 		$headers = array(
-			"X-Atlassian-Token: no-check",
-			"Content-Type:multipart/form-data",
+			"X-Atlassian-Token"=>"no-check",
+			"Content-Type"=>"multipart/form-data",
 		);
 		
-		$ch = curl_init();
-		$options = array(
-			CURLOPT_URL => $this->get_apiurl(). '/rest/api/'.$this->api_version.'/issue/' .$key .'/attachments',
-			CURLOPT_USERPWD => $this->get_authorization(),
-			CURLOPT_POST => 1,
-			CURLOPT_HTTPHEADER => $headers,
-			CURLOPT_POSTFIELDS => array (
-				'file' => new CURLFile($filename)
-			),
-			CURLOPT_RETURNTRANSFER => true
-		);
-		curl_setopt_array($ch, $options);
-		$req = curl_exec($ch);
+		$url = parse_url($this->get_apiurl());
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/' .$key .'/attachments';
+		
+		$req = $this->http_multipart_post($url,$headers,array (
+			'file' => new CURLFile($filename)
+		));
+		
 		
 		$ret = array(
 			'status' => false,
 			'message' => 'Generic error on attachment ' . $basename
 		);
-		if(!curl_errno($ch))
+		if($req->status)
 		{
-			$info = curl_getinfo($ch);
-			if ($info['http_code'] == 200) {
+			if ($req->info['http_code'] == 200) {
 				$ret = array(
 					'status' => true,
-					'message' => json_decode($req)
+					'message' => json_decode($req->body)
 				);
+			} elseif($req->info['http_code'] == 413) {
+				$ret['message'] = $ret['message'] . ' - Entity too large';
 			} else {
-				$ret['message'] = $ret['message'] . ' - Error ' .  $info['http_code'];
+				$ret['message'] = $ret['message'] . ' - Error ' .  $req->info['http_code'];
 			}
 		}
 		else
 		{
 			$ret = array(
 				'status' => false,
-				'error' => $errmsg
+				'message' => $req->error
 			);
 		}
-		curl_close($ch);
 		unlink($filename);
+		return $ret;
 	}
 
 
