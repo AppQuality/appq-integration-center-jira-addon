@@ -22,7 +22,14 @@ class JiraRestApi extends IntegrationCenterRestApi
 		);
 	}
 
-
+	
+	/**
+	 * Get the apiurl
+	 * @method get_apiurl
+	 * @date   2019-10-30T14:52:24+010
+	 * @author: Davide Bizzi <clochard>
+	 * @return string                  The api URL
+	 */
 	public function get_apiurl()
 	{
 		$endpoint_data = json_decode($this->configuration->endpoint);
@@ -33,6 +40,13 @@ class JiraRestApi extends IntegrationCenterRestApi
 		return $endpoint_data->endpoint;
 	}
 
+	/**
+	 * Get jira project
+	 * @method get_project
+	 * @date   2019-10-30T15:31:33+010
+	 * @author: Davide Bizzi <clochard>
+	 * @return string                  The project slug
+	 */
 	public function get_project()
 	{
 		$endpoint_data = json_decode($this->configuration->endpoint);
@@ -42,12 +56,29 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		return $endpoint_data->project;
 	}
-
+	
+	/**
+	 * Get the data for authorization
+	 * @method get_authorization
+	 * @date   2019-10-30T14:53:28+010
+	 * @author: Davide Bizzi <clochard>
+	 * @return string	The data for the authorization. Overwrite in the subclass if you need manipulation of the token (base64 encoding,...)
+	 */
 	public function get_issue_type()
 	{
 		return 'Task';
 	}
-
+	
+	/**
+	 * Replace {placeholders} in a field mapping value with data from a bug
+	 * @method bug_data_replace
+	 * @date   2019-10-30T15:06:02+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  MvcObject                  $bug   The bug (MvcObject with additional fields on field property)
+	 * @param  string                  $value The string with {placeholders} to fill
+	 * @param  bool                  $sanitize Escape special jira characters (_,*,...)
+	 * @return string                         
+	 */
 	public function bug_data_replace_jira($bug, $value, $sanitize)
 	{
 		global $wpdb;
@@ -78,31 +109,41 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		return $value;
 	}
-
-	public function map_key_and_value_jira($bug, $key, $value, $sanitize)
-	{
-		$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
-		$value = $this->bug_data_replace_jira($bug, $value, $sanitize);
-
-		return array(
-			'key' => $key,
-			'value' => $value
-		);
-	}
-
+	
+	/**
+	 * Get mapped field data
+	 * @method map_fields
+	 * @date   2019-10-30T15:20:13+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  MvcObject                  $bug The bug to map (MvcObject with additional fields on field property)
+	 * @return array                       An associative array with bugtracker field as key and the data to send as value
+	 */
 	public function map_fields($bug)
 	{
 		$field_mapping = $this->get_field_mapping();
-		foreach ($field_mapping as $key => $item) {
+		foreach ($field_mapping as $key => $item) 
+		{
 			$value = $item['value'];
 			$sanitize = array_key_exists('sanitize', $item) && $item['sanitize'] === 'on';
-			$map = $this->map_key_and_value_jira($bug, $key, $value, $sanitize);
-			$data[$map['key']] = $map['value'];
+			$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
+			$value = $this->bug_data_replace_jira($bug, $value, $sanitize);
+			$data[$key] = $value;
 		}
 
 		return $data;
 	}
 
+	/** 
+	 * Send the issue
+	 * @method send_issue
+	 * @date   2019-10-30T15:21:44+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  MvcObject                  $bug The bug to upload (MvcObject with additional fields on field property)
+	 * @return array 					An associative array {
+	 * 										status: bool,		If uploaded successfully
+	 * 										message: string		The response of the upload or an error message on error 
+	 * 									}
+	 */
 	public function send_issue($bug)
 	{
 		global $wpdb;
@@ -159,7 +200,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 				foreach ($media as $media_item)
 				{
-					$result = $this->add_attachment($bug, $res->key, $media_item);
+					$result = $this->add_attachment($res->key, $media_item);
 					if (!$result['status'])
 					{
 						$return['status'] = false;
@@ -198,15 +239,34 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'message' => 'Generic error'
 		);
 	}
-
+	
+	/**
+	 * Get an issue associated with a bug
+	 * @method get_issue_by_id
+	 * @date   2019-10-30T15:24:54+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  int                  $id The bug id
+	 * @return mixed                      false on error, an object on success
+	 */
 	public function get_issue_by_id($id)
 	{
 		return false;
 	}
 
 
-
-	public function add_attachment($bug, $key, $media)
+	/**
+	 * Add bug media to an issue on jira
+	 * @method add_attachment
+	 * @date   2019-10-30T15:34:39+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  string                  $key   The issue key
+	 * @param                    $media The url of the media to attach
+	 * @return array 					An associative array {
+	 * 										status: bool,		If uploaded successfully
+	 * 										message: string		The response of the upload or an error message on error 
+	 * 									}
+	 */
+	public function add_attachment($key, $media)
 	{
 		$basename = basename($media);
 		$filename =  ABSPATH . 'wp-content/plugins/appq-integration-center/tmp/' . $basename;
@@ -253,23 +313,4 @@ class JiraRestApi extends IntegrationCenterRestApi
 		return $ret;
 	}
 
-
-	public function get_bug($bug_id)
-	{
-		$bug_model = mvc_model('Bug');
-		$bug = $bug_model->find_by_id($bug_id);
-		$additional_fields = appq_get_campaign_additional_fields_data($bug_id);
-
-		if (sizeof($additional_fields) > 0)
-		{
-			$bug->fields = array();
-		}
-
-		foreach ($additional_fields as $additional_field)
-		{
-			$bug->fields[$additional_field->slug] = $additional_field->value;
-		}
-
-		return $bug;
-	}
 }
