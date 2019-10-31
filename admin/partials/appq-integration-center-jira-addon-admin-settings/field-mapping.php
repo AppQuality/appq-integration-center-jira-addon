@@ -5,11 +5,17 @@
 		<?php foreach ($field_mapping as $key => $item) : ?>
 			<div class="form-group row d-flex">
 				<label style="word-break: break-all;" for="field_mapping[<?= $key ?>]" class="col-sm-2 align-self-center text-center"><?= $key ?></label>
-				<textarea name="field_mapping[<?= $key ?>][value]" class="col-sm-8 form-control" placeholder="Title: {Bug.title}"><?= array_key_exists('value',$item) ? $item['value'] : '' ?></textarea>
+				<textarea name="field_mapping[<?= $key ?>][value]" class="col-sm-7 form-control" placeholder="Title: {Bug.title}"><?= array_key_exists('value',$item) ? $item['value'] : '' ?></textarea>
 				<div class="custom-control custom-checkbox col-sm-1">
 				  <input name="field_mapping[<?= $key ?>][sanitize]" class="custom-control-input" type="checkbox" <?= array_key_exists('sanitize',$item) && $item['sanitize'] == 'on' ? 'checked="checked"' : '' ?>>
 				  <label class="custom-control-label" for="field_mapping[<?= $key ?>][sanitize]">
 				    Sanitize?
+				  </label>
+				</div>
+				<div class="custom-control custom-checkbox col-sm-1">
+				  <input name="field_mapping[<?= $key ?>][is_json]" class="custom-control-input" type="checkbox" <?= array_key_exists('is_json',$item) && $item['is_json'] == 'on' ? 'checked="checked"' : '' ?>>
+				  <label class="custom-control-label" for="field_mapping[<?= $key ?>][is_json]">
+				    JSON?
 				  </label>
 				</div>
 				<button class="col-sm-1 remove btn btn-danger"><span class="fa fa-minus"></span></button>

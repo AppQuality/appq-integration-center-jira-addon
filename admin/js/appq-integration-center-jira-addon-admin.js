@@ -16,14 +16,28 @@
 				
 				var new_input = $(`
 				<div class="form-group row">
-					<label class="col-sm-2"></label>
-					<textarea class="col-sm-8 form-control" placeholder="Title: {Bug.title}"></textarea>
-  					<input class="form-check-input" type="checkbox">
+					<label for="key" class="col-sm-2 align-self-center text-center"></label>
+					<textarea name="key" class="col-sm-7 form-control" placeholder="Title: {Bug.title}"></textarea>
+					<div class="custom-control custom-checkbox col-sm-1">
+					  <input name="sanitize" class="custom-control-input" type="checkbox" >
+					  <label class="custom-control-label" for="sanitize">
+						Sanitize?
+					  </label>
+					</div>
+					<div class="custom-control custom-checkbox col-sm-1">
+					  <input name="is_json" class="custom-control-input" type="checkbox" >
+					  <label class="custom-control-label" for="is_json">
+						JSON?
+					  </label>
+					</div>
 					<button class="col-sm-1 remove btn btn-danger">-</button>
 				</div>`)
-				new_input.find('label').attr('for','field_mapping['+key+']').text(key)
-				new_input.find('textarea').attr('name','field_mapping['+key+'][value]').val(value)
-				new_input.find('.form-check-input').attr('name','field_mapping['+key+'][sanitize]')
+				new_input.find('label[for=key]').attr('for','field_mapping['+key+']').text(key)
+				new_input.find('textarea[name=key]').attr('name','field_mapping['+key+'][value]').val(value)
+				new_input.find('.form-check-input[name=sanitize]').attr('name','field_mapping['+key+'][sanitize]')
+				new_input.find('label[for=sanitize]').attr('for','field_mapping['+key+'][sanitize]')
+				new_input.find('.form-check-input[name=is_json]').attr('name','field_mapping['+key+'][is_json]')
+				new_input.find('label[for=is_json]').attr('for','field_mapping['+key+'][is_json]')
 				new_input.find('.remove').click(function(){
 					$(this).parent().remove()
 				})

@@ -79,7 +79,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param  bool                  $sanitize Escape special jira characters (_,*,...)
 	 * @return string                         
 	 */
-	public function bug_data_replace_jira($bug, $value, $sanitize)
+	public function bug_data_replace_jira($bug, $value, $sanitize, $is_json = false)
 	{
 		global $wpdb;
 
@@ -107,6 +107,11 @@ class JiraRestApi extends IntegrationCenterRestApi
 			$value = str_replace('*', '\\*', $value);
 		}
 
+		if ($is_json)
+		{
+			$value = json_decode($value);
+		}
+
 		return $value;
 	}
 	
@@ -125,8 +130,9 @@ class JiraRestApi extends IntegrationCenterRestApi
 		{
 			$value = $item['value'];
 			$sanitize = array_key_exists('sanitize', $item) && $item['sanitize'] === 'on';
+			$is_json = array_key_exists('is_json', $item) && $item['is_json'] === 'on';
 			$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
-			$value = $this->bug_data_replace_jira($bug, $value, $sanitize);
+			$value = $this->bug_data_replace_jira($bug, $value, $sanitize,$is_json);
 			$data[$key] = $value;
 		}
 
