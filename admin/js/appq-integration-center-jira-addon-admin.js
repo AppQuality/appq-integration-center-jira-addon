@@ -38,6 +38,10 @@
 				new_input.find('label[for=sanitize]').attr('for','field_mapping['+key+'][sanitize]')
 				new_input.find('.form-check-input[name=is_json]').attr('name','field_mapping['+key+'][is_json]')
 				new_input.find('label[for=is_json]').attr('for','field_mapping['+key+'][is_json]')
+				new_input.find('.custom-checkbox').click(function(){
+					var input = $(this).find("input")
+		        	input.prop("checked", !input.prop("checked"));
+				})
 				new_input.find('.remove').click(function(){
 					$(this).parent().remove()
 				})
