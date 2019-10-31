@@ -8,6 +8,9 @@ function appq_jira_edit_settings()
 	$apikey = array_key_exists('jira_apikey', $_POST) ? $_POST['jira_apikey'] : '';
 	$project = array_key_exists('jira_project', $_POST) ? $_POST['jira_project'] : '';
 	$field_mapping = array_key_exists('field_mapping', $_POST) ? $_POST['field_mapping'] : new stdClass();
+	foreach ($field_mapping as $key => $value) {
+		$field_mapping[$key]['value'] = stripslashes($value['value']);
+	}
 	$field_mapping = (json_encode($field_mapping));
 	
 	$endpoint = json_encode(array(
