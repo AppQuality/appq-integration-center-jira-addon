@@ -110,6 +110,9 @@ class JiraRestApi extends IntegrationCenterRestApi
 		if ($is_json)
 		{
 			$value = json_decode($value);
+			if ($value === null) {
+				throw new Exception("Invalid JSON to decode", 1);
+			}
 		}
 
 		return $value;
@@ -131,8 +134,12 @@ class JiraRestApi extends IntegrationCenterRestApi
 			$value = $item['value'];
 			$sanitize = array_key_exists('sanitize', $item) && $item['sanitize'] === 'on';
 			$is_json = array_key_exists('is_json', $item) && $item['is_json'] === 'on';
-			$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
-			$value = $this->bug_data_replace_jira($bug, $value, $sanitize,$is_json);
+			try {
+				$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
+				$value = $this->bug_data_replace_jira($bug, $value, $sanitize,$is_json);
+			} catch(Exception $e) {
+				throw new Exception("Invalid JSON to decode for mapping " . $key);
+			}
 			$data[$key] = $value;
 		}
 
