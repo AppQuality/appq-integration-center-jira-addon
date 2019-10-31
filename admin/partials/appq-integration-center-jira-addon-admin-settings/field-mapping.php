@@ -46,6 +46,8 @@
 				<p> {Bug.model} - Modello del device del bug </p> 
 				<p> {Bug.os} - OS del device del bug </p> 
 				<p> {Bug.os_version} - OS version del device del bug </p>
+				<p> {Bug.media} - Media del bug, le immagini verranno mostrate nel contenuto </p>
+				<p> {Bug.media_links} - Link ai media del bug </p>
 				<?php foreach ($additional_fields as $additional_field) : ?>
 					<p> {Bug.field.<?=$additional_field->slug ?>} - Additional field <?=$additional_field->title ?> </p>
 				<?php endforeach ?>
