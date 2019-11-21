@@ -12,12 +12,34 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		$this->basic_configuration = array(
 			'summary' => array(
-				'value' => '{Bug.message}',
+				'value' => '[{Bug.internal_id}] {Bug.message}',
 				'sanitize' => 'off'
 			),
 			'description' => array(
-				'value' => '{Bug.message}',
-				'sanitize' => 'on'
+				'value' => '*Type*: {Bug.type}
+*User Replicability*: {Bug.replicability}
+*User Severity*: {Bug.severity}
+
+*Steps to reproduce*
+{Bug.steps}
+
+*Expected Result*
+{Bug.expected}
+
+*Current Result*
+{Bug.actual}
+
+*Bug Media*
+{Bug.media_links}
+
+ 
+*Extra note*
+ {Bug.note}
+
+*Device*:
+{Bug.manufacturer} {Bug.model} {Bug.os} {Bug.os_version}
+',
+				'sanitize' => 'off'
 			),
 		);
 	}
