@@ -337,5 +337,38 @@ class JiraRestApi extends IntegrationCenterRestApi
 		unlink($filename);
 		return $ret;
 	}
+	
+	public function get_issue($key) {
+		$url = parse_url($this->get_apiurl());
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/' .$key ;
+		
+		$headers = array();
+		$req = $this->http_get($url,$headers);
+		
+		
+		if($req->success)
+		{
+			if ($req->status_code == 200) {
+				$ret = array(
+					'status' => true,
+					'message' => json_decode($req->body)
+				);
+			} elseif($req->status_code == 413) {
+				$ret['message'] = $ret['message'] . ' - Entity too large';
+			} else {
+				$ret['message'] = $ret['message'] . ' - Error ' .  $req->info['http_code'];
+			}
+		}
+		else
+		{
+			$ret = array(
+				'status' => false,
+				'message' => $req->error
+			);
+		}
+		
+		
+		return $ret;
+	}
 
 }
