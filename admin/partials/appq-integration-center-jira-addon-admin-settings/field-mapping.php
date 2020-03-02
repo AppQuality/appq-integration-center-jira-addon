@@ -1,5 +1,8 @@
 
-<h3> Field Mapping</h3>
+<h3> 
+	Field Mapping
+	<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Get Mappings From Bug</button>
+</h3>
 <div class="row">
 	<div class="col-sm-9 field_mapping">
 		<?php foreach ($field_mapping as $key => $item) : ?>
@@ -55,3 +58,8 @@
 		</div>
 	</div>
 </div>
+
+<?php
+$this->partial('settings/get-bug-modal', array(
+)) 
+?>

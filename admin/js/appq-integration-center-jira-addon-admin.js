@@ -2,13 +2,67 @@
 	'use strict';
 
 	$(document).ready(function() {
+		
+		$('#retrieve_mappings').click(function(){
+			var srcParams = new URLSearchParams(window.location.search)
+			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var issue_id = $('#issue_id').val()
+			var button = $(this)
+			var text = button.text()
+			button.text("")
+			button.append('<span class="fa fa-spinner fa-spin"></span>')
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				url: custom_object.ajax_url,
+				data: {
+					action: 'appq_get_issue_from_bugtracker',
+					issue_id: issue_id,
+					cp_id: cp_id
+				},
+				success: function(res) {
+			 		button.text(text)
+					if (res.success) {
+						var fields = res.data.fields
+						$('#retrieved_mappings').find('li').remove()
+						var mappings = {
+							reporter : {data: { id: fields.reporter.accountId }},
+							assignee : {data: { id: fields.assignee.accountId }},
+							issuetype : {data: { name: fields.issuetype.name }},
+							labels : {data: fields.labels }
+						}
+						Object.keys(mappings).forEach(function(name){
+							var li = $(`
+								<li class="row">
+									<p class="col-3 name">`+ name +`</p>
+									<p class="col-6 data">`+ JSON.stringify(mappings[name].data) +`</p>
+									<p class="col-3"><button class="btn btn-success import-mapping">Import</button></p>
+								</li>`)
+							li.find('.import-mapping').click(function(e){
+								e.preventDefault()
+								var name = $(this).closest('.row').find('.name').text()
+								var data = $(this).closest('.row').find('.data').text()
+								$('#jira .add_field_mapping').click()
+								$('#jira input[name="key"]').val(name)
+								$('#jira input[name="value"]').val(data)
+								$('#jira .confirm-add-mapping').click()
+								$('#jira label[for="field_mapping['+name+'][is_json]"]').click()
+								$('#jira input[name="field_mapping['+name+'][is_json]"]').prop('checked', true);
+							})
+							$('#retrieved_mappings').append(li)
+						})
+					}
+				}
+			});
+		})
+		
 		$('#jira_settings .field_mapping .remove').click(function(){
 			$(this).parent().remove()
 		})
 		$('#jira_settings .add_field_mapping').click(function(){
 			var button = $(this)
 			button.attr('disabled','disabled')
-			var proto = $('<div><input type="text" placeholder="key" name="key"><input type="text" placeholder="value" name="value"><button class="btn btn-primary">OK</button></div>')
+			var proto = $('<div><input type="text" placeholder="key" name="key"><input type="text" placeholder="value" name="value"><button class="btn btn-primary confirm-add-mapping">OK</button></div>')
 			proto.find('button').click(function(e){
 				e.preventDefault()
 				var key = $(this).parent().find('[name="key"]').val()
@@ -38,6 +92,7 @@
 				new_input.find('label[for=sanitize]').attr('for','field_mapping['+key+'][sanitize]')
 				new_input.find('.form-check-input[name=is_json]').attr('name','field_mapping['+key+'][is_json]')
 				new_input.find('label[for=is_json]').attr('for','field_mapping['+key+'][is_json]')
+				new_input.find('input[name=is_json]').attr('name','field_mapping['+key+'][is_json]')
 				new_input.find('.custom-checkbox').click(function(){
 					var input = $(this).find("input")
 		        	input.prop("checked", !input.prop("checked"));
