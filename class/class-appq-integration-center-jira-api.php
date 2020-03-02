@@ -15,6 +15,10 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'value' => '[{Bug.internal_id}] {Bug.message}',
 				'sanitize' => 'off'
 			),
+			'issuetype' => array(
+				'value' => '{"name":"Task"}',
+				'is_json' => 'on'
+			),
 			'description' => array(
 				'value' => '*Type*: {Bug.type}
 *User Replicability*: {Bug.replicability}
@@ -79,17 +83,6 @@ class JiraRestApi extends IntegrationCenterRestApi
 		return $endpoint_data->project;
 	}
 	
-	/**
-	 * Get the data for authorization
-	 * @method get_authorization
-	 * @date   2019-10-30T14:53:28+010
-	 * @author: Davide Bizzi <clochard>
-	 * @return string	The data for the authorization. Overwrite in the subclass if you need manipulation of the token (base64 encoding,...)
-	 */
-	public function get_issue_type()
-	{
-		return 'Task';
-	}
 	
 	/**
 	 * Replace {placeholders} in a field mapping value with data from a bug
@@ -195,9 +188,6 @@ class JiraRestApi extends IntegrationCenterRestApi
 		}
 
 		$data = $this->map_fields($bug);
-		$data['issuetype'] = array(
-			'name' => $this->get_issue_type()
-		);
 		$data['project'] = array(
 			'key' => $this->get_project()
 		);
