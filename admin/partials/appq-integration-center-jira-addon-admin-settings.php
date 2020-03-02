@@ -33,7 +33,7 @@ $endpoint_data = !empty($config) && property_exists($config,'endpoint') ? json_d
             <div class="form-group row">
                 <label for="jira_apikey" class="col-sm-3 col-form-label">User email : api token</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" name="jira_apikey" id="jira_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="username@email.com:xxxxxxxxxxxxxxxxxx">
+                    <input type="password" autocomplete="new-password" class="form-control" name="jira_apikey" id="jira_apikey" value="<?= !empty($config) ? $config->apikey : ''?>"  placeholder="username@email.com:xxxxxxxxxxxxxxxxxx">
                 </div>
             </div>
         </div>
