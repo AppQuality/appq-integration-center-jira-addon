@@ -1,7 +1,7 @@
 
-<h3> 
+<h3 class="mb-3"> 
 	Field Mapping
-	<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Get Mappings From Bug</button>
+	<button  type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#exampleModal">Get Mappings From Bug</button>
 </h3>
 <div class="row">
 	<div class="col-sm-9 field_mapping">

@@ -2,7 +2,12 @@
 	'use strict';
 
 	$(document).ready(function() {
-		
+		$('#issue_id').on('keypress', function (e) {
+			  if(e.which === 13){
+				  e.preventDefault()
+				  $('#retrieve_mappings').click()
+			  }
+		});
 		$('#retrieve_mappings').click(function(){
 			var srcParams = new URLSearchParams(window.location.search)
 			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
@@ -34,9 +39,9 @@
 						Object.keys(mappings).forEach(function(name){
 							var li = $(`
 								<li class="row">
-									<p class="col-3 name">`+ name +`</p>
-									<p class="col-6 data">`+ JSON.stringify(mappings[name].data) +`</p>
-									<p class="col-3"><button class="btn btn-success import-mapping">Import</button></p>
+									<span style="align-self: center;" class="col-3 name font-weight-bold">`+ name +`</span>
+									<span style="align-self: center;" class="col-6 data">`+ JSON.stringify(mappings[name].data) +`</span>
+									<span class="col-3 d-flex"><button style="align-self: center;" class="ml-auto btn btn-success import-mapping">Import</button></span>
 								</li>`)
 							li.find('.import-mapping').click(function(e){
 								e.preventDefault()
@@ -51,6 +56,9 @@
 							})
 							$('#retrieved_mappings').append(li)
 						})
+					}
+					else {
+						toastr.error(res.data)
 					}
 				}
 			});
