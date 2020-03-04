@@ -363,7 +363,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		{
 			$ret = array(
 				'status' => false,
-				'message' => $req->error
+				'message' => 'Error ' . $req->status_code . ': ' . $req->body
 			);
 		}
 		
