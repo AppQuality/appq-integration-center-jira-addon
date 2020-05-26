@@ -161,6 +161,12 @@ class JiraRestApi extends IntegrationCenterRestApi
 		return $data;
 	}
 
+	public function delete_issue() {
+		return array(
+			'status' => false,
+			'message' => 'Not implemented yet'
+		);
+	}
 	/** 
 	 * Send the issue
 	 * @method send_issue
