@@ -161,6 +161,78 @@ class JiraRestApi extends IntegrationCenterRestApi
 		return $data;
 	}
 
+	/**
+	 * Delete an issue from JIRA
+	 * @param  string $bugtracker_id 
+	 */
+	public function delete_issue($bugtracker_id) {
+		global $wpdb;
+		if (empty($bugtracker_id)) {
+			return array(
+				'status' => false,
+				'data' => array(
+					'auth_error' => false,
+					'message' => 'Empty bugtracker_id'
+				)
+			);
+		}
+
+		$url = parse_url($this->get_apiurl());
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/' . $bugtracker_id;
+		$req = $this->http_delete($url, array(
+			'Content-Type' => 'application/json',
+			'Accept' => 'application/json'
+		));
+		
+		if (empty($req) || !property_exists($req,'status_code')) {
+			return array(
+				'status' => false,
+				'data' => array(
+					'auth_error' => false,
+					'message' => 'Empty Response from Jira'
+				)
+			);
+		} else {
+			$delete_from_db = false;
+			if ($req->status_code == 204) {
+				$delete_from_db = true;
+				$authorized = true;
+			} elseif ($req->status_code == 403) {
+				$delete_from_db = true;
+			}
+		}
+
+		if ($authorized) {
+			$data = array(
+				'auth_error' => false,
+				'message' => 'Successfully deleted the issue'
+			);
+		} else {
+			$data = array(
+				'auth_error' => true,
+				'message' => 'You are not authorized to delete issues on this project'
+			);
+		}
+		
+		if ($delete_from_db) {
+			$wpdb->delete($wpdb->prefix . 'appq_integration_center_bugs',array(
+				'bugtracker_id' => $bugtracker_id
+			));
+			return array(
+				'status' => true,
+				'data' => $data
+			);
+		}
+		
+		
+		return array(
+			'status' => false,
+			'data' => array(
+				'auth_error' => false,
+				'message' => 'There was an error deleting the issue. The status code was ' .$req->status_code
+			)
+		);
+	}
 	/** 
 	 * Send the issue
 	 * @method send_issue
