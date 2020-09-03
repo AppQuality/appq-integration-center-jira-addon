@@ -30,32 +30,45 @@
 					if (res.success) {
 						var fields = res.data.fields
 						$('#retrieved_mappings').find('li').remove()
-						var mappings = {
-							reporter : {data: { id: fields.reporter.accountId }},
-							assignee : {data: { id: fields.assignee.accountId }},
-							issuetype : {data: { name: fields.issuetype.name }},
-							labels : {data: fields.labels }
-						}
-						Object.keys(mappings).forEach(function(name){
-							var li = $(`
-								<li class="row">
+						$('#getBugModal').find('pre').remove()
+						if (!fields) {
+							toastr.error('Invalid bug. No fields to retrieve')
+						} else {
+							var mappings = {}
+							if (fields.reporter && fields.reporter.accountId) {
+								mappings.reporter = {data: { id: fields.reporter.accountId }}
+							}
+							if (fields.assignee && fields.assignee.accountId) {
+								mappings.assignee = {data: { id: fields.assignee.accountId }}
+							}
+							if (fields.issuetype && fields.issuetype.name) {
+								mappings.issuetype = {data: { name: fields.issuetype.name }}
+							}
+							if (fields.labels) {
+								mappings.labels = {data: fields.labels }
+							}
+							Object.keys(mappings).forEach(function(name){
+								var li = $(`
+									<li class="row">
 									<span style="align-self: center;" class="col-3 name font-weight-bold">`+ name +`</span>
 									<span style="align-self: center;" class="col-6 data">`+ JSON.stringify(mappings[name].data) +`</span>
 									<span class="col-3 d-flex"><button style="align-self: center;" class="ml-auto btn btn-success import-mapping">Import</button></span>
-								</li>`)
-							li.find('.import-mapping').click(function(e){
-								e.preventDefault()
-								var name = $(this).closest('.row').find('.name').text()
-								var data = $(this).closest('.row').find('.data').text()
-								$('#jira .add_field_mapping').click()
-								$('#jira input[name="key"]').val(name)
-								$('#jira input[name="value"]').val(data)
-								$('#jira .confirm-add-mapping').click()
-								$('#jira label[for="field_mapping['+name+'][is_json]"]').click()
-								$('#jira input[name="field_mapping['+name+'][is_json]"]').prop('checked', true);
-							})
-							$('#retrieved_mappings').append(li)
-						})
+									</li>`)
+									li.find('.import-mapping').click(function(e){
+										e.preventDefault()
+										var name = $(this).closest('.row').find('.name').text()
+										var data = $(this).closest('.row').find('.data').text()
+										$('#jira .add_field_mapping').click()
+										$('#jira input[name="key"]').val(name)
+										$('#jira input[name="value"]').val(data)
+										$('#jira .confirm-add-mapping').click()
+										$('#jira label[for="field_mapping['+name+'][is_json]"]').click()
+										$('#jira input[name="field_mapping['+name+'][is_json]"]').prop('checked', true);
+									})
+									$('#retrieved_mappings').append(li)
+								})
+								$('<pre style="max-height: 400px; overflow: scroll; background: #000; color: #fff; padding: 15px;">'+JSON.stringify(fields,undefined,2)+'</pre>').insertAfter('#retrieved_mappings')
+						}
 					}
 					else {
 						toastr.error(res.data)
