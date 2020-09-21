@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<div class="modal" style="z-index: 99999;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" style="z-index: 99999;" id="getBugModal" tabindex="-1" role="dialog" aria-labelledby="getBugModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div style="z-index: 99999;" class="modal-content">
       <div class="modal-header">
