@@ -1,3 +1,12 @@
+<?php 
+$api = new JiraRestApi(null);
+foreach ($api->basic_configuration as $key => $value) {
+	if (!in_array($key,array_keys($field_mapping))) {
+		$field_mapping[$key] = $value;
+	}
+}
+?>
+
 
 <h3 class="mb-3"> 
 	Field Mapping
