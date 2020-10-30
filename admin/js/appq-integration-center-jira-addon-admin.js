@@ -83,7 +83,7 @@
 		$('#jira_settings .add_field_mapping').click(function(){
 			var button = $(this)
 			button.attr('disabled','disabled')
-			var proto = $('<div><input type="text" placeholder="key" name="key"><input type="text" placeholder="value" name="value"><button class="btn btn-primary confirm-add-mapping">OK</button></div>')
+			var proto = $('<div style="display:flex"><input type="text" placeholder="key" name="key"><textarea style="flex-grow:1" placeholder="value" name="value"></textarea><button class="btn btn-primary confirm-add-mapping">OK</button></div>')
 			proto.find('button').click(function(e){
 				e.preventDefault()
 				var key = $(this).parent().find('[name="key"]').val()
