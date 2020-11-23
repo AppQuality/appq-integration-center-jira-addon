@@ -1,5 +1,5 @@
 <?php 
-$api = new JiraRestApi(null);
+$api = new JiraRestApi($campaign_id);
 foreach ($api->basic_configuration as $key => $value) {
 	if (!in_array($key,array_keys($field_mapping))) {
 		$field_mapping[$key] = $value;
@@ -39,31 +39,8 @@ foreach ($api->basic_configuration as $key => $value) {
 		<div class="row">
 			<h4 class="col-sm-12"> Add fields </h4>
 			<div class="col-sm-12">
-				<p> {Bug.message} - Titolo del bug </p> 
-				<p> {Bug.steps} - Step by step description del bug </p> 
-				<p> {Bug.expected} - Expected result del bug </p> 
-				<p> {Bug.actual} - Actual result del bug </p> 
-				<p> {Bug.note} - Note del bug </p> 
-				<p> {Bug.id} - ID del bug </p> 
-				<p> {Bug.internal_id} - Internal id del bug </p> 
-				<p> {Bug.status_id} - Status id del bug </p> 
-				<p> {Bug.status} - Status name del bug </p> 
-				<p> {Bug.severity_id} - Severity id del bug </p> 
-				<p> {Bug.severity} - Severity name del bug </p> 
-				<p> {Bug.replicability_id} - Replicability id del bug </p> 
-				<p> {Bug.replicability} - Replicability name del bug </p> 
-				<p> {Bug.type_id} - Bug Type id id del bug </p> 
-				<p> {Bug.type} - Bug Type name del bug </p> 
-				<p> {Bug.manufacturer} - Manufacturer del device del bug </p> 
-				<p> {Bug.model} - Modello del device del bug </p> 
-				<p> {Bug.os} - OS del device del bug </p> 
-				<p> {Bug.os_version} - OS version del device del bug </p>
-				<p> {Bug.media} - Media del bug, le immagini verranno mostrate nel contenuto </p>
-				<p> {Bug.media_links} - Link ai media del bug </p>
-		        <p> {Bug.tags} - Tags del bug, verranno mostrati separati da punto e virgola (e.g. "tag1 ; tag2")</p>
-		        <p> {Bug.tags_list} - Tags del bug, verranno mostrati come un array json (e.g. "["tag1" , "tag2"]")</p>
-				<?php foreach ($additional_fields as $additional_field) : ?>
-					<p> {Bug.field.<?=$additional_field->slug ?>} - Additional field <?=$additional_field->title ?> </p>
+				<?php foreach ($api->mappings as $map => $data) : ?>
+					<p> <?= $map ?> - <?= $data['description'] ?> </p> 
 				<?php endforeach ?>
 			</div>
 		</div>
