@@ -60,7 +60,7 @@
 										var data = $(this).closest('.row').find('.data').text()
 										$('#jira .add_field_mapping').click()
 										$('#jira input[name="key"]').val(name)
-										$('#jira input[name="value"]').val(data)
+										$('#jira textarea[name="value"]').val(data)
 										$('#jira .confirm-add-mapping').click()
 										$('#jira label[for="field_mapping['+name+'][is_json]"]').click()
 										$('#jira input[name="field_mapping['+name+'][is_json]"]').prop('checked', true);
