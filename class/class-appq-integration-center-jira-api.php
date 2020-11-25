@@ -233,6 +233,15 @@ class JiraRestApi extends IntegrationCenterRestApi
 			)
 		);
 	}
+	
+	private function is_uploaded_with_old_bugtracker($bug_id) {
+		global $wpdb;
+
+		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug->id));
+		$is_uploaded = intval($is_uploaded);
+		
+		return $is_uploaded > 0;
+	}
 	/** 
 	 * Send the issue
 	 * @method send_issue
@@ -249,9 +258,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 		global $wpdb;
 
 		// TODO: Remove this control when old bugtracker will be discontinued
-		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug->id));
-		$is_uploaded = intval($is_uploaded);
-		if ($is_uploaded > 0)
+		$is_uploaded = $this->is_uploaded_with_old_bugtracker($bug->id);
+		if ($is_uploaded)
 		{
 			return array(
 				'status' => false,
