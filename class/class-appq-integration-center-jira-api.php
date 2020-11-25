@@ -356,7 +356,11 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 */
 	public function get_issue_by_id($id)
 	{
-		return false;
+		global $wpdb;
+		
+		$sql = $wpdb->prepare('SELECT bugtracker_id FROM wp_appq_integration_center_bugs 
+			WHERE bug_id = %d AND integration = "jira"',$id);
+		return $wpdb->get_var($sql);
 	}
 
 
