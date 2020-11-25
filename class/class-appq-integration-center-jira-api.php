@@ -364,6 +364,28 @@ class JiraRestApi extends IntegrationCenterRestApi
 	}
 
 
+	private function clear_attachments($key) {
+		$url = parse_url($this->get_apiurl());
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/'.$key.'?fields=attachment';
+		$req = $this->http_get($url, array(
+			'Content-Type' => 'application/json',
+			'Accept' => 'application/json'
+		), json_encode($body));
+		
+		$body = json_decode($req->body);
+		
+		if ($body && property_exists($body,'fields') && property_exists($body->fields,'attachment')) {
+			$url = parse_url($this->get_apiurl());
+			$base_url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/attachment/';
+			foreach($body->fields->attachment as $attachment) {
+				$url = $base_url . $attachment->id;
+				$req = $this->http_delete($url, array(
+					'Content-Type' => 'application/json',
+					'Accept' => 'application/json'
+				));
+			}
+		}
+	}
 	/**
 	 * Add bug media to an issue on jira
 	 * @method add_attachment
