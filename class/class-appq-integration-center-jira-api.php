@@ -234,6 +234,89 @@ class JiraRestApi extends IntegrationCenterRestApi
 		);
 	}
 	
+	
+	
+	/** 
+	 * Send the issue
+	 * @method update_issue
+	 * @date              2020-11-25T10:27:36+010
+	 * @author: Davide Bizzi <clochard>
+	 * @param  MvcObject                  $bug The bug to upload (MvcObject with additional fields on field property)
+	 * @param  string                  $key The key of the issue to update
+	 * @return array 					An associative array {
+	 * 										status: bool,		If uploaded successfully
+	 * 										message: string		The response of the upload or an error message on error 
+	 * 									}
+	 */
+	public function update_issue($bug,$key) {
+		global $wpdb;
+
+		// TODO: Remove this control when old bugtracker will be discontinued
+		$is_uploaded = $this->is_uploaded_with_old_bugtracker($bug->id);
+		if ($is_uploaded)
+		{
+			return array(
+				'status' => false,
+				'message' => "This bug is already uploaded with old bugtracker"
+			);
+		}
+		
+
+		$data = $this->map_fields($bug);
+		$data['project'] = array(
+			'key' => $this->get_project()
+		);
+		$body = new stdClass();
+		$body->update = new stdClass();
+		$body->fields = (object) $data;
+		$url = parse_url($this->get_apiurl());
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/'.$key;
+		$req = $this->http_put($url, array(
+			'Content-Type' => 'application/json',
+			'Accept' => 'application/json'
+		), json_encode($body));
+
+		
+		if (!$req->success | $req->status_code != 204) {
+			return array(
+				'status' => false,
+				'message' => "There was a ".$req->status_code." error on update"
+			);
+		}
+		if (property_exists($this->configuration, 'upload_media') && intval($this->configuration->upload_media) > 0)
+		{
+			$this->clear_attachments($key);
+			$return = array(
+				'status' => true,
+				'message' => ''
+			);
+			if (property_exists($bug,'media')) {
+				$media = $bug->media;
+			} else {
+				$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+			}
+			foreach ($media as $media_item)
+			{
+				$result = $this->add_attachment($key, $media_item);
+				if (!$result['status'])
+				{
+					$return['status'] = false;
+					$return['message'] = $return['message'] . ' <br> '. $result['message'];
+				}
+			}
+			
+			if (!$return['status'])
+			{
+				return $return;
+			}
+		}
+		return array(
+			'status' => true,
+			'message' => $key . ' updated'
+		);
+		
+	}
+	
 	private function is_uploaded_with_old_bugtracker($bug_id) {
 		global $wpdb;
 
