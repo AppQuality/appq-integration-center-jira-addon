@@ -303,7 +303,11 @@ class JiraRestApi extends IntegrationCenterRestApi
 					'status' => true,
 					'message' => ''
 				);
-				$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+				if (property_exists($bug,'media')) {
+					$media = $bug->media;
+				} else {
+					$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+				}
 				foreach ($media as $media_item)
 				{
 					$result = $this->add_attachment($res->key, $media_item);
