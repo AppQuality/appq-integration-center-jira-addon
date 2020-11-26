@@ -320,7 +320,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	private function is_uploaded_with_old_bugtracker($bug_id) {
 		global $wpdb;
 
-		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug->id));
+		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug_id));
 		$is_uploaded = intval($is_uploaded);
 		
 		return $is_uploaded > 0;
@@ -457,7 +457,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		$req = $this->http_get($url, array(
 			'Content-Type' => 'application/json',
 			'Accept' => 'application/json'
-		), json_encode($body));
+		));
 		
 		$body = json_decode($req->body);
 		
