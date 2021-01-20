@@ -128,11 +128,10 @@
 			})
 			proto.insertBefore($(this))
 		})
-		$('#jira_settings .save').click(function(){
+		$('#jira_settings').submit(function(e){
+			e.preventDefault();
 			var srcParams = new URLSearchParams(window.location.search)
 			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
-			var button = $(this)
-			var text = button.text()
 			var data = $('#jira_settings').serializeArray()
 			data.push({
 				'name' : 'action',
@@ -142,15 +141,13 @@
 				'name' : 'cp_id',
 				'value': cp_id
 			})
-			button.text("")
-			button.append('<span class="fa fa-spinner fa-spin"></span>')
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
 				url: custom_object.ajax_url,
 				data: data,
 				success: function(msg) {
-			 		button.text(text)
+					location.reload();
 				}
 			});
 		})
