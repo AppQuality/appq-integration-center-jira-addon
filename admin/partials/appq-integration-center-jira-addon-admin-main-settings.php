@@ -37,4 +37,13 @@ $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_
         printf('<input type="text" class="form-control" name="jira_project" id="jira_project" placeholder="%s" value="%s">', __('ABC', $this->plugin_name), !empty($endpoint_data) ? $endpoint_data['project'] : '');
         ?>
     </div>
+    <div class="form-group">
+        <?php
+        printf('<label for="media">%s</label><br>', __('Media preferences', $this->plugin_name));
+        printf('<label><input type="checkbox" class="form-control" name="media" id="media"%s> %s</label>', 
+        isset($config->upload_media) ? checked( $config->upload_media, 1, false ) : '',
+        __('Upload media', $this->plugin_name)
+    );
+        ?>
+    </div>
 </form>

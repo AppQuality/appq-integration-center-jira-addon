@@ -116,7 +116,7 @@ class Appq_Integration_Center_Jira_Addon_Admin {
 		$config = $wpdb->get_row(
 			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix .'appq_integration_center_config WHERE campaign_id = %d AND integration = %s',$campaign->id,$this->integration['slug'])
 		);
-		$this->partial('main-settings',array(
+		$this->partial('full-settings',array(
 			'config' => $config,
 			'campaign_id' => $campaign->id
 		));

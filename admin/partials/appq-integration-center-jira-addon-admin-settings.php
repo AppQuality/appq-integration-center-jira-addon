@@ -50,7 +50,8 @@ $endpoint_data = !empty($config) && property_exists($config,'endpoint') ? json_d
 	$this->partial('settings/field-mapping', array(
 		'field_mapping' => $field_mapping,
 		'campaign_id' => $campaign_id
-	)) ?>
+    ));
+    ?>
 	<div class="row">
 		<button type="button" class="save col-sm-2 offset-sm-10 btn btn-primary">Save</button>
 	</div>

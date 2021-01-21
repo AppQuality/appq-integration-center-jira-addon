@@ -136,15 +136,19 @@
 			data.push({
 				'name' : 'action',
 				'value': 'appq_jira_edit_settings'
-			})
+			});
 			data.push({
 				'name' : 'cp_id',
 				'value': cp_id
-			})
+			});
+			data.push({
+			  name: "nonce",
+			  value: appq_ajax.nonce,
+			});
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
-				url: custom_object.ajax_url,
+				url: appq_ajax.url,
 				data: data,
 				success: function(msg) {
 					location.reload();

@@ -2,11 +2,15 @@
 
 function appq_jira_edit_settings()
 {
+    if(!check_ajax_referer('appq-ajax-nonce', 'nonce', false)){
+        wp_send_json_error('You don\'t have the permission to do this');
+	}
 	global $wpdb;
 	$cp_id = array_key_exists('cp_id', $_POST) ? intval($_POST['cp_id']) : false;
 	$endpoint = array_key_exists('jira_endpoint', $_POST) ? $_POST['jira_endpoint'] : '';
 	$apikey = array_key_exists('jira_apikey', $_POST) ? $_POST['jira_apikey'] : '';
 	$project = array_key_exists('jira_project', $_POST) ? $_POST['jira_project'] : '';
+	$upload_media = array_key_exists('media', $_POST) ? $_POST['media'] : false;
 	$field_mapping = array_key_exists('field_mapping', $_POST) ? $_POST['field_mapping'] : new stdClass();
 	foreach ($field_mapping as $key => $value) {
 		$field_mapping[$key]['value'] = stripslashes($value['value']);
@@ -30,11 +34,14 @@ function appq_jira_edit_settings()
 	$wpdb->update($wpdb->prefix .'appq_integration_center_config', array(
 		'endpoint' => $endpoint,
 		'apikey' => $apikey,
+        'upload_media' => $upload_media ? 1 : 0,
+        'is_active' => 1,
 		'field_mapping' => $field_mapping,
 	), array(
 		'integration' => 'jira',
 		'campaign_id' => $cp_id,
 	));
+	
 	wp_send_json_success('ok');
 }
 
