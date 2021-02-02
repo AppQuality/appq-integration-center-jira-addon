@@ -77,10 +77,10 @@
 			});
 		})
 		
-		$('#jira_settings .field_mapping .remove').click(function(){
+		$('#jira_fields_settings .field_mapping .remove').click(function(){
 			$(this).parent().remove()
 		})
-		$('#jira_settings .add_field_mapping').click(function(){
+		$('#jira_fields_settings .add_field_mapping').click(function(){
 			var button = $(this)
 			button.attr('disabled','disabled')
 			var proto = $('<div style="display:flex"><input type="text" placeholder="key" name="key"><textarea style="flex-grow:1" placeholder="value" name="value"></textarea><button class="btn btn-primary confirm-add-mapping">OK</button></div>')
@@ -128,11 +128,11 @@
 			})
 			proto.insertBefore($(this))
 		})
-		$('#jira_settings').submit(function(e){
+		$('#jira_tracker_settings').submit(function(e){
 			e.preventDefault();
 			var srcParams = new URLSearchParams(window.location.search)
 			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
-			var data = $('#jira_settings').serializeArray()
+			var data = $('#jira_tracker_settings').serializeArray();
 			data.push({
 				'name' : 'action',
 				'value': 'appq_jira_edit_settings'
@@ -145,6 +145,7 @@
 			  name: "nonce",
 			  value: appq_ajax.nonce,
 			});
+			console.log(data);
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",

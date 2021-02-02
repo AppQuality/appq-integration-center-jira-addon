@@ -18,7 +18,7 @@ if (empty($field_mapping)) {
 }
 $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_decode($config->endpoint, true) : array();
 ?>
-<form id="jira_settings">
+<form id="jira_tracker_settings">
     <div class="form-group mt-5">
         <?php
         printf('<label for="jira_endpoint">%s</label>', __('Endpoint', $this->plugin_name));
