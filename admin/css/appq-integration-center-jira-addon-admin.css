@@ -14,3 +14,15 @@
     top: 2em;
     left: 30%;
 }
+
+
+
+
+
+#get_from_bug .raw-content {
+    max-height: 400px; 
+    overflow: scroll; 
+    background: #000; 
+    color: #fff; 
+    padding: 15px;
+}

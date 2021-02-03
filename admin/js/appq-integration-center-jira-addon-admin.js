@@ -30,7 +30,8 @@
 					if (res.success) {
 						var fields = res.data.fields
 						$('#retrieved_mappings').find('li').remove()
-						$('#getBugModal').find('pre').remove()
+						$('#get_from_bug').find('pre').remove()
+						$('#get_from_bug').find('h4').remove()
 						if (!fields) {
 							toastr.error('Invalid bug. No fields to retrieve')
 						} else {
@@ -47,13 +48,16 @@
 							if (fields.labels) {
 								mappings.labels = {data: fields.labels }
 							}
+							$('<h4 class="mt-3" >Identified fields</h4>').insertBefore('#retrieved_mappings')
 							Object.keys(mappings).forEach(function(name){
-								var li = $(`
-									<li class="row">
-									<span style="align-self: center;" class="col-3 name font-weight-bold">`+ name +`</span>
-									<span style="align-self: center;" class="col-6 data">`+ JSON.stringify(mappings[name].data) +`</span>
-									<span class="col-3 d-flex"><button style="align-self: center;" class="ml-auto btn btn-success import-mapping">Import</button></span>
-									</li>`)
+									var li = $(`
+										<li class="row mt-3">
+										<div class="col-9">
+										<small class="name">`+ name +`</small>
+										<span class="data">`+ JSON.stringify(mappings[name].data) +`</span>
+										</div>
+										<div class="col-3 text-right"><button class="btn btn-secondary import-mapping">Import</button></div>
+										</li>`)
 									li.find('.import-mapping').click(function(e){
 										e.preventDefault()
 										var name = $(this).closest('.row').find('.name').text()
@@ -67,7 +71,7 @@
 									})
 									$('#retrieved_mappings').append(li)
 								})
-								$('<pre style="max-height: 400px; overflow: scroll; background: #000; color: #fff; padding: 15px;">'+JSON.stringify(fields,undefined,2)+'</pre>').insertAfter('#retrieved_mappings')
+								$('<h4 class="mt-3" >Raw code</h4><pre class="raw-content">'+JSON.stringify(fields,undefined,2)+'</pre>').insertAfter('#retrieved_mappings')
 						}
 					}
 					else {

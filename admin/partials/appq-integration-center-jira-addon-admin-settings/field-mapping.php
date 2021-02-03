@@ -45,7 +45,7 @@ foreach ($api->basic_configuration as $key => $value) {
     </div>
 <? } ?>
 
-<?php /*
+
 <div class="row">
 	<div class="col-sm-9 field_mapping">
 		<?php foreach ($field_mapping as $key => $item) : ?>
@@ -80,7 +80,7 @@ foreach ($api->basic_configuration as $key => $value) {
 		</div>
 	</div>
 </div>
-*/?>
+
 <?php
 $this->partial('settings/get-bug-modal', array())
 ?>
