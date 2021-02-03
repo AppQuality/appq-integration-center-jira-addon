@@ -18,11 +18,11 @@ if (empty($field_mapping)) {
 }
 $endpoint_data = !empty($config) && property_exists($config,'endpoint') ? json_decode($config->endpoint,true) : array();
 ?>
-<form id="jira_fields_settings">
+<div id="jira_fields_settings">
 	<?php 
 	$this->partial('settings/field-mapping', array(
 		'field_mapping' => $field_mapping,
 		'campaign_id' => $campaign_id
     ));
     ?>
-</form>
+</div>

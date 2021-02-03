@@ -31,7 +31,7 @@
 						var fields = res.data.fields
 						$('#retrieved_mappings').find('li').remove()
 						$('#get_from_bug').find('pre').remove()
-						$('#get_from_bug').find('h4').remove()
+						$('#get_from_bug').find('h5').remove()
 						if (!fields) {
 							toastr.error('Invalid bug. No fields to retrieve')
 						} else {
@@ -48,7 +48,7 @@
 							if (fields.labels) {
 								mappings.labels = {data: fields.labels }
 							}
-							$('<h4 class="mt-3" >Identified fields</h4>').insertBefore('#retrieved_mappings')
+							$('<h5 class="mt-3" >Identified fields</h5>').insertBefore('#retrieved_mappings')
 							Object.keys(mappings).forEach(function(name){
 									var li = $(`
 										<li class="row mt-3">
@@ -71,7 +71,7 @@
 									})
 									$('#retrieved_mappings').append(li)
 								})
-								$('<h4 class="mt-3" >Raw code</h4><pre class="raw-content">'+JSON.stringify(fields,undefined,2)+'</pre>').insertAfter('#retrieved_mappings')
+								$('<h5 class="mt-3" >Raw code</h5><pre class="raw-content">'+JSON.stringify(fields,undefined,2)+'</pre>').insertAfter('#retrieved_mappings')
 						}
 					}
 					else {
@@ -149,7 +149,6 @@
 			  name: "nonce",
 			  value: appq_ajax.nonce,
 			});
-			console.log(data);
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
@@ -160,7 +159,33 @@
 				}
 			});
 		})
-		
+		$('#jira_mapping_field').submit(function(e){
+			e.preventDefault();
+			var srcParams = new URLSearchParams(window.location.search)
+			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var data = $('#jira_mapping_field').serializeArray();
+			data.push({
+				'name' : 'action',
+				'value': 'appq_jira_edit_mapping_fields'
+			});
+			data.push({
+				'name' : 'cp_id',
+				'value': cp_id
+			});
+			data.push({
+			  name: "nonce",
+			  value: appq_ajax.nonce,
+			});
+			jQuery.ajax({
+				type: "post",
+				dataType: "json",
+				url: appq_ajax.url,
+				data: data,
+				success: function(msg) {
+					location.reload();
+				}
+			});
+		})
 		$('.custom-checkbox').click(function(){
 			var input = $(this).find("input")
         	input.prop("checked", !input.prop("checked"));
