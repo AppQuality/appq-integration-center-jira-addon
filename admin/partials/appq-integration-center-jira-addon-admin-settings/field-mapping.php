@@ -28,9 +28,9 @@ foreach ($api->basic_configuration as $key => $value) {
         <?php printf('<small><strong>%s</strong></small>', __('Contains JSON', $this->plugin_name)); ?>
     </div>
 </div>
-
+<div class="fields-list">
 <?php foreach ($field_mapping as $key => $item){ ?>
-    <div class="row mb-2">
+    <div class="row mb-2" data-row="<?= $key ?>">
         <?php
         printf(
             '<div class="col-2">%s</div><div class="col-4">%s</div><div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled%s></div><div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled%s></div><div class="col-2 text-right actions">%s</div>',
@@ -38,14 +38,16 @@ foreach ($api->basic_configuration as $key => $value) {
 			array_key_exists('value', $item) ? $item['value'] : '',
 			array_key_exists('sanitize', $item) && $item['sanitize'] == 'on' ? ' checked="checked"' : '',
 			array_key_exists('is_json', $item) && $item['is_json'] == 'on' ? ' checked="checked"' : '',
-			'<button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-secondary mr-1"><i class="fa fa-pencil"></i></button>
-			<button data-toggle="modal" data-target="#delete_field_settings_modal" type="button" class="btn btn-secondary"><i class="fa fa-trash"></i></button>'
+			'<button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-secondary mr-1 edit-mapping-field" data-key="'.esc_attr($key).'" data-content="'.(isset($item['value']) ? esc_attr($item['value']) : '').'" data-sanitize="'.(isset($item['sanitize']) ? esc_attr($item['sanitize']) : '').'" data-json="'.(isset($item['is_json']) ? esc_attr($item['is_json']) : '').'"><i class="fa fa-pencil"></i></button>
+			<button data-toggle="modal" data-target="#delete_mapping_field_modal" type="button" class="btn btn-secondary delete-mapping-field" data-key="'.esc_attr($key).'"><i class="fa fa-trash"></i></button>'
         );
         ?>
     </div>
 <? } ?>
+</div>
 
 <?php
 $this->partial('settings/get-bug-modal', array());
 $this->partial('settings/edit-mapping-field-modal', array());
+$this->partial('settings/delete-mapping-field-modal', array());
 ?>

@@ -1,17 +1,13 @@
 <?php
 
-function appq_jira_edit_mapping_fields()
+function appq_jira_delete_mapping_fields()
 {
     if(!check_ajax_referer('appq-ajax-nonce', 'nonce', false)){
         wp_send_json_error('You don\'t have the permission to do this');
 	}
 	global $wpdb;
 	$cp_id = array_key_exists('cp_id', $_POST) ? intval($_POST['cp_id']) : false;
-	$name = array_key_exists('name', $_POST) ? $_POST['name'] : '';
-	$value = array_key_exists('value', $_POST) ? $_POST['value'] : '';
-	$value = str_replace("\\","", $value);
-	$sanitize = array_key_exists('sanitize', $_POST) ? 'on' : '';
-	$is_json = array_key_exists('is_json', $_POST) ? 'on' : '';
+	$key = array_key_exists('field_key', $_POST) ? $_POST['field_key'] : '';
 
 	$field_mapping = $wpdb->get_row(
 		$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE integration = "jira" AND campaign_id = %d', $cp_id)
@@ -19,11 +15,7 @@ function appq_jira_edit_mapping_fields()
 
 	$field_mapping = json_decode($field_mapping->field_mapping);
 
-	$field_mapping->$name = [
-		'value' => $value,
-		'sanitize' => $sanitize,
-		'is_json' => $is_json,
-	];
+	unset($field_mapping->$key);
 	
 	$field_mapping = (json_encode($field_mapping));
 
@@ -44,12 +36,8 @@ function appq_jira_edit_mapping_fields()
 		'campaign_id' => $cp_id,
 	));
 	
-	wp_send_json_success([
-		'key' => $name,
-		'content' => $value,
-		'sanitize' => $sanitize,
-		'json' => $is_json,
-	]);
+	//wp_send_json_success($field_mapping);
+	wp_send_json_success($key);
 }
 
-add_action('wp_ajax_appq_jira_edit_mapping_fields', 'appq_jira_edit_mapping_fields');
+add_action('wp_ajax_appq_jira_delete_mapping_fields', 'appq_jira_delete_mapping_fields');
