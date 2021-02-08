@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div style="z-index: 99999;" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="add_mapping_field_modal_label"><?php _e('Add / Edit mapping field', $this->plugin); ?></h5>
+        <h5 class="modal-title" id="add_mapping_field_modal_label"><?php _e('Add / Edit mapping field', $this->plugin_name); ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
