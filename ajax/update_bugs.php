@@ -4,7 +4,7 @@ function appq_jira_update_bugs($cp_id, $bug_id){
 	$api = new JiraRestApi($cp_id);
 	
 	if($bug_id == 'default') {
-		$uploaded_issue = $api->get_issue_by_id(-$cp_id);
+		$uploaded_issue = $api->get_issue_by_id($cp_id);
 	} else {
 		$uploaded_issue = $api->get_issue_by_id($bug_id);
 	}

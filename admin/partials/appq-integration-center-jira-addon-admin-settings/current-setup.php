@@ -34,11 +34,11 @@ printf('<h4 class="title py-3">%s</h4>', __('Current setup', $this->plugin_name)
         <?php
         if (property_exists($campaign->bugtracker, 'default_bug')) {
             printf(
-                '<button id="update_default_bug" type="button" class="btn btn-secondary mr-1">%s</button>',
-                __('Update bug', $this->plugin_name)
+                '<button id="update_default_bug" type="button" class="btn btn-secondary mr-2">%s</button>',
+                __('Update', $this->plugin_name)
             );
             printf(
-                '<a href="%s" target="_blank">%s <i class="fa fa-external"></i></a>',
+                '<a href="%s" target="_blank" class="btn btn-secondary mr-1" title="%s"><i class="fa fa-external-link"></i></a>',
                 $campaign->bugtracker->default_bug,
                 __('Show bug', $this->plugin_name)
             );
