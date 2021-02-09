@@ -35,7 +35,7 @@ foreach ($api->basic_configuration as $key => $value) {
         printf(
             '<div class="col-2">%s</div><div class="col-4">%s</div><div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled%s></div><div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled%s></div><div class="col-2 text-right actions">%s</div>',
             $key,
-			array_key_exists('value', $item) ? wpautop($item['value']) : '',
+			array_key_exists('value', $item) ? nl2br($item['value']) : '',
 			array_key_exists('sanitize', $item) && $item['sanitize'] == 'on' ? ' checked="checked"' : '',
 			array_key_exists('is_json', $item) && $item['is_json'] == 'on' ? ' checked="checked"' : '',
 			'<button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-secondary mr-1 edit-mapping-field" data-key="'.esc_attr($key).'" data-content="'.(isset($item['value']) ? esc_attr($item['value']) : '').'" data-sanitize="'.(isset($item['sanitize']) ? esc_attr($item['sanitize']) : '').'" data-json="'.(isset($item['is_json']) ? esc_attr($item['is_json']) : '').'"><i class="fa fa-pencil"></i></button>
