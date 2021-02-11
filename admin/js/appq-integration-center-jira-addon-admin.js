@@ -48,7 +48,8 @@
 							if (fields.labels) {
 								mappings.labels = {data: fields.labels }
 							}
-							$('<h5 class="mt-3" >Identified fields</h5>').insertBefore('#retrieved_mappings')
+							$("#get_from_bug").find('.search-bug').hide();
+							$('<h5>Identified fields</h5>').insertBefore('#retrieved_mappings')
 							Object.keys(mappings).forEach(function(name){
 									var li = $(`
 										<li class="row mt-3">
@@ -198,17 +199,20 @@
 				success: function(msg) {
 					toastr.success('Field added!');
 					submit_btn.html(submit_btn_html);
-					field_list_wrap.find(`[data-row="${msg.data.key}"]`).remove();
-					field_list_wrap.prepend(`<div class="row mb-2" data-row="${msg.data.key}">
-					<div class="col-2">${msg.data.key}</div>
+					var output = `<div class="col-2">${msg.data.key}</div>
 					<div class="col-4">${msg.data.content}</div>
 					<div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled="" ${'on' == msg.data.sanitize ? 'checked' : ''}></div>
 					<div class="col-2 text-center"><input type="checkbox" style="cursor: unset;" disabled="" ${'on' == msg.data.json ? 'checked' : ''}></div>
 					<div class="col-2 text-right actions">
 					<button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-secondary mr-1 edit-mapping-field" data-key="${msg.data.key}" data-content="${msg.data.content}" data-sanitize="${msg.data.sanitize}" data-json="${msg.data.json}"><i class="fa fa-pencil"></i></button>
 					<button data-toggle="modal" data-target="#delete_mapping_field_modal" type="button" class="btn btn-secondary delete-mapping-field" data-key="${msg.data.key}"><i class="fa fa-trash"></i></button>
-					</div>    
-					</div>`);
+					</div>`;
+					var field_row = field_list_wrap.find(`[data-row="${msg.data.key}"]`);
+					if(field_row.length) {
+						field_row.html(output);
+					} else {
+						field_list_wrap.prepend(`<div class="row mb-2" data-row="${msg.data.key}">${output}</div>`);
+					}
 					$('#add_mapping_field_modal').modal('hide');
 				}
 			});
@@ -275,6 +279,12 @@
 				}
 			});
 		})
+		$("#get_from_bug").on("hidden.bs.modal", function (e) {
+			$("#get_from_bug").find('.search-bug').show();
+			$('#retrieved_mappings').find('li').remove();
+			$('#get_from_bug').find('pre').remove();
+			$('#get_from_bug').find('h5').remove();
+		});
 		$('.custom-checkbox').click(function(){
 			var input = $(this).find("input")
         	input.prop("checked", !input.prop("checked"));
