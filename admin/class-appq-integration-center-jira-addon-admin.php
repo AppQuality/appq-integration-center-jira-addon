@@ -104,7 +104,7 @@ class Appq_Integration_Center_Jira_Addon_Admin
 
 	public function get_settings($campaign, $template_name = 'settings')
 	{
-		if (!in_array($template_name, ['tracker-settings', 'fields-settings', 'current-settings'])) return;
+		if (!in_array($template_name, ['tracker-settings', 'fields-settings'])) return;
 		global $wpdb;
 		$config = $wpdb->get_row(
 			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
@@ -115,41 +115,41 @@ class Appq_Integration_Center_Jira_Addon_Admin
 		]);
 	}
 
-	public function main_settings($campaign)
-	{
-		global $wpdb;
-		$config = $wpdb->get_row(
-			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
-		);
-		$this->partial('main-settings', array(
-			'config' => $config,
-			'campaign_id' => $campaign->id
-		));
-	}
+	// public function main_settings($campaign)
+	// {
+	// 	global $wpdb;
+	// 	$config = $wpdb->get_row(
+	// 		$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
+	// 	);
+	// 	$this->partial('main-settings', array(
+	// 		'config' => $config,
+	// 		'campaign_id' => $campaign->id
+	// 	));
+	// }
 
-	public function full_settings($campaign)
-	{
-		global $wpdb;
-		$config = $wpdb->get_row(
-			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
-		);
-		$this->partial('full-settings', array(
-			'config' => $config,
-			'campaign_id' => $campaign->id
-		));
-	}
+	// public function full_settings($campaign)
+	// {
+	// 	global $wpdb;
+	// 	$config = $wpdb->get_row(
+	// 		$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
+	// 	);
+	// 	$this->partial('full-settings', array(
+	// 		'config' => $config,
+	// 		'campaign_id' => $campaign->id
+	// 	));
+	// }
 
-	public function settings($campaign)
-	{
-		global $wpdb;
-		$config = $wpdb->get_row(
-			$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
-		);
-		$this->partial('settings', array(
-			'config' => $config,
-			'campaign_id' => $campaign->id
-		));
-	}
+	// public function settings($campaign)
+	// {
+	// 	global $wpdb;
+	// 	$config = $wpdb->get_row(
+	// 		$wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'appq_integration_center_config WHERE campaign_id = %d AND integration = %s', $campaign->id, $this->integration['slug'])
+	// 	);
+	// 	$this->partial('settings', array(
+	// 		'config' => $config,
+	// 		'campaign_id' => $campaign->id
+	// 	));
+	// }
 
 	/** 
 	 * Return admin partial path

@@ -11,11 +11,6 @@ function appq_jira_edit_settings()
 	$apikey = array_key_exists('jira_apikey', $_POST) ? $_POST['jira_apikey'] : '';
 	$project = array_key_exists('jira_project', $_POST) ? $_POST['jira_project'] : '';
 	$upload_media = array_key_exists('media', $_POST) ? $_POST['media'] : false;
-	$field_mapping = array_key_exists('field_mapping', $_POST) ? $_POST['field_mapping'] : new stdClass();
-	foreach ($field_mapping as $key => $value) {
-		$field_mapping[$key]['value'] = stripslashes($value['value']);
-	}
-	$field_mapping = (json_encode($field_mapping));
 	
 	$endpoint = json_encode(array(
 		'endpoint' => $endpoint,
@@ -36,12 +31,10 @@ function appq_jira_edit_settings()
 		'apikey' => $apikey,
         'upload_media' => $upload_media ? 1 : 0,
         'is_active' => 1,
-		'field_mapping' => $field_mapping,
 	), array(
 		'integration' => 'jira',
 		'campaign_id' => $cp_id,
 	));
-	
 	wp_send_json_success('ok');
 }
 

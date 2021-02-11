@@ -12,10 +12,6 @@
  * @subpackage Appq_Integration_Center_Jira_Addon/admin/partials
  */
 
-$field_mapping = !empty($config) ? json_decode($config->field_mapping, true) : array();
-if (empty($field_mapping)) {
-    $field_mapping = array();
-}
 $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_decode($config->endpoint, true) : array();
 ?>
 <form id="jira_tracker_settings">

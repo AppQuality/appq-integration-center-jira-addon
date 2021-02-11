@@ -36,7 +36,6 @@ function appq_jira_delete_mapping_fields()
 		'campaign_id' => $cp_id,
 	));
 	
-	//wp_send_json_success($field_mapping);
 	wp_send_json_success($key);
 }
 
