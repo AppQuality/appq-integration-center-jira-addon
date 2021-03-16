@@ -37,6 +37,9 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'APPQ_INTEGRATION_CENTER_JIRA_ADDON_VERSION', '1.0.0' );
 
+define('APPQ_INTEGRATION_CENTER_JIRA_URL', plugin_dir_url( __FILE__ ));
+
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-appq-integration-center-jira-addon-activator.php

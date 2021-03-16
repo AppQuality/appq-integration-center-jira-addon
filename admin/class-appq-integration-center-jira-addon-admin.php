@@ -172,4 +172,11 @@ class Appq_Integration_Center_Jira_Addon_Admin
 		}
 		include(WP_PLUGIN_DIR . '/' . $this->get_partial($slug));
 	}
+	
+	
+	public function current_setup( $campaign = null )
+	{
+		$this->partial( 'settings/current-setup', [ 'campaign' => $campaign ] );
+	}
+
 }
