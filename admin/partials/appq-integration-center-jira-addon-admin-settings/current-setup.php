@@ -29,7 +29,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
             </h6>
             <span>
                 <span class="text-primary"><?= substr( $apikey, 0, 10 ) . str_repeat( "•", 10 ); ?></span>
-                <button data-toggle="modal" data-target="#apiKeyModal" type="button" class="btn btn-link btn-sm pt-0 pb-0">
+                <button data-toggle="modal" data-target="#apiKeyModal" type="button" class="btn btn-default btn-sm pt-0 pb-0">
                     <i class="fa fa-eye"></i>
                 </button>
             </span>
@@ -56,26 +56,26 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
         <div class="btn-group mr-1" role="group">
 			<?php if ( isset( $campaign->bugtracker->default_bug ) ): ?>
 
-                <button id="update_default_bug" class="btn btn-light" title="Click to update the example bug previously uploaded" type="button">
+                <button id="update_default_bug" class="btn btn-default" title="Click to update the example bug previously uploaded" type="button">
 					<?= __( 'Update', $this->plugin_name ) ?>
                 </button>
-                <a href="<?= $campaign->bugtracker->default_bug; ?>" target="_blank" class="btn btn-light"
+                <a href="<?= $campaign->bugtracker->default_bug; ?>" target="_blank" class="btn btn-default"
                    title="<?= __( 'Show Example Bug uploaded', $this->plugin_name ) ?>">
                     <i class="fa fa-external-link"></i>
                 </a>
 
 			<?php else: ?>
 
-                <button id="import_default_bug" type="button" class="btn btn-light">
+                <button id="import_default_bug" type="button" class="btn btn-default">
 					<?=  __( 'Import bug', $this->plugin_name ) ?>
                 </button>
 			<?php endif; ?>
         </div>
         <div class="btn-group" role="group">
-            <button data-toggle="modal" data-target="#custom_tracker_settings_modal" type="button" class="btn btn-light">
+            <button data-toggle="modal" data-target="#custom_tracker_settings_modal" type="button" class="btn btn-default">
                 <i class="fa fa-pencil"></i>
             </button>
-            <button data-toggle="modal" data-target="#reset_tracker_settings" type="button" class="btn btn-light">
+            <button data-toggle="modal" data-target="#reset_tracker_settings" type="button" class="btn btn-default">
                 <i class="fa fa-trash"></i>
             </button>
         </div>
