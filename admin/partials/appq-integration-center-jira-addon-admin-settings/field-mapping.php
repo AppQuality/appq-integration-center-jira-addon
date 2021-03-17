@@ -30,7 +30,7 @@ foreach ($api->basic_configuration as $key => $value) {
     </div>
     <div class="fields-list">
 		<?php foreach ($field_mapping as $key => $item): ?>
-            <div class="row mb-2" data-row="<?= $key ?>">
+            <div class="row py-2" data-row="<?= $key ?>">
                 <div class="col-2"><?= $key ?></div>
                 <div class="col-4"><?= array_key_exists('value', $item) ? nl2br($item['value']) : '' ?></div>
                 <div class="col-2 text-center">
@@ -40,14 +40,14 @@ foreach ($api->basic_configuration as $key => $value) {
                     <input type="checkbox" style="cursor: unset;" disabled <?= array_key_exists('is_json', $item) && $item['is_json'] == 'on' ? ' checked="checked"' : '' ?>>
                 </div>
                 <div class="col-2 text-right actions">
-                    <button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-info mr-1 edit-mapping-field"
+                    <button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-info btn-sm mr-1 edit-mapping-field"
                             data-key="<?= esc_attr($key); ?>"
                             data-content="<?= (isset($item['value']) ? esc_attr($item['value']) : '') ?>"
                             data-sanitize="<?= (isset($item['sanitize']) ? esc_attr($item['sanitize']) : '') ?>"
                             data-json="<?= (isset($item['is_json']) ? esc_attr($item['is_json']) : '') ?>">
                         <i class="fa fa-pencil"></i>
                     </button>
-                    <button data-toggle="modal" data-target="#delete_mapping_field_modal" type="button" class="btn btn-danger delete-mapping-field"
+                    <button data-toggle="modal" data-target="#delete_mapping_field_modal" type="button" class="btn btn-danger btn-sm delete-mapping-field"
                             data-key="<?= esc_attr($key) ?>">
                         <i class="fa fa-trash"></i>
                     </button>
