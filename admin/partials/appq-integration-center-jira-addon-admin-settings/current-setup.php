@@ -18,7 +18,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
 			<?php
 			printf( '<h6 class="text-secondary">%s</h6>', __( 'Endpoint', $this->plugin_name ) );
 			?>
-            <span class="stick-bottom text-primary"><?= $endpoint ?></span>
+            <span class="text-primary"><?= $endpoint ?></span>
         </div>
     </div>
     <div class="col-3">
@@ -40,7 +40,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
 			<?php
 			printf( '<h6 class="text-secondary">%s</h6>', __( 'Project ID', $this->plugin_name ) );
 			?>
-            <span class="stick-bottom text-primary"><?= $project ?></span>
+            <span class="text-primary"><?= $project ?></span>
         </div>
     </div>
     <div class="col">
@@ -49,7 +49,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
 			printf( '<h6 class="text-secondary">%s</h6>', __( 'Media upload', $this->plugin_name ) );
 			$madiaUploadText = isset( $campaign->bugtracker->upload_media ) && $campaign->bugtracker->upload_media == 1 ? __( 'Yes', $this->plugin_name ) : __( 'No', $this->plugin_name );
 			?>
-            <span class="stick-bottom text-primary"><?= $madiaUploadText ?></span>
+            <span class="text-primary"><?= $madiaUploadText ?></span>
         </div>
     </div>
     <div class="col d-flex-vertical-center">
