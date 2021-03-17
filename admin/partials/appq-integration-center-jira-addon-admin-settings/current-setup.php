@@ -53,7 +53,6 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
         </div>
     </div>
     <div class="col d-flex-vertical-center">
-        <div class="btn-group mr-1" role="group">
 			<?php if ( isset( $campaign->bugtracker->default_bug ) ): ?>
 
                 <button id="update_default_bug" class="btn btn-default" title="Click to update the example bug previously uploaded" type="button">
@@ -70,15 +69,12 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
 					<?=  __( 'Import bug', $this->plugin_name ) ?>
                 </button>
 			<?php endif; ?>
-        </div>
-        <div class="btn-group" role="group">
             <button data-toggle="modal" data-target="#custom_tracker_settings_modal" type="button" class="btn btn-default">
                 <i class="fa fa-pencil"></i>
             </button>
             <button data-toggle="modal" data-target="#reset_tracker_settings" type="button" class="btn btn-default">
                 <i class="fa fa-trash"></i>
             </button>
-        </div>
     </div>
 </div>
 
