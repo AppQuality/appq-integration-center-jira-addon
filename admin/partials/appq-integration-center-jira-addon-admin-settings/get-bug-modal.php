@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div style="z-index: 99999;" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><?php _e('Import mapping from bug', $this->plugin_name); ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel"><?php _e('Inspect your bugtracker data', $this->plugin_name); ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -56,17 +56,17 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
 			<?php if ( isset( $campaign->bugtracker->default_bug ) ): ?>
 
                 <button id="update_default_bug" class="btn btn-default" title="Click to update the example bug previously uploaded" type="button">
-					<?= __( 'Update', $this->plugin_name ) ?>
+					<?= __( 'Update example issue', $this->plugin_name ) ?>
                 </button>
                 <a href="<?= $campaign->bugtracker->default_bug; ?>" target="_blank" class="btn btn-default"
-                   title="<?= __( 'Show Example Bug uploaded', $this->plugin_name ) ?>">
+                   title="<?= __( 'Show example issue', $this->plugin_name ) ?>">
                     <i class="fa fa-external-link"></i>
                 </a>
 
 			<?php else: ?>
 
                 <button id="import_default_bug" type="button" class="btn btn-default">
-					<?=  __( 'Import bug', $this->plugin_name ) ?>
+					<?=  __( 'Create example issue', $this->plugin_name ) ?>
                 </button>
 			<?php endif; ?>
             <button data-toggle="modal" data-target="#custom_tracker_settings_modal" type="button" class="btn btn-default">
