@@ -34,10 +34,18 @@ foreach ($api->basic_configuration as $key => $value) {
                 <div class="col-2"><?= $key ?></div>
                 <div class="col-4"><?= array_key_exists('value', $item) ? nl2br($item['value']) : '' ?></div>
                 <div class="col-2 text-center">
-                    <input type="checkbox" style="cursor: unset;" disabled <?= array_key_exists('sanitize', $item) && $item['sanitize'] == 'on' ? ' checked="checked"' : '' ?>>
+									<?php if (array_key_exists('sanitize', $item) && $item['sanitize'] == 'on') : ?>
+										<i class="fa fa-check"></i>
+									<?php else: ?>
+										<i class="fa fa-minus"></i>
+									<?php endif; ?>
                 </div>
                 <div class="col-2 text-center">
-                    <input type="checkbox" style="cursor: unset;" disabled <?= array_key_exists('is_json', $item) && $item['is_json'] == 'on' ? ' checked="checked"' : '' ?>>
+									<?php if (array_key_exists('is_json', $item) && $item['is_json'] == 'on') : ?>
+										<i class="fa fa-check"></i>
+									<?php else: ?>
+										<i class="fa fa-minus"></i>
+									<?php endif; ?>
                 </div>
                 <div class="col-2 text-right actions">
                     <button data-toggle="modal" data-target="#add_mapping_field_modal" type="button" class="btn btn-info btn-sm mr-1 edit-mapping-field"
