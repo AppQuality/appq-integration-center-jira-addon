@@ -26,21 +26,25 @@
                 printf('<textarea class="form-control" name="value" id="custom_mapping_content" placeholder="%s"></textarea>', __('*Type*: {Bug.type} ...', $this->plugin_name));
                 ?>
               </div>
-              <div class="form-group">
-                <?php
-                printf(
-                  '<label><input type="checkbox" class="form-control" name="sanitize"> %s</label>',
-                  __('Needs sanitizing', $this->plugin_name)
-                );
-                ?>
-              </div>
-              <div class="form-group">
-                <?php
-                printf(
-                  '<label><input type="checkbox" class="form-control" name="is_json"> %s</label>',
-                  __('Contains JSON', $this->plugin_name)
-                );
-                ?>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group pull-left mr-3">
+                    <?php
+                    printf(
+                      '<label><input type="checkbox" class="form-control" name="sanitize"> %s</label>',
+                      __('Needs sanitizing', $this->plugin_name)
+                    );
+                    ?>
+                  </div>
+                  <div class="form-group pull-left mr-3">
+                    <?php
+                    printf(
+                      '<label><input type="checkbox" class="form-control" name="is_json"> %s</label>',
+                      __('Contains JSON', $this->plugin_name)
+                    );
+                    ?>
+                  </div>
+                </div>
               </div>
               <div class="row mt-5 pb-4">
                 <div class="col-6 col-lg-4 offset-lg-2 text-right">
@@ -56,10 +60,10 @@
             </form>
           </div>
           <div class="col-4" style="max-height:350px;overflow-y:scroll">
-            <ul>
+            <ul style="list-style: none;">
             <?php foreach ($api->mappings as $key => $value): ?>
               <li title="<?= esc_attr($value['description']) ?>">
-                <button data-copy-to-clipboard class="btn btn-block btn-secondary"><?= $key ?></button>
+                <button style="text-transform: initial;" data-copy-to-clipboard class="btn btn-block btn-secondary"><?= $key ?></button>
               </li>
             <?php endforeach; ?>
             </ul>
