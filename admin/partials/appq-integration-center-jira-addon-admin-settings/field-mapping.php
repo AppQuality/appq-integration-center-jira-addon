@@ -60,6 +60,6 @@ foreach ($api->basic_configuration as $key => $value) {
 
 <?php
 $this->partial('settings/get-bug-modal', array());
-$this->partial('settings/edit-mapping-field-modal', array());
+$this->partial('settings/edit-mapping-field-modal', array('campaign_id' => $campaign_id));
 $this->partial('settings/delete-mapping-field-modal', array());
 ?>

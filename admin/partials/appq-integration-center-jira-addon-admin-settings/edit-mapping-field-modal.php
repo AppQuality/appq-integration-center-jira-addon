@@ -1,4 +1,4 @@
-<?php $api = new IntegrationCenterRestApi($campaign->id, null, null); ?>
+<?php $api = new IntegrationCenterRestApi($campaign_id, null, null); ?>
 
 <!-- Modal -->
 <div class="modal" style="z-index: 99999;" id="add_mapping_field_modal" tabindex="-1" role="dialog" aria-labelledby="add_mapping_field_modal_label" aria-hidden="true">
