@@ -1,7 +1,7 @@
 
 				<div class="row py-2" data-row="<?= $_key ?>">
 						<div class="col-2"><?= $_key ?></div>
-						<div class="col-4"><?= array_key_exists('value', $item) ? $item['value'] : '' ?></div>
+						<div class="col-4" style="white-space:pre"><?= array_key_exists('value', $item) ? $item['value'] : '' ?></div>
 						<div class="col-2 text-center">
 							<?= $sanitize_icon ?>
 						</div>
