@@ -10,8 +10,8 @@ foreach ($api->basic_configuration as $key => $value) {
     <div class="row">
         <div class="col-6"><?php printf('<h4 class="title py-3">%s</h4>', __('Field mapping', $this->plugin_name)); ?></div>
         <div class="col-6 text-right actions mt-2">
-            <button type="button" class="btn btn-default mr-1" data-toggle="modal" data-target="#get_from_bug"><?php _e('Inspect your bugtracker data', $this->plugin_name); ?></button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_mapping_field_modal"><?php _e('Add new field mapping', $this->plugin_name); ?></button>
+            <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" data-target="#get_from_bug"><?php _e('Inspect your bugtracker data', $this->plugin_name); ?></button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add_mapping_field_modal"><?php _e('Add new field mapping', $this->plugin_name); ?></button>
         </div>
     </div>
     <div class="row mb-2">
