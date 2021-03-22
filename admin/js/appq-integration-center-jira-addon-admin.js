@@ -9,8 +9,7 @@
 			  }
 		});
 		$('#retrieve_mappings').click(function(){
-			var srcParams = new URLSearchParams(window.location.search)
-			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var cp_id = $('#campaign_id').val()
 			var issue_id = $('#issue_id').val()
 			var button = $(this)
 			var text = button.text()
@@ -143,8 +142,7 @@
 		})
 		$('#jira_tracker_settings').submit(function(e){
 			e.preventDefault();
-			var srcParams = new URLSearchParams(window.location.search)
-			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var cp_id = $('#campaign_id').val();
 			var data = $('#jira_tracker_settings').serializeArray();
 			data.push({
 				'name' : 'action',
@@ -172,8 +170,7 @@
 		$('#jira_mapping_field').submit(function(e){
 			e.preventDefault();
 			var field_list_wrap = $('.fields-list');
-			var srcParams = new URLSearchParams(window.location.search)
-			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var cp_id = $('#campaign_id').val()
 			var data = $('#jira_mapping_field').serializeArray();
 			
 			var submit_btn = $(this).find('[type="submit"]');
@@ -241,8 +238,7 @@
 		$('#jira_delete_field').submit(function(e){
 			e.preventDefault();
 			var field_list_wrap = $('.fields-list');
-			var srcParams = new URLSearchParams(window.location.search)
-			var cp_id = srcParams.has('id') ? srcParams.get('id') : -1
+			var cp_id = $('#campaign_id').val()
 			var data = $('#jira_delete_field').serializeArray();
 			var submit_btn = $(this).find('[type="submit"]');
 			var submit_btn_html = submit_btn.html();
