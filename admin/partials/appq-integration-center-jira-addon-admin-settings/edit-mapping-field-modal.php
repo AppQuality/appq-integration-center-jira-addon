@@ -28,21 +28,17 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <div class="form-group pull-left mr-3">
-                    <?php
-                    printf(
-                      '<label><input type="checkbox" class="form-control" name="sanitize"> %s</label>',
-                      __('Needs sanitizing', $this->plugin_name)
-                    );
-                    ?>
+                  <div class="form-group pull-left mr-3 col-12">
+                    <label class="d-flex align-items-center">
+                      <input type="checkbox" class="form-control col-1 mr-2" name="sanitize">
+                      <?=  __('Needs sanitizing', $this->plugin_name) ?>
+                    </label>
                   </div>
-                  <div class="form-group pull-left mr-3">
-                    <?php
-                    printf(
-                      '<label><input type="checkbox" class="form-control" name="is_json"> %s</label>',
-                      __('Contains JSON', $this->plugin_name)
-                    );
-                    ?>
+                  <div class="form-group pull-left mr-3 col-12">
+                    <label class="d-flex align-items-center">
+                      <input type="checkbox" class="form-control col-1 mr-2" name="is_json">
+                      <?=  __('Contains JSON', $this->plugin_name) ?>
+                    </label>
                   </div>
                 </div>
               </div>
@@ -54,15 +50,16 @@
                   ); ?>
                 </div>
                 <div class="col-6 col-lg-4">
-                  <?php printf('<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', $this->plugin_name)); ?>
+                  <?php printf('<button type="button" class="btn btn-link" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', $this->plugin_name)); ?>
                 </div>
               </div>
             </form>
           </div>
           <div class="col-4" style="max-height:350px;overflow-y:scroll">
+            <h6 class="text-center">Click to copy</h6>
             <ul style="list-style: none;">
             <?php foreach ($api->mappings as $key => $value): ?>
-              <li title="<?= esc_attr($value['description']) ?>">
+              <li class="mb-1" title="<?= esc_attr($value['description']) ?>">
                 <button style="text-transform: initial;" data-copy-to-clipboard class="btn btn-block btn-secondary"><?= $key ?></button>
               </li>
             <?php endforeach; ?>
