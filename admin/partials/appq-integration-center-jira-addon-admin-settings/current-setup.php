@@ -53,28 +53,10 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
         </div>
     </div>
     <div class="col d-flex-vertical-center">
-			<?php if ( isset( $campaign->bugtracker->default_bug ) ): ?>
-
-                <button id="update_default_bug" class="btn btn-secondary mr-1" title="Click to update the example bug previously uploaded" type="button">
-					<?= __( 'Update example issue', $this->plugin_name ) ?>
-                </button>
-                <a href="<?= $campaign->bugtracker->default_bug; ?>" target="_blank" class="btn btn-secondary"
-                   title="<?= __( 'Show example issue', $this->plugin_name ) ?>">
-                    <i class="fa fa-external-link"></i>
-                </a>
-
-			<?php else: ?>
-
-                <button id="import_default_bug" type="button" class="btn btn-secondary mr-1">
-					<?=  __( 'Create example issue', $this->plugin_name ) ?>
-                </button>
-			<?php endif; ?>
-            <button data-toggle="modal" data-target="#custom_tracker_settings_modal" type="button" class="btn btn-secondary mr-1">
-                <i class="fa fa-pencil"></i>
-            </button>
-            <button data-toggle="modal" data-target="#reset_tracker_settings" type="button" class="btn btn-secondary mr-1">
-                <i class="fa fa-trash"></i>
-            </button>
+			<?php
+      $admin = new AppQ_Integration_Center_Admin('appq-integration-center', APPQ_INTEGRATION_CENTERVERSION);
+      $admin->current_setup_edit_buttons($campaign) 
+      ?>
     </div>
 </div>
 
