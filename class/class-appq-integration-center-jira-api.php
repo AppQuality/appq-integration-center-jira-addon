@@ -391,20 +391,26 @@ class JiraRestApi extends IntegrationCenterRestApi
 				} else {
 					$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 				}
+				
+				$media_error = false;
+				
 				foreach ($media as $media_item)
 				{
 					$result = $this->add_attachment($res->key, $media_item);
 					if (!$result['status'])
 					{
-						$return['status'] = false;
-						$return['message'] = $return['message'] . ' <br> '. $result['message'];
+						$media_error = $return['message'] . ' <br> '. $result['message'];
 					}
 				}
 				
-				if (!$return['status'])
-				{
-					return $return;
+				if ($media_error) {
+					return array(
+						'status' => true,
+						'warning' => $media_error,
+						'message' => $res
+					);
 				}
+				
 			}
 
 			return array(
@@ -520,13 +526,6 @@ class JiraRestApi extends IntegrationCenterRestApi
 			} else {
 				$ret['message'] = $ret['message'] . ' - Error ' .  $req->info['http_code'];
 			}
-		}
-		else
-		{
-			$ret = array(
-				'status' => false,
-				'message' => $req->error
-			);
 		}
 		unlink($filename);
 		return $ret;
