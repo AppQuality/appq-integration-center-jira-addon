@@ -15,17 +15,29 @@ foreach ($api->basic_configuration as $key => $value) {
         </div>
     </div>
     <div class="row mb-2">
-        <div class="col-2">
-			<?php printf('<small><strong>%s</strong></small>', __('Name', $this->plugin_name)); ?>
+        <div class="col-2" >
+					<small>
+						<strong><?= __('Name', $this->plugin_name); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Jira field name', $this->plugin_name) ?>"></i>
+					</small>
         </div>
         <div class="col-4">
-			<?php printf('<small><strong>%s</strong></small>', __('Content', $this->plugin_name)); ?>
+					<small>
+						<strong><?= __('Content', $this->plugin_name); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('The content you want to set the jira field to. {Bug.*} fields will be replaced with the bug data', $this->plugin_name) ?>"></i>
+					</small>
         </div>
         <div class="col-2 text-center">
-			<?php printf('<small><strong>%s</strong></small>', __('Needs sanitizing', $this->plugin_name)); ?>
+					<small>
+						<strong><?= __('Needs sanitizing', $this->plugin_name); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if you don\'t want to expand special characters for jira content (e.g. _ for italics, * for bold ...)', $this->plugin_name) ?>"></i>
+					</small>
         </div>
         <div class="col-2 text-center">
-			<?php printf('<small><strong>%s</strong></small>', __('Contains JSON', $this->plugin_name)); ?>
+					<small>
+						<strong><?= __('Contains JSON', $this->plugin_name); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if the content should be interpreted as a json object, useful when setting object or arrays', $this->plugin_name) ?>"></i>
+					</small>
         </div>
     </div>
     <div class="fields-list">
