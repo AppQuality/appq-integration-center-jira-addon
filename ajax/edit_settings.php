@@ -35,6 +35,13 @@ function appq_jira_edit_settings()
 		'integration' => 'jira',
 		'campaign_id' => $cp_id,
 	));
+  
+	$sql = 'UPDATE '.$wpdb->prefix .'appq_integration_center_config
+	SET is_active = 0
+	WHERE campaign_id = %d AND integration != "jira";';
+	$sql = $wpdb->prepare($sql,$cp_id);
+	
+	$wpdb->query($sql);
 	wp_send_json_success('ok');
 }
 
