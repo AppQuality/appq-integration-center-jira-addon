@@ -198,7 +198,7 @@
 					submit_btn.html(submit_btn_html);
 					var template = wp.template("field_mapping_row");
 					var output = template(msg.data);
-					if ($('[data-row="'+msg.data.key+'"]')) {
+					if ($('[data-row="'+msg.data.key+'"]').length) {
 						$('[data-row="'+msg.data.key+'"]').replaceWith(output)
 					} else {
 						field_list_wrap.prepend(output);
