@@ -96,7 +96,8 @@ class Appq_Integration_Center_Jira_Addon_Admin
 		$integrations[] = array_merge(
 			$this->integration,
 			array(
-				'class' => $this
+				'class' => $this,
+				'visible_to_customer' => true
 			)
 		);
 		return $integrations;
