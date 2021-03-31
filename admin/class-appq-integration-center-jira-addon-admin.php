@@ -27,10 +27,10 @@ class Appq_Integration_Center_Jira_Addon_Admin
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
-	 * @access   private
+	 * @access   public
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
-	private $plugin_name;
+	public $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -79,7 +79,7 @@ class Appq_Integration_Center_Jira_Addon_Admin
 	public function enqueue_scripts($hook)
 	{
 		if (strpos($hook, 'integration-center') !== false) {
-			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/appq-integration-center-jira-addon-admin.js', array('jquery'), $this->version, false);
+			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/appq-integration-center-jira-addon-admin.js', array('jquery','wp-util'), $this->version, false);
 			wp_localize_script($this->plugin_name, 'custom_object', array(
 				'ajax_url' => admin_url('admin-ajax.php')
 			));
@@ -96,7 +96,8 @@ class Appq_Integration_Center_Jira_Addon_Admin
 		$integrations[] = array_merge(
 			$this->integration,
 			array(
-				'class' => $this
+				'class' => $this,
+				'visible_to_customer' => true
 			)
 		);
 		return $integrations;
