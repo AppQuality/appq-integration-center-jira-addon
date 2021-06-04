@@ -48,7 +48,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		);
 	}
 
-	
+
 	/**
 	 * Get the apiurl
 	 * @method get_apiurl
@@ -82,8 +82,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		return $endpoint_data->project;
 	}
-	
-	
+
+
 	/**
 	 * Replace {placeholders} in a field mapping value with data from a bug
 	 * @method bug_data_replace
@@ -92,7 +92,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param  MvcObject                  $bug   The bug (MvcObject with additional fields on field property)
 	 * @param  string                  $value The string with {placeholders} to fill
 	 * @param  bool                  $sanitize Escape special jira characters (_,*,...)
-	 * @return string                         
+	 * @return string
 	 */
 	public function bug_data_replace_jira($bug, $value, $sanitize, $is_json = false)
 	{
@@ -132,7 +132,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		return $value;
 	}
-	
+
 	/**
 	 * Get mapped field data
 	 * @method map_fields
@@ -144,7 +144,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	public function map_fields($bug)
 	{
 		$field_mapping = $this->get_field_mapping();
-		foreach ($field_mapping as $key => $item) 
+		foreach ($field_mapping as $key => $item)
 		{
 			$value = $item['value'];
 			$sanitize = array_key_exists('sanitize', $item) && $item['sanitize'] === 'on';
@@ -163,7 +163,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 	/**
 	 * Delete an issue from JIRA
-	 * @param  string $bugtracker_id 
+	 * @param  string $bugtracker_id
 	 */
 	public function delete_issue($bugtracker_id) {
 		global $wpdb;
@@ -183,7 +183,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'Content-Type' => 'application/json',
 			'Accept' => 'application/json'
 		));
-		
+
 		if (empty($req) || !property_exists($req,'status_code')) {
 			return array(
 				'status' => false,
@@ -213,7 +213,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'message' => 'You are not authorized to delete issues on this project'
 			);
 		}
-		
+
 		if ($delete_from_db) {
 			$wpdb->delete($wpdb->prefix . 'appq_integration_center_bugs',array(
 				'bugtracker_id' => $bugtracker_id
@@ -223,8 +223,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'data' => $data
 			);
 		}
-		
-		
+
+
 		return array(
 			'status' => false,
 			'data' => array(
@@ -233,10 +233,10 @@ class JiraRestApi extends IntegrationCenterRestApi
 			)
 		);
 	}
-	
-	
-	
-	/** 
+
+
+
+	/**
 	 * Send the issue
 	 * @method update_issue
 	 * @date              2020-11-25T10:27:36+010
@@ -245,7 +245,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param  string                  $key The key of the issue to update
 	 * @return array 					An associative array {
 	 * 										status: bool,		If uploaded successfully
-	 * 										message: string		The response of the upload or an error message on error 
+	 * 										message: string		The response of the upload or an error message on error
 	 * 									}
 	 */
 	public function update_issue($bug,$key) {
@@ -260,7 +260,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'message' => "This bug is already uploaded with old bugtracker"
 			);
 		}
-		
+
 
 		$data = $this->map_fields($bug);
 		$data['project'] = array(
@@ -276,7 +276,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'Accept' => 'application/json'
 		), json_encode($body));
 
-		
+
 		if (!$req->success | $req->status_code != 204) {
 			return array(
 				'status' => false,
@@ -304,7 +304,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 					$return['message'] = $return['message'] . ' <br> '. $result['message'];
 				}
 			}
-			
+
 			if (!$return['status'])
 			{
 				return $return;
@@ -314,18 +314,18 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'status' => true,
 			'message' => $key . ' updated'
 		);
-		
+
 	}
-	
+
 	private function is_uploaded_with_old_bugtracker($bug_id) {
 		global $wpdb;
 
 		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug_id));
 		$is_uploaded = intval($is_uploaded);
-		
+
 		return $is_uploaded > 0;
 	}
-	/** 
+	/**
 	 * Send the issue
 	 * @method send_issue
 	 * @date   2019-10-30T15:21:44+010
@@ -333,7 +333,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param  MvcObject                  $bug The bug to upload (MvcObject with additional fields on field property)
 	 * @return array 					An associative array {
 	 * 										status: bool,		If uploaded successfully
-	 * 										message: string		The response of the upload or an error message on error 
+	 * 										message: string		The response of the upload or an error message on error
 	 * 									}
 	 */
 	public function send_issue($bug)
@@ -358,7 +358,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 		$body->update = new stdClass();
 		$body->fields = (object) $data;
 		$url = parse_url($this->get_apiurl());
-		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue';
+        $host = array_key_exists('path', $url) ? $url['host'] . "/" . str_replace('/', '', $url['path']) : $url['host'];
+        $url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $host . '/rest/api/'.$this->api_version.'/issue';
 		$req = $this->http_post($url, array(
 			'Content-Type' => 'application/json',
 			'Accept' => 'application/json'
@@ -391,9 +392,9 @@ class JiraRestApi extends IntegrationCenterRestApi
 				} else {
 					$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 				}
-				
+
 				$media_error = false;
-				
+
 				foreach ($media as $media_item)
 				{
 					$result = $this->add_attachment($res->key, $media_item);
@@ -402,7 +403,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 						$media_error = $return['message'] . ' <br> '. $result['message'];
 					}
 				}
-				
+
 				if ($media_error) {
 					return array(
 						'status' => true,
@@ -410,7 +411,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 						'message' => $res
 					);
 				}
-				
+
 			}
 
 			return array(
@@ -419,7 +420,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			);
 		}
 
-		if ($res->{"status-code"} == 404) {
+		if (property_exists($res, "status-code") && $res->{"status-code"} == 404) {
 			return array(
 				'status' => false,
 				'message' => $res->message
@@ -427,9 +428,21 @@ class JiraRestApi extends IntegrationCenterRestApi
 		}
 
 		if (property_exists($res, 'errorMessages')) {
+
+		    $errors = implode(',', $res->errorMessages);
+
+		    if(!empty( $res->errors ))
+            {
+                $errors .= " - ";
+                foreach($res->errors as $key => $value)
+                {
+                    $errors .= sprintf('%s: %s, ', $key, $value);
+                }
+            }
+
 			return array(
 				'status' => false,
-				'message' => implode(',', $res->errorMessages) . ' - ' . implode(',', (array) $res->errors)
+				'message' => $errors
 			);
 		}
 
@@ -438,7 +451,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'message' => 'Generic error'
 		);
 	}
-	
+
 	/**
 	 * Get an issue associated with a bug
 	 * @method get_issue_by_id
@@ -450,7 +463,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	public function get_issue_by_id($id)
 	{
 		global $wpdb;
-		
+
 		$sql = $wpdb->prepare('SELECT bugtracker_id FROM wp_appq_integration_center_bugs 
 			WHERE bug_id = %d AND integration = "jira"',$id);
 		return $wpdb->get_var($sql);
@@ -464,9 +477,9 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'Content-Type' => 'application/json',
 			'Accept' => 'application/json'
 		));
-		
+
 		$body = json_decode($req->body);
-		
+
 		if ($body && property_exists($body,'fields') && property_exists($body->fields,'attachment')) {
 			$url = parse_url($this->get_apiurl());
 			$base_url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/attachment/';
@@ -488,7 +501,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param                    $media The url of the media to attach
 	 * @return array 					An associative array {
 	 * 										status: bool,		If uploaded successfully
-	 * 										message: string		The response of the upload or an error message on error 
+	 * 										message: string		The response of the upload or an error message on error
 	 * 									}
 	 */
 	public function add_attachment($key, $media)
@@ -501,15 +514,15 @@ class JiraRestApi extends IntegrationCenterRestApi
 			"X-Atlassian-Token"=>"no-check",
 			"Content-Type"=>"multipart/form-data",
 		);
-		
+
 		$url = parse_url($this->get_apiurl());
 		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/' .$key .'/attachments';
-		
+
 		$req = $this->http_multipart_post($url,$headers,array (
 			'file' => new CURLFile($filename)
 		));
-		
-		
+
+
 		$ret = array(
 			'status' => false,
 			'message' => 'Generic error on attachment ' . $basename
@@ -530,15 +543,17 @@ class JiraRestApi extends IntegrationCenterRestApi
 		unlink($filename);
 		return $ret;
 	}
-	
+
 	public function get_issue($key) {
 		$url = parse_url($this->get_apiurl());
-		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $url['host'] . '/rest/api/'.$this->api_version.'/issue/' .$key ;
-		
+
+		$host = array_key_exists('path', $url) ? $url['host'] . "/" . str_replace('/', '', $url['path']) : $url['host'];
+		$url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $host . '/rest/api/'.$this->api_version.'/issue/' .$key ;
+
 		$headers = array();
 		$req = $this->http_get($url,$headers);
-		
-		
+
+
 		if($req->success)
 		{
 			if ($req->status_code == 200) {
@@ -559,8 +574,8 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'message' => 'Error ' . $req->status_code . ': ' . $req->body
 			);
 		}
-		
-		
+
+
 		return $ret;
 	}
 
