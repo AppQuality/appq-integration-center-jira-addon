@@ -615,24 +615,12 @@ class JiraRestApi extends IntegrationCenterRestApi
     {
         $url = parse_url($this->get_apiurl());
 
-        error_log("**** URL 1 ****");
-        error_log(print_r($url, true));
-        error_log("****     ****");
-
         $host = $this->get_host_from_url($url);
-
         $url = $url['scheme'] . '://' . $this->get_authorization() . '@' . $host . '/rest/api/' . $this->api_version . '/issue/' . $key;
-
-        error_log("**** URL ****");
-        error_log($url);
-        error_log("****     ****");
 
         $headers = array();
         $req = $this->http_get($url, $headers);
 
-        error_log("**** REQ ****");
-        error_log(print_r($req, true));
-        error_log("****     ****");
         if($req->success)
         {
             if($req->status_code == 200)
