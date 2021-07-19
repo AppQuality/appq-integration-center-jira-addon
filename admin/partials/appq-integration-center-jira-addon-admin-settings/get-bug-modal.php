@@ -17,7 +17,7 @@
             <div class="col-6 col-lg-4 offset-lg-2 text-right">
               <?php printf(
                 '<button type="button" id="retrieve_mappings" class="btn btn-primary confirm">%s</button>',
-                __('Import now', $this->plugin_name)
+                __('Inspect now', $this->plugin_name)
               ); ?>
             </div>
             <div class="col-6 col-lg-4">
