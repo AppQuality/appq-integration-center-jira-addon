@@ -72,7 +72,11 @@
 
 										input_name.val(name);
 										input_content.val(data);
-										input_sanitize.prop('checked', true);
+										if (name !== "assignee") {
+											input_sanitize.prop('checked', true);
+										} else {
+											input_sanitize.prop('checked', false);
+										}
 										input_json.prop('checked', true);
 										form.trigger('submit');
 										$(this).html(submit_btn_content);
