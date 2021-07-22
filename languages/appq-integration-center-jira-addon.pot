@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
-"POT-Creation-Date: 2021-03-29 15:16+0200\n"
+"POT-Creation-Date: 2021-07-22 17:24+0200\n"
 "PO-Revision-Date: 2021-03-29 15:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: AppQuality\n"
@@ -9,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -136,7 +137,7 @@ msgid "Search for a bug (Eg. ABC-01)"
 msgstr ""
 
 #: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:20
-msgid "Import now"
+msgid "Inspect now"
 msgstr ""
 
 #: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:21
