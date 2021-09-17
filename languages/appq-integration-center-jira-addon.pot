@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
-"POT-Creation-Date: 2021-09-02 15:31+0200\n"
+"POT-Creation-Date: 2021-09-17 16:09+0200\n"
 "PO-Revision-Date: 2021-03-29 15:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: AppQuality\n"
@@ -10,12 +10,32 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_x;_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:36
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
+msgid "Invalid bug. No fields to retrieve"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:167
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
+msgid "Tracker settings updated!"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:199
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
+msgid "Field added!"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:266
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
+msgid "Field deleted!"
+msgstr ""
 
 #: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:19
 #: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:20
@@ -158,4 +178,72 @@ msgstr ""
 
 #: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:45
 msgid "Upload media"
+msgstr ""
+
+#: ajax/update_bugs.php:15
+msgid "No issue to update"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:129
+msgid "Invalid JSON to decode"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:156
+msgid "Invalid JSON to decode for mapping"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:175
+msgid "Empty bugtracker_id"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:192
+msgid "Empty Response from Jira"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:208
+msgid "Successfully deleted the issue"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:213
+msgid "You are not authorized to delete issues on this project"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:232
+msgid "There was an error deleting the issue. The status code was"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:260
+#: class/class-appq-integration-center-jira-api.php:349
+msgid "This bug is already uploaded with old bugtracker"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:283
+msgid "Something went wrong during the update. The error code was"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:315
+msgid "updated"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:373
+msgid "Error on bug upload"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:451
+msgid "Generic error"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:528
+msgid "Generic error on attachment"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:538
+#: class/class-appq-integration-center-jira-api.php:568
+msgid "Entity too large"
+msgstr ""
+
+#: class/class-appq-integration-center-jira-api.php:541
+#: class/class-appq-integration-center-jira-api.php:571
+#: class/class-appq-integration-center-jira-api.php:577
+msgid "Error"
 msgstr ""
