@@ -79,7 +79,8 @@ class Appq_Integration_Center_Jira_Addon_Admin
 	public function enqueue_scripts($hook)
 	{
 		if (strpos($hook, 'integration-center') !== false) {
-			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/appq-integration-center-jira-addon-admin.js', array('jquery','wp-util'), $this->version, false);
+			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/dist/appq-integration-center-jira-addon.min.js', array('jquery','wp-util'), $this->version, false);
+            wp_set_script_translations($this->plugin_name, 'appq-integration-center-jira-addon', APPQ_INTEGRATION_CENTER_JIRA_PATH . 'languages');
 			wp_localize_script($this->plugin_name, 'custom_object', array(
 				'ajax_url' => admin_url('admin-ajax.php')
 			));

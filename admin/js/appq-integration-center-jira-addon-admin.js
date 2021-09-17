@@ -1,5 +1,6 @@
 (function($) {
 	'use strict';
+	var _x =  wp.i18n._x;
 
 	$(document).ready(function() {
 		$('#issue_id').on('keypress', function (e) {
@@ -32,7 +33,7 @@
 						$('#get_from_bug').find('pre').remove()
 						$('#get_from_bug').find('h5').remove()
 						if (!fields) {
-							toastr.error('Invalid bug. No fields to retrieve')
+							toastr.error(_x('Invalid bug. No fields to retrieve', 'Integration Center Jira get issue from bugtracker', 'appq-integration-center-jira-addon'))
 						} else {
 							var mappings = {}
 							if (fields.reporter && fields.reporter.accountId) {
@@ -50,14 +51,15 @@
 							$("#get_from_bug").find('.search-bug').hide();
 							$('<h5>Identified fields</h5>').insertBefore('#retrieved_mappings')
 							Object.keys(mappings).forEach(function(name){
-									var li = $(`
-										<li class="row mt-3">
-										<div class="col-9">
-										<small class="name">`+ name +`</small>
-										<span class="data">`+ JSON.stringify(mappings[name].data) +`</span>
-										</div>
-										<div class="col-3 text-right"><button class="btn btn-secondary import-mapping">Import</button></div>
-										</li>`)
+									var html_li =
+										'<li class="row mt-3">' +
+											'<div class="col-9">' +
+												'<small class="name">' + name + '</small>' +
+												'<span class="data">' + JSON.stringify(mappings[name].data) + '</span>' +
+											'</div>' +
+											'<div class="col-3 text-right"><button class="btn btn-secondary import-mapping">Import</button></div>' +
+										'</li>';
+									var li = $(html_li)
 									li.find('.import-mapping').click(function(e){
 										e.preventDefault();
 										var submit_btn_content = $(this).html();
@@ -104,25 +106,21 @@
 				e.preventDefault()
 				var key = $(this).parent().find('[name="key"]').val()
 				var value = $(this).parent().find('[name="value"]').val()
-				
-				var new_input = $(`
-				<div class="form-group row">
-					<label for="key" class="col-sm-2 align-self-center text-center"></label>
-					<textarea name="key" class="col-sm-7 form-control" placeholder="Title: {Bug.title}"></textarea>
-					<div class="custom-control custom-checkbox col-sm-1">
-					  <input name="sanitize" class="custom-control-input" type="checkbox" >
-					  <label class="custom-control-label" for="sanitize">
-						Sanitize?
-					  </label>
-					</div>
-					<div class="custom-control custom-checkbox col-sm-1">
-					  <input name="is_json" class="custom-control-input" type="checkbox" >
-					  <label class="custom-control-label" for="is_json">
-						JSON?
-					  </label>
-					</div>
-					<button class="col-sm-1 remove btn btn-danger">-</button>
-				</div>`)
+				var html_input =
+					'<div class="form-group row">' +
+						'<label for="key" class="col-sm-2 align-self-center text-center"></label>' +
+						'<textarea name="key" class="col-sm-7 form-control" placeholder="Title: {Bug.title}"></textarea>' +
+						'<div class="custom-control custom-checkbox col-sm-1">' +
+							'<input name="sanitize" class="custom-control-input" type="checkbox" >' +
+							'<label class="custom-control-label" for="sanitize">Sanitize?</label>' +
+						'</div>' +
+						'<div class="custom-control custom-checkbox col-sm-1">' +
+							'<input name="is_json" class="custom-control-input" type="checkbox">' +
+							'<label class="custom-control-label" for="is_json">JSON?</label>' +
+						'</div>' +
+						'<button class="col-sm-1 remove btn btn-danger">-</button>' +
+					'</div>'
+				var new_input = $(html_input)
 				new_input.find('label[for=key]').attr('for','field_mapping['+key+']').text(key)
 				new_input.find('textarea[name=key]').attr('name','field_mapping['+key+'][value]').val(value)
 				new_input.find('.form-check-input[name=sanitize]').attr('name','field_mapping['+key+'][sanitize]')
@@ -166,7 +164,7 @@
 				url: appq_ajax.url,
 				data: data,
 				success: function(msg) {
-					toastr.success('Tracker settings updated!');
+					toastr.success(_x('Tracker settings updated!', 'Integration Center Jira edit tracker settings', 'appq-integration-center-jira-addon'));
 					location.reload();
 				}
 			});
@@ -198,7 +196,7 @@
 				url: appq_ajax.url,
 				data: data,
 				success: function(msg) {
-					toastr.success('Field added!');
+					toastr.success(_x('Field added!', 'Integration Center Jira add mapping field', 'appq-integration-center-jira-addon'));
 					submit_btn.html(submit_btn_html);
 					var template = wp.template("field_mapping_row");
 					var output = template(msg.data);
@@ -265,9 +263,9 @@
 				url: appq_ajax.url,
 				data: data,
 				success: function(msg) {
-					toastr.success('Field deleted!');
+					toastr.success(_x('Field deleted!', 'Integration Center Jira delete mapping field', 'appq-integration-center-jira-addon'));
 					submit_btn.html(submit_btn_html);
-					field_list_wrap.find(`[data-row="${msg.data}"]`).remove();
+					field_list_wrap.find('[data-row="${msg.data}"]').remove();
 					$('#delete_mapping_field_modal').modal('toggle');
 				}
 			});

@@ -12,7 +12,7 @@ function appq_jira_update_bugs($cp_id, $bug_id){
 	if (empty($uploaded_issue)) {
 		return array(
 			'status' => false,
-			'message' => 'No issue to update'
+			'message' => __('No issue to update', "appq-integration-center-jira-addon")
 		);
 	}
 	$bug = $api->get_bug($bug_id);

@@ -21,28 +21,28 @@ class JiraRestApi extends IntegrationCenterRestApi
 			),
 			'description' => array(
 				'value' => '*Type*: {Bug.type}
-*User Replicability*: {Bug.replicability}
-*User Severity*: {Bug.severity}
-
-*Steps to reproduce*
-{Bug.steps}
-
-*Expected Result*
-{Bug.expected}
-
-*Current Result*
-{Bug.actual}
-
-*Bug Media*
-{Bug.media_links}
-
- 
-*Extra note*
- {Bug.note}
-
-*Device*:
-{Bug.manufacturer} {Bug.model} {Bug.os} {Bug.os_version}
-',
+                    *User Replicability*: {Bug.replicability}
+                    *User Severity*: {Bug.severity}
+                    
+                    *Steps to reproduce*
+                    {Bug.steps}
+                    
+                    *Expected Result*
+                    {Bug.expected}
+                    
+                    *Current Result*
+                    {Bug.actual}
+                    
+                    *Bug Media*
+                    {Bug.media_links}
+                    
+                     
+                    *Extra note*
+                     {Bug.note}
+                    
+                    *Device*:
+                    {Bug.manufacturer} {Bug.model} {Bug.os} {Bug.os_version}
+                ',
 				'sanitize' => 'off'
 			),
 		);
@@ -126,7 +126,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		{
 			$value = json_decode($value);
 			if ($value === null) {
-				throw new Exception("Invalid JSON to decode", 1);
+				throw new Exception(__("Invalid JSON to decode", "appq-integration-center-jira-addon"), 1);
 			}
 		}
 
@@ -153,7 +153,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				$key = $this->bug_data_replace_jira($bug, $key, $sanitize);
 				$value = $this->bug_data_replace_jira($bug, $value, $sanitize,$is_json);
 			} catch(Exception $e) {
-				throw new Exception("Invalid JSON to decode for mapping " . $key);
+				throw new Exception(__("Invalid JSON to decode for mapping", "appq-integration-center-jira-addon") . " " . $key);
 			}
 			$data[$key] = $value;
 		}
@@ -172,7 +172,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'status' => false,
 				'data' => array(
 					'auth_error' => false,
-					'message' => 'Empty bugtracker_id'
+					'message' => __('Empty bugtracker_id', "appq-integration-center-jira-addon")
 				)
 			);
 		}
@@ -189,7 +189,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				'status' => false,
 				'data' => array(
 					'auth_error' => false,
-					'message' => 'Empty Response from Jira'
+					'message' => __('Empty Response from Jira', "appq-integration-center-jira-addon")
 				)
 			);
 		} else {
@@ -205,12 +205,12 @@ class JiraRestApi extends IntegrationCenterRestApi
 		if ($authorized) {
 			$data = array(
 				'auth_error' => false,
-				'message' => 'Successfully deleted the issue'
+				'message' => __('Successfully deleted the issue', "appq-integration-center-jira-addon")
 			);
 		} else {
 			$data = array(
 				'auth_error' => true,
-				'message' => 'You are not authorized to delete issues on this project'
+				'message' => __('You are not authorized to delete issues on this project', "appq-integration-center-jira-addon")
 			);
 		}
 
@@ -229,7 +229,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			'status' => false,
 			'data' => array(
 				'auth_error' => false,
-				'message' => 'There was an error deleting the issue. The status code was ' .$req->status_code
+				'message' => __('There was an error deleting the issue. The status code was', "appq-integration-center-jira-addon") . " " . $req->status_code
 			)
 		);
 	}
@@ -257,7 +257,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		{
 			return array(
 				'status' => false,
-				'message' => "This bug is already uploaded with old bugtracker"
+				'message' => __("This bug is already uploaded with old bugtracker", "appq-integration-center-jira-addon")
 			);
 		}
 
@@ -280,7 +280,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		if (!$req->success | $req->status_code != 204) {
 			return array(
 				'status' => false,
-				'message' => "There was a ".$req->status_code." error on update"
+				'message' => __("Something went wrong during the update. The error code was", "appq-integration-center-jira-addon") . " " . $req->status_code
 			);
 		}
 		if (property_exists($this->configuration, 'upload_media') && intval($this->configuration->upload_media) > 0)
@@ -312,7 +312,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		}
 		return array(
 			'status' => true,
-			'message' => $key . ' updated'
+			'message' => $key . ' ' . __('updated', "appq-integration-center-jira-addon")
 		);
 
 	}
@@ -346,7 +346,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		{
 			return array(
 				'status' => false,
-				'message' => "This bug is already uploaded with old bugtracker"
+				'message' => __("This bug is already uploaded with old bugtracker", "appq-integration-center-jira-addon")
 			);
 		}
 
@@ -370,7 +370,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		if (is_null($res)) {
 			return array(
 				'status' => false,
-				'message' => 'Error on upload bug'
+				'message' => __('Error on bug upload', "appq-integration-center-jira-addon")
 			);
 		}
 
@@ -448,7 +448,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		return array(
 			'status' => false,
-			'message' => 'Generic error'
+			'message' => __('Generic error', "appq-integration-center-jira-addon")
 		);
 	}
 
@@ -525,7 +525,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		$ret = array(
 			'status' => false,
-			'message' => 'Generic error on attachment ' . $basename
+			'message' => __('Generic error on attachment', "appq-integration-center-jira-addon") . " " . $basename
 		);
 		if($req->status)
 		{
@@ -535,12 +535,15 @@ class JiraRestApi extends IntegrationCenterRestApi
 					'message' => json_decode($req->body)
 				);
 			} elseif($req->info['http_code'] == 413) {
-				$ret['message'] = $ret['message'] . ' - Entity too large';
+                $message = __('Entity too large', "appq-integration-center-jira-addon");
+                $ret['message'] = $ret['message'] . ' - ' . $message;
 			} else {
-				$ret['message'] = $ret['message'] . ' - Error ' .  $req->info['http_code'];
+                $message = __('Error', "appq-integration-center-jira-addon");
+                $ret['message'] = $ret['message'] . ' - ' . $message .  $req->info['http_code'];
 			}
 		}
 		unlink($filename);
+
 		return $ret;
 	}
 
@@ -552,7 +555,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		$headers = array();
 		$req = $this->http_get($url,$headers);
-
+        $ret = array();
 
 		if($req->success)
 		{
@@ -562,19 +565,21 @@ class JiraRestApi extends IntegrationCenterRestApi
 					'message' => json_decode($req->body)
 				);
 			} elseif($req->status_code == 413) {
-				$ret['message'] = $ret['message'] . ' - Entity too large';
+                $message = __('Entity too large', "appq-integration-center-jira-addon");
+				$ret['message'] = $ret['message'] . ' - ' . $message;
 			} else {
-				$ret['message'] = $ret['message'] . ' - Error ' .  $req->info['http_code'];
+                $message = __('Error', "appq-integration-center-jira-addon");
+				$ret['message'] = $ret['message'] . ' - ' . $message .  $req->info['http_code'];
 			}
 		}
 		else
 		{
+		    $message = __('Error', "appq-integration-center-jira-addon");
 			$ret = array(
 				'status' => false,
-				'message' => 'Error ' . $req->status_code . ': ' . $req->body
+				'message' => $message . ' ' . $req->status_code . ': ' . $req->body
 			);
 		}
-
 
 		return $ret;
 	}
