@@ -1,0 +1,16 @@
+{
+  "name": "appq-integration-center-jira-addon",
+  "version": "1.0.0",
+  "description": "=== Plugin Name ===\r Contributors: (this should be a list of wordpress.org userid's)\r Donate link: https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/\r Tags: comments, spam\r Requires at least: 3.0.1\r Tested up to: 3.4\r Stable tag: 4.3\r License: GPLv2 or later\r License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-uglify": "^3.4.0",
+    "load-grunt-tasks": "^5.1.0"
+  }
+}
