@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
-"POT-Creation-Date: 2021-09-17 16:09+0200\n"
+"POT-Creation-Date: 2021-09-28 09:22+0200\n"
 "PO-Revision-Date: 2021-03-29 15:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: AppQuality\n"
@@ -16,6 +16,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_x;_e;_n\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: .github\n"
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:36
 #: admin/js/dist/appq-integration-center-jira-addon.min.js:1
