@@ -1,4 +1,5 @@
-#, fuzzy
+# Copyright (C) 2021 Davide Bizzi
+# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
@@ -18,167 +19,24 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 
-#: admin/js/appq-integration-center-jira-addon-admin.js:36
-#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
-msgid "Invalid bug. No fields to retrieve"
+#. Plugin Name of the plugin
+msgid "Integration Center - Jira"
 msgstr ""
 
-#: admin/js/appq-integration-center-jira-addon-admin.js:167
-#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
-msgid "Tracker settings updated!"
+#. Plugin URI of the plugin
+msgid "bitbucket/appq-integration-center-jira-addon"
 msgstr ""
 
-#: admin/js/appq-integration-center-jira-addon-admin.js:199
-#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
-msgid "Field added!"
+#. Description of the plugin
+msgid "Extend Integration Center with Jira"
 msgstr ""
 
-#: admin/js/appq-integration-center-jira-addon-admin.js:266
-#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
-msgid "Field deleted!"
+#. Author of the plugin
+msgid "Davide Bizzi"
 msgstr ""
 
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:19
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:20
-msgid "Endpoint"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:28
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:26
-msgid "Authentication"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:41
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:32
-msgid "Project ID"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:49
-msgid "Media upload"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:50
-msgid "Yes"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:50
-msgid "No"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:6
-msgid "Delete this field?"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:19
-msgid "Delete field"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:23
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:53
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:24
-msgid "Cancel"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:8
-msgid "Add/edit field mapping"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:19
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:20
-msgid "Name"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:20
-msgid "summary"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:25
-msgid "Target field"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:26
-msgid "*Type*: {Bug.type} ..."
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:34
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:32
-msgid "Needs sanitizing"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:40
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:38
-msgid "Contains JSON"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:49
-msgid "Save field"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:11
-msgid "Field mapping"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:13
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:6
-msgid "Inspect your bugtracker data"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:14
-msgid "Add new field mapping"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:21
-msgid "Jira field name"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:26
-msgid "Content"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:27
-msgid ""
-"The content you want to set the jira field to. {Bug.*} fields will be "
-"replaced with the bug data"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:33
-msgid ""
-"Check it if you don't want to expand special characters for jira content (e."
-"g. _ for italics, * for bold ...)"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:39
-msgid ""
-"Check it if the content should be interpreted as a json object, useful when "
-"setting object or arrays"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:14
-msgid "Search for a bug (Eg. ABC-01)"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:20
-msgid "Inspect now"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:21
-msgid "https://yourcompanyname.atlassian.com"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:27
-msgid "email@adress.com:APITOKEN"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:33
-msgid "ABC"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:36
-msgid "Media preferences"
-msgstr ""
-
-#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:45
-msgid "Upload media"
+#. Author URI of the plugin
+msgid "https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/"
 msgstr ""
 
 #: ajax/update_bugs.php:15
@@ -247,4 +105,24 @@ msgstr ""
 #: class/class-appq-integration-center-jira-api.php:571
 #: class/class-appq-integration-center-jira-api.php:577
 msgid "Error"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:36
+msgctxt "Integration Center Jira get issue from bugtracker"
+msgid "Invalid bug. No fields to retrieve"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:167
+msgctxt "Integration Center Jira edit tracker settings"
+msgid "Tracker settings updated!"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:199
+msgctxt "Integration Center Jira add mapping field"
+msgid "Field added!"
+msgstr ""
+
+#: admin/js/appq-integration-center-jira-addon-admin.js:266
+msgctxt "Integration Center Jira delete mapping field"
+msgid "Field deleted!"
 msgstr ""
