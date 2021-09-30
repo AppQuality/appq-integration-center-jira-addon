@@ -265,7 +265,7 @@
 				success: function(msg) {
 					toastr.success(_x('Field deleted!', 'Integration Center Jira delete mapping field', 'appq-integration-center-jira-addon'));
 					submit_btn.html(submit_btn_html);
-					field_list_wrap.find('[data-row="${msg.data}"]').remove();
+					field_list_wrap.find('[data-row="' + msg.data + '"]').remove();
 					$('#delete_mapping_field_modal').modal('toggle');
 				}
 			});
