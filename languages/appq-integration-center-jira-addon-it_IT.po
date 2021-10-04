@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/appq-integration-"
 "center-jira-addon\n"
-"POT-Creation-Date: 2021-09-28T08:41:52+00:00\n"
+"POT-Creation-Date: 2021-10-04T09:35:02+00:00\n"
 "PO-Revision-Date: 2021-09-17 16:21+0200\n"
 "Last-Translator: Luca Cannarozzo <luca.cannarozzo@app-quality.com>\n"
 "Language-Team: AppQuality\n"
@@ -37,6 +37,155 @@ msgstr ""
 #. Author URI of the plugin
 msgid "https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/"
 msgstr ""
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:19
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:20
+msgid "Endpoint"
+msgstr "Endpoint"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:28
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:26
+msgid "Authentication"
+msgstr "Autenticazione"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:41
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:32
+msgid "Project ID"
+msgstr "ID Progetto"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:49
+msgid "Media upload"
+msgstr "Carica Media"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:50
+msgid "Yes"
+msgstr "Sì"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/current-setup.php:50
+msgid "No"
+msgstr "No"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:6
+msgid "Delete this field?"
+msgstr "Elimina questo campo?"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:19
+msgid "Delete field"
+msgstr "Elimina campo"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/delete-mapping-field-modal.php:23
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:53
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:24
+msgid "Cancel"
+msgstr "Annulla"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:8
+msgid "Add/edit field mapping"
+msgstr "Aggiungi/modifica mapping campo"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:19
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:20
+msgid "Name"
+msgstr "Nome"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:20
+msgid "summary"
+msgstr "summary"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:25
+msgid "Target field"
+msgstr "Nuovo campo"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:26
+msgid "*Type*: {Bug.type} ..."
+msgstr "*Tipo*: {Bug.type} ..."
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:34
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:32
+msgid "Needs sanitizing"
+msgstr "Necessita sanitizzazione"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:40
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:38
+msgid "Contains JSON"
+msgstr "Contiene JSON"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/edit-mapping-field-modal.php:49
+msgid "Save field"
+msgstr "Salva campo"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:11
+msgid "Field mapping"
+msgstr "Mapping campi"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:13
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:6
+msgid "Inspect your bugtracker data"
+msgstr "Leggi dati dal tuo bugtracker"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:14
+msgid "Add new field mapping"
+msgstr "Aggiungi nuovo mapping campi"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:21
+msgid "Jira field name"
+msgstr "Nome del campo Jira"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:26
+msgid "Content"
+msgstr "Contenuto"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:27
+msgid ""
+"The content you want to set the jira field to. {Bug.*} fields will be "
+"replaced with the bug data"
+msgstr ""
+"Il contenuto da settare nel campo Jira. I {Bug.*} verranno sostituiti con i "
+"dati del bug che stai caricando"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:33
+msgid ""
+"Check it if you don't want to expand special characters for jira content (e."
+"g. _ for italics, * for bold ...)"
+msgstr ""
+"Segnalo se non vuoi che i caratteri speciali vengano utilizzati per la "
+"formattazione di Jira (e.g. _ per il corsivo, * per il grassetto ...)"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/field-mapping.php:39
+msgid ""
+"Check it if the content should be interpreted as a json object, useful when "
+"setting object or arrays"
+msgstr ""
+"Segnalo se il contenuto deve essere interpretato come un oggetto JSON, serve "
+"quando vengono impostati oggetti o array"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:14
+msgid "Search for a bug (Eg. ABC-01)"
+msgstr "Cerca una issue (e.g. ABC-01)"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-settings/get-bug-modal.php:20
+msgid "Inspect now"
+msgstr "Ispeziona adesso"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:21
+msgid "https://yourcompanyname.atlassian.com"
+msgstr "https://yourcompanyname.atlassian.com"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:27
+msgid "email@adress.com:APITOKEN"
+msgstr "email@adress.com:APITOKEN"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:33
+msgid "ABC"
+msgstr "ABC"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:36
+msgid "Media preferences"
+msgstr "Impostazioni media"
+
+#: admin/partials/appq-integration-center-jira-addon-admin-tracker-settings.php:45
+msgid "Upload media"
+msgstr "Carica Media"
 
 #: ajax/update_bugs.php:15
 msgid "No issue to update"
@@ -132,111 +281,3 @@ msgstr "Campo aggiunto!"
 msgctxt "Integration Center Jira delete mapping field"
 msgid "Field deleted!"
 msgstr "Campo cancellato!"
-
-#~ msgid "Endpoint"
-#~ msgstr "Endpoint"
-
-#~ msgid "Authentication"
-#~ msgstr "Autenticazione"
-
-#~ msgid "Project ID"
-#~ msgstr "ID Progetto"
-
-#~ msgid "Media upload"
-#~ msgstr "Carica Media"
-
-#~ msgid "Yes"
-#~ msgstr "Sì"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "Delete this field?"
-#~ msgstr "Elimina questo campo?"
-
-#~ msgid "Delete field"
-#~ msgstr "Elimina campo"
-
-#~ msgid "Cancel"
-#~ msgstr "Annulla"
-
-#~ msgid "Add/edit field mapping"
-#~ msgstr "Aggiungi/modifica mapping campo"
-
-#~ msgid "Name"
-#~ msgstr "Nome"
-
-#~ msgid "summary"
-#~ msgstr "summary"
-
-#~ msgid "Target field"
-#~ msgstr "Nuovo campo"
-
-#~ msgid "*Type*: {Bug.type} ..."
-#~ msgstr "*Tipo*: {Bug.type} ..."
-
-#~ msgid "Needs sanitizing"
-#~ msgstr "Necessita sanitizzazione"
-
-#~ msgid "Contains JSON"
-#~ msgstr "Contiene JSON"
-
-#~ msgid "Save field"
-#~ msgstr "Salva campo"
-
-#~ msgid "Field mapping"
-#~ msgstr "Mapping campi"
-
-#~ msgid "Inspect your bugtracker data"
-#~ msgstr "Leggi dati dal tuo bugtracker"
-
-#~ msgid "Add new field mapping"
-#~ msgstr "Aggiungi nuovo mapping campi"
-
-#~ msgid "Jira field name"
-#~ msgstr "Nome del campo Jira"
-
-#~ msgid "Content"
-#~ msgstr "Contenuto"
-
-#~ msgid ""
-#~ "The content you want to set the jira field to. {Bug.*} fields will be "
-#~ "replaced with the bug data"
-#~ msgstr ""
-#~ "Il contenuto da settare nel campo Jira. I {Bug.*} verranno sostituiti con "
-#~ "i dati del bug che stai caricando"
-
-#~ msgid ""
-#~ "Check it if you don't want to expand special characters for jira content "
-#~ "(e.g. _ for italics, * for bold ...)"
-#~ msgstr ""
-#~ "Segnalo se non vuoi che i caratteri speciali vengano utilizzati per la "
-#~ "formattazione di Jira (e.g. _ per il corsivo, * per il grassetto ...)"
-
-#~ msgid ""
-#~ "Check it if the content should be interpreted as a json object, useful "
-#~ "when setting object or arrays"
-#~ msgstr ""
-#~ "Segnalo se il contenuto deve essere interpretato come un oggetto JSON, "
-#~ "serve quando vengono impostati oggetti o array"
-
-#~ msgid "Search for a bug (Eg. ABC-01)"
-#~ msgstr "Cerca una issue (e.g. ABC-01)"
-
-#~ msgid "Inspect now"
-#~ msgstr "Ispeziona adesso"
-
-#~ msgid "https://yourcompanyname.atlassian.com"
-#~ msgstr "https://yourcompanyname.atlassian.com"
-
-#~ msgid "email@adress.com:APITOKEN"
-#~ msgstr "email@adress.com:APITOKEN"
-
-#~ msgid "ABC"
-#~ msgstr "ABC"
-
-#~ msgid "Media preferences"
-#~ msgstr "Impostazioni media"
-
-#~ msgid "Upload media"
-#~ msgstr "Carica Media"
