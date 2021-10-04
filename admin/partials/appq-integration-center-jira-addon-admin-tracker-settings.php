@@ -17,23 +17,23 @@ $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_
 <form id="jira_tracker_settings">
     <div class="form-group mt-5">
         <?php
-        printf('<label for="jira_endpoint">%s</label>', __('Endpoint', $this->plugin_name));
-        printf('<input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" placeholder="%s" value="%s">', __('https://yourcompanyname.atlassian.com', $this->plugin_name), !empty($endpoint_data) ? $endpoint_data['endpoint'] : '');
+        printf('<label for="jira_endpoint">%s</label>', __('Endpoint', 'appq-integration-center-jira-addon'));
+        printf('<input type="text" class="form-control" name="jira_endpoint" id="jira_endpoint" placeholder="%s" value="%s">', __('https://yourcompanyname.atlassian.com', 'appq-integration-center-jira-addon'), !empty($endpoint_data) ? $endpoint_data['endpoint'] : '');
         ?>
     </div>
     <div class="form-group">
         <?php
-        printf('<label for="jira_apikey">%s</label>', __('Authentication', $this->plugin_name));
-        printf('<input type="text" class="form-control" name="jira_apikey" id="jira_apikey" placeholder="%s" value="%s">', __('email@adress.com:APITOKEN', $this->plugin_name), !empty($config) ? $config->apikey : '');
+        printf('<label for="jira_apikey">%s</label>', __('Authentication', 'appq-integration-center-jira-addon'));
+        printf('<input type="text" class="form-control" name="jira_apikey" id="jira_apikey" placeholder="%s" value="%s">', __('email@adress.com:APITOKEN', 'appq-integration-center-jira-addon'), !empty($config) ? $config->apikey : '');
         ?>
     </div>
     <div class="form-group">
         <?php
-        printf('<label for="jira_project">%s</label>', __('Project ID', $this->plugin_name));
-        printf('<input type="text" class="form-control" name="jira_project" id="jira_project" placeholder="%s" value="%s">', __('ABC', $this->plugin_name), !empty($endpoint_data) ? $endpoint_data['project'] : '');
+        printf('<label for="jira_project">%s</label>', __('Project ID', 'appq-integration-center-jira-addon'));
+        printf('<input type="text" class="form-control" name="jira_project" id="jira_project" placeholder="%s" value="%s">', __('ABC', 'appq-integration-center-jira-addon'), !empty($endpoint_data) ? $endpoint_data['project'] : '');
         ?>
     </div>
-    <small><?= __('Media preferences', $this->plugin_name) ?></small>
+    <small><?= __('Media preferences', 'appq-integration-center-jira-addon') ?></small>
     <div class="form-group pull-left mr-3 col-12">
         <label class="d-flex align-items-center w-100">
             <input 
@@ -42,7 +42,7 @@ $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_
               name="media" id="media"
               <?= isset($config->upload_media) ? checked( $config->upload_media, 1, false ) : '' ?>
             > 
-            <?= __('Upload media', $this->plugin_name) ?>
+            <?= __('Upload media', 'appq-integration-center-jira-addon') ?>
         </label>   
     </div>
 </form>

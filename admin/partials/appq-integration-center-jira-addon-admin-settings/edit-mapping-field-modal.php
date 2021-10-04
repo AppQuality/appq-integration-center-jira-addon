@@ -5,7 +5,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div style="z-index: 99999;" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="add_mapping_field_modal_label"><?php _e('Add/edit field mapping', $this->plugin_name); ?></h5>
+        <h5 class="modal-title" id="add_mapping_field_modal_label"><?php _e('Add/edit field mapping', 'appq-integration-center-jira-addon'); ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,14 +16,14 @@
             <form id="jira_mapping_field">
               <div class="form-group">
                 <?php
-                printf('<label for="custom_mapping_name">%s</label>', __('Name', $this->plugin_name));
-                printf('<input type="text" class="form-control" name="name" id="custom_mapping_name" placeholder="%s">', __('summary', $this->plugin_name));
+                printf('<label for="custom_mapping_name">%s</label>', __('Name', 'appq-integration-center-jira-addon'));
+                printf('<input type="text" class="form-control" name="name" id="custom_mapping_name" placeholder="%s">', __('summary', 'appq-integration-center-jira-addon'));
                 ?>
               </div>
               <div class="form-group">
                 <?php
-                printf('<label for="custom_mapping_content">%s</label>', __('Target field', $this->plugin_name));
-                printf('<textarea class="form-control" name="value" id="custom_mapping_content" placeholder="%s"></textarea>', __('*Type*: {Bug.type} ...', $this->plugin_name));
+                printf('<label for="custom_mapping_content">%s</label>', __('Target field', 'appq-integration-center-jira-addon'));
+                printf('<textarea class="form-control" name="value" id="custom_mapping_content" placeholder="%s"></textarea>', __('*Type*: {Bug.type} ...', 'appq-integration-center-jira-addon'));
                 ?>
               </div>
               <div class="row">
@@ -31,13 +31,13 @@
                   <div class="form-group pull-left mr-3 col-12">
                     <label class="d-flex align-items-center">
                       <input type="checkbox" class="form-control col-1 mr-2" name="sanitize">
-                      <?=  __('Needs sanitizing', $this->plugin_name) ?>
+                      <?=  __('Needs sanitizing', 'appq-integration-center-jira-addon') ?>
                     </label>
                   </div>
                   <div class="form-group pull-left mr-3 col-12">
                     <label class="d-flex align-items-center">
                       <input type="checkbox" class="form-control col-1 mr-2" name="is_json">
-                      <?=  __('Contains JSON', $this->plugin_name) ?>
+                      <?=  __('Contains JSON', 'appq-integration-center-jira-addon') ?>
                     </label>
                   </div>
                 </div>
@@ -46,11 +46,11 @@
                 <div class="col-6 col-lg-4 offset-lg-2 text-right">
                   <?php printf(
                     '<button type="submit" id="add_new_mapping_field" class="btn btn-primary">%s</button>',
-                    __('Save field', $this->plugin_name)
+                    __('Save field', 'appq-integration-center-jira-addon')
                   ); ?>
                 </div>
                 <div class="col-6 col-lg-4">
-                  <?php printf('<button type="button" class="btn btn-link" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', $this->plugin_name)); ?>
+                  <?php printf('<button type="button" class="btn btn-link" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', 'appq-integration-center-jira-addon')); ?>
                 </div>
               </div>
             </form>

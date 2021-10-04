@@ -8,35 +8,35 @@ foreach ($api->basic_configuration as $key => $value) {
 ?>
 
     <div class="row">
-        <div class="col-6"><?php printf('<h4 class="title py-3">%s</h4>', __('Field mapping', $this->plugin_name)); ?></div>
+        <div class="col-6"><?php printf('<h4 class="title py-3">%s</h4>', __('Field mapping', 'appq-integration-center-jira-addon')); ?></div>
         <div class="col-6 text-right actions mt-2">
-            <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" data-target="#get_from_bug"><?php _e('Inspect your bugtracker data', $this->plugin_name); ?></button>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add_mapping_field_modal"><?php _e('Add new field mapping', $this->plugin_name); ?></button>
+            <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" data-target="#get_from_bug"><?php _e('Inspect your bugtracker data', 'appq-integration-center-jira-addon'); ?></button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add_mapping_field_modal"><?php _e('Add new field mapping', 'appq-integration-center-jira-addon'); ?></button>
         </div>
     </div>
     <div class="row mb-2">
         <div class="col-2" >
 					<small>
-						<strong><?= __('Name', $this->plugin_name); ?></strong>
-						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Jira field name', $this->plugin_name) ?>"></i>
+						<strong><?= __('Name', 'appq-integration-center-jira-addon'); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Jira field name', 'appq-integration-center-jira-addon') ?>"></i>
 					</small>
         </div>
         <div class="col-4">
 					<small>
-						<strong><?= __('Content', $this->plugin_name); ?></strong>
-						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('The content you want to set the jira field to. {Bug.*} fields will be replaced with the bug data', $this->plugin_name) ?>"></i>
+						<strong><?= __('Content', 'appq-integration-center-jira-addon'); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('The content you want to set the jira field to. {Bug.*} fields will be replaced with the bug data', 'appq-integration-center-jira-addon') ?>"></i>
 					</small>
         </div>
         <div class="col-2 text-center">
 					<small>
-						<strong><?= __('Needs sanitizing', $this->plugin_name); ?></strong>
-						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if you don\'t want to expand special characters for jira content (e.g. _ for italics, * for bold ...)', $this->plugin_name) ?>"></i>
+						<strong><?= __('Needs sanitizing', 'appq-integration-center-jira-addon'); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if you don\'t want to expand special characters for jira content (e.g. _ for italics, * for bold ...)', 'appq-integration-center-jira-addon') ?>"></i>
 					</small>
         </div>
         <div class="col-2 text-center">
 					<small>
-						<strong><?= __('Contains JSON', $this->plugin_name); ?></strong>
-						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if the content should be interpreted as a json object, useful when setting object or arrays', $this->plugin_name) ?>"></i>
+						<strong><?= __('Contains JSON', 'appq-integration-center-jira-addon'); ?></strong>
+						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if the content should be interpreted as a json object, useful when setting object or arrays', 'appq-integration-center-jira-addon') ?>"></i>
 					</small>
         </div>
     </div>

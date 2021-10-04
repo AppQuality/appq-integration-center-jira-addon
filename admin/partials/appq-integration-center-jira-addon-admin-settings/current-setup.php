@@ -16,7 +16,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
     <div class="col-3">
         <div>
 			<?php
-			printf( '<h6 class="text-secondary">%s</h6>', __( 'Endpoint', $this->plugin_name ) );
+			printf( '<h6 class="text-secondary">%s</h6>', __( 'Endpoint', 'appq-integration-center-jira-addon' ) );
 			?>
             <span class="text-primary"><?= $endpoint ?></span>
         </div>
@@ -25,7 +25,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
         <div>
 			<?php $apikey = $campaign->bugtracker->apikey; ?>
             <h6 class="text-secondary">
-				<?= __( 'Authentication', $this->plugin_name ) ?>
+				<?= __( 'Authentication', 'appq-integration-center-jira-addon' ) ?>
             </h6>
             <span>
                 <span class="text-primary"><?= substr( $apikey, 0, 10 ) . str_repeat( "•", 10 ); ?></span>
@@ -38,7 +38,7 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
     <div class="col">
         <div>
 			<?php
-			printf( '<h6 class="text-secondary">%s</h6>', __( 'Project ID', $this->plugin_name ) );
+			printf( '<h6 class="text-secondary">%s</h6>', __( 'Project ID', 'appq-integration-center-jira-addon' ) );
 			?>
             <span class="text-primary"><?= $project ?></span>
         </div>
@@ -46,8 +46,8 @@ $project  = isset( json_decode( $campaign->bugtracker->endpoint )->project ) ? j
     <div class="col">
         <div>
 			<?php
-			printf( '<h6 class="text-secondary">%s</h6>', __( 'Media upload', $this->plugin_name ) );
-			$madiaUploadText = isset( $campaign->bugtracker->upload_media ) && $campaign->bugtracker->upload_media == 1 ? __( 'Yes', $this->plugin_name ) : __( 'No', $this->plugin_name );
+			printf( '<h6 class="text-secondary">%s</h6>', __( 'Media upload', 'appq-integration-center-jira-addon' ) );
+			$madiaUploadText = isset( $campaign->bugtracker->upload_media ) && $campaign->bugtracker->upload_media == 1 ? __( 'Yes', 'appq-integration-center-jira-addon' ) : __( 'No', 'appq-integration-center-jira-addon' );
 			?>
             <span class="text-primary"><?= $madiaUploadText ?></span>
         </div>
