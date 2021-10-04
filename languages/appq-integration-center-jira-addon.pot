@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-10-04T10:59:29+00:00\n"
+"POT-Creation-Date: 2021-10-04T11:03:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: appq-integration-center-jira-addon\n"
@@ -240,21 +240,25 @@ msgid "Error"
 msgstr ""
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:36
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira get issue from bugtracker"
 msgid "Invalid bug. No fields to retrieve"
 msgstr ""
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:167
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira edit tracker settings"
 msgid "Tracker settings updated!"
 msgstr ""
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:199
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira add mapping field"
 msgid "Field added!"
 msgstr ""
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:266
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira delete mapping field"
 msgid "Field deleted!"
 msgstr ""

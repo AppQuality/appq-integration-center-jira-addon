@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: appq-integration-center-jira-addon\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/appq-integration-"
 "center-jira-addon\n"
-"POT-Creation-Date: 2021-10-04T09:35:02+00:00\n"
+"POT-Creation-Date: 2021-10-04T11:03:49+00:00\n"
 "PO-Revision-Date: 2021-10-04 11:53+0200\n"
 "Last-Translator: Luca Cannarozzo <luca.cannarozzo@app-quality.com>\n"
 "Language-Team: AppQuality\n"
@@ -259,21 +259,25 @@ msgid "Error"
 msgstr "Errore"
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:36
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira get issue from bugtracker"
 msgid "Invalid bug. No fields to retrieve"
 msgstr "Bug non valido. Nessun campo disponibile"
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:167
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira edit tracker settings"
 msgid "Tracker settings updated!"
 msgstr "Impostazioni tracker aggiornate!"
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:199
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira add mapping field"
 msgid "Field added!"
 msgstr "Campo aggiunto!"
 
 #: admin/js/appq-integration-center-jira-addon-admin.js:266
+#: admin/js/dist/appq-integration-center-jira-addon.min.js:1
 msgctxt "Integration Center Jira delete mapping field"
 msgid "Field deleted!"
 msgstr "Campo cancellato!"
