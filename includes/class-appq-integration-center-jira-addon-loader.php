@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
+ * @link       https://github.com/AppQuality/
  * @since      1.0.0
  *
  * @package    Appq_Integration_Center_Jira_Addon

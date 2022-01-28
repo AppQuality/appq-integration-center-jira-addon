@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
+ * @link              https://github.com/AppQuality/
  * @since             1.0.0
  * @package           Appq_Integration_Center_Jira_Addon
  *
  * @wordpress-plugin
  * Plugin Name:       Integration Center - Jira
- * Plugin URI:        bitbucket/appq-integration-center-jira-addon
+ * Plugin URI:        https://github.com/AppQuality/appq-integration-center-jira-addon
  * Description:       Extend Integration Center with Jira
- * Version:           1.0.0
- * Author:            Davide Bizzi
- * Author URI:        https://bitbucket.org/%7B1c7dab51-4872-4f3e-96ac-11f21c44fd4b%7D/
+ * Version:           1.1.3
+ * Author:            Unguess Team
+ * Author URI:        https://github.com/AppQuality/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       appq-integration-center-jira-addon
