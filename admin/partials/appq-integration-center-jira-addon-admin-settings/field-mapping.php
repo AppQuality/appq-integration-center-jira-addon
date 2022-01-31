@@ -7,68 +7,73 @@ foreach ($api->basic_configuration as $key => $value) {
 }
 ?>
 
-    <div class="row">
-        <div class="col-6"><?php printf('<h4 class="title py-3">%s</h4>', __('Field mapping', 'appq-integration-center-jira-addon')); ?></div>
-        <div class="col-6 text-right actions mt-2">
-            <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" data-target="#get_from_bug"><?php _e('Inspect your bugtracker data', 'appq-integration-center-jira-addon'); ?></button>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add_mapping_field_modal"><?php _e('Add new field mapping', 'appq-integration-center-jira-addon'); ?></button>
-        </div>
-    </div>
-    <div class="row mb-2">
-        <div class="col-2" >
-					<small>
-						<strong><?= __('Name', 'appq-integration-center-jira-addon'); ?></strong>
+<div class="row">
+	<div class="col-sm-6 col-md-4">
+		<h4 class="text-primary py-3"><?=  __('Field mapping', 'appq-integration-center') ?></h4>	
+	</div>
+	<div class="col-sm-6 col-md-8 text-right actions">
+		<div class="btn-group">
+
+			<button type="button" class="btn btn-primary-light" data-toggle="modal" data-target="#get_from_bug"><?= __('Inspect your bugtracker data', 'appq-integration-center-jira-addon'); ?></button>
+			<button type="button" class="btn btn-primary-light" data-toggle="modal" data-target="#add_mapping_field_modal"><?= __('Add new field mapping', 'appq-integration-center-jira-addon'); ?></button>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						<?= __("Name", 'appq-integration-center-jira-addon'); ?>
 						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Jira field name', 'appq-integration-center-jira-addon') ?>"></i>
-					</small>
-        </div>
-        <div class="col-4">
-					<small>
-						<strong><?= __('Content', 'appq-integration-center-jira-addon'); ?></strong>
+					</th>
+					<th class="text-center">
+						<?= __("Content", 'appq-integration-center-jira-addon'); ?>
 						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('The content you want to set the jira field to. {Bug.*} fields will be replaced with the bug data', 'appq-integration-center-jira-addon') ?>"></i>
-					</small>
-        </div>
-        <div class="col-2 text-center">
-					<small>
-						<strong><?= __('Needs sanitizing', 'appq-integration-center-jira-addon'); ?></strong>
+					</th>
+					<th class="text-center">
+						<?= __("Needs sanitizing", 'appq-integration-center-jira-addon'); ?>
 						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if you don\'t want to expand special characters for jira content (e.g. _ for italics, * for bold ...)', 'appq-integration-center-jira-addon') ?>"></i>
-					</small>
-        </div>
-        <div class="col-2 text-center">
-					<small>
-						<strong><?= __('Contains JSON', 'appq-integration-center-jira-addon'); ?></strong>
+					</th>
+					<th class="text-center">
+						<?= __("Contains JSON", 'appq-integration-center-jira-addon'); ?>
 						<i class="fa fa-question-circle" data-toggle="tooltip" title="<?= __('Check it if the content should be interpreted as a json object, useful when setting object or arrays', 'appq-integration-center-jira-addon') ?>"></i>
-					</small>
-        </div>
-    </div>
-    <div class="fields-list">
-		<?php foreach ($field_mapping as $key => $item): ?>
-			<?php foreach ($item as $ik => $ii) {
-				$item[$ik] = esc_attr($ii);
-			} ?>
-			<?php $this->partial('settings/field-mapping-row',array(
-				'_key' => esc_attr($key),  
-				'item' => $item,
-				'sanitize_icon' => (array_key_exists('sanitize', $item) && $item['sanitize'] == 'on')  
-					? '<i class="fa fa-check"></i>'
-					: '<i class="fa fa-minus"></i>',
-				'is_json_icon' => (array_key_exists('is_json', $item) && $item['is_json'] == 'on')  
-					? '<i class="fa fa-check"></i>'
-					: '<i class="fa fa-minus"></i>'
-			)); ?>
-		<?php endforeach; ?>
-		<script type="text/html" id ="tmpl-field_mapping_row">
-		<?php $this->partial('settings/field-mapping-row',array(
-			'_key' => '{{data.key}}',
-			'item' => array(
-				'value' => '{{data.content}}',
-				'is_json' => '{{data.json}}',
-				'sanitize' => '{{data.sanitize}}'
-			),
-			'sanitize_icon' => '<# if (data.sanitize == "on") {#><i class="fa fa-check"></i><#} else {#><i class="fa fa-minus"></i><#}#>',
-			'is_json_icon' => '<# if (data.json == "on") {#><i class="fa fa-check"></i><#} else {#><i class="fa fa-minus"></i><#}#>'
-		)); ?>
-		</script>
-    </div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="fields-list">
+				<?php foreach ($field_mapping as $key => $item) {
+					$this->partial('settings/field-mapping-row', array(
+						'_key' => esc_attr($key),
+						'item' => $item,
+						'sanitize_icon' => (array_key_exists('sanitize', $item) && $item['sanitize'] == 'on')
+							? '<i class="fa fa-check"></i>'
+							: '<i class="fa fa-minus"></i>',
+						'is_json_icon' => (array_key_exists('is_json', $item) && $item['is_json'] == 'on')
+							? '<i class="fa fa-check"></i>'
+							: '<i class="fa fa-minus"></i>'
+					));
+				}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/html" id="tmpl-field_mapping_row">
+	<?php $this->partial('settings/field-mapping-row', array(
+		'_key' => '{{data.key}}',
+		'item' => array(
+			'value' => '{{data.content}}',
+			'is_json' => '{{data.json}}',
+			'sanitize' => '{{data.sanitize}}'
+		),
+		'sanitize_icon' => '<# if (data.sanitize == "on") {#><i class="fa fa-check"></i><#} else {#><i class="fa fa-minus"></i><#}#>',
+		'is_json_icon' => '<# if (data.json == "on") {#><i class="fa fa-check"></i><#} else {#><i class="fa fa-minus"></i><#}#>'
+	)); ?>
+</script>
 
 <?php
 $this->partial('settings/get-bug-modal', array());

@@ -19,7 +19,7 @@
 			$.ajax({
 				type: "post",
 				dataType: "json",
-				url: custom_object.ajax_url,
+				url: integration_center_obj.ajax_url,
 				data: {
 					action: 'appq_get_issue_from_bugtracker',
 					issue_id: issue_id,
@@ -156,20 +156,24 @@
 			});
 			data.push({
 			  name: "nonce",
-			  value: appq_ajax.nonce,
+			  value: integration_center_obj.nonce,
 			});
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
-				url: appq_ajax.url,
+				url: integration_center_obj.ajax_url,
 				data: data,
 				success: function(msg) {
 					toastr.success(_x('Tracker settings updated!', 'Integration Center Jira edit tracker settings', 'appq-integration-center-jira-addon'));
 					location.reload();
+				},
+				error: function(err){
+					console.log(err);
 				}
 			});
 		})
-		$('#jira_mapping_field').submit(function(e){
+
+		$('#jira_mapping_field').on('submit', function(e){
 			e.preventDefault();
 			var field_list_wrap = $('.fields-list');
 			var cp_id = $('#campaign_id').val()
@@ -188,12 +192,16 @@
 			});
 			data.push({
 			  name: "nonce",
-			  value: appq_ajax.nonce,
+			  value: integration_center_obj.nonce,
 			});
+
+			console.log("Submit...");
+			console.log(integration_center_obj.ajax_url);
+
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
-				url: appq_ajax.url,
+				url: integration_center_obj.ajax_url,
 				data: data,
 				success: function(msg) {
 					toastr.success(_x('Field added!', 'Integration Center Jira add mapping field', 'appq-integration-center-jira-addon'));
@@ -208,7 +216,8 @@
 					$('#add_mapping_field_modal').modal('hide');
 				}
 			});
-		})
+		});
+
 		$(document).on('click', '[data-target="#add_mapping_field_modal"]', function(){
 			var modal_id = $(this).attr('data-target');
 			var input_name = $(modal_id).find('input[name="name"]');
@@ -255,12 +264,12 @@
 			});
 			data.push({
 			  name: "nonce",
-			  value: appq_ajax.nonce,
+			  value: integration_center_obj.nonce,
 			});
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
-				url: appq_ajax.url,
+				url: integration_center_obj.ajax_url,
 				data: data,
 				success: function(msg) {
 					toastr.success(_x('Field deleted!', 'Integration Center Jira delete mapping field', 'appq-integration-center-jira-addon'));
