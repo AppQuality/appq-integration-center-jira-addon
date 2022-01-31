@@ -21,7 +21,9 @@
               ); ?>
             </div>
             <div class="col-6 col-lg-4">
-              <?php printf('<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', 'appq-integration-center-jira-addon')); ?>
+              <button type="button" class="btn btn-link" data-dismiss="modal">
+                <?= __('Cancel', 'appq-integration-center-jira-addon') ?>
+              </button>
             </div>
           </div>
         </div>

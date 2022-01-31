@@ -1,72 +1,72 @@
 <?php $api = new IntegrationCenterRestApi($campaign_id, null, null); ?>
 
 <!-- Modal -->
-<div class="modal" style="z-index: 99999;" id="add_mapping_field_modal" tabindex="-1" role="dialog" aria-labelledby="add_mapping_field_modal_label" aria-hidden="true">
+<div class="modal" id="add_mapping_field_modal" tabindex="-1" role="dialog" aria-labelledby="add_mapping_field_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div style="z-index: 99999;" class="modal-content">
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="add_mapping_field_modal_label"><?php _e('Add/edit field mapping', 'appq-integration-center-jira-addon'); ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <h4 class="modal-title" id="add_mapping_field_modal_label">
+          <?php _e('Add/edit field mapping', 'appq-integration-center-jira-addon'); ?>
+        </h4>
       </div>
-      <div class="modal-body px-4">
-        <div class="row">
-          <div class="col-8">
-            <form id="jira_mapping_field">
+      <form class="form" id="jira_mapping_field">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-8">
               <div class="form-group">
-                <?php
-                printf('<label for="custom_mapping_name">%s</label>', __('Name', 'appq-integration-center-jira-addon'));
-                printf('<input type="text" class="form-control" name="name" id="custom_mapping_name" placeholder="%s">', __('summary', 'appq-integration-center-jira-addon'));
-                ?>
+                <label for="custom_mapping_name"><?= __('Name', 'appq-integration-center-jira-addon') ?></label>
+                <input type="text" class="form-control" name="name" id="custom_mapping_name" placeholder="<?= __('summary', 'appq-integration-center-jira-addon') ?>">
               </div>
               <div class="form-group">
-                <?php
-                printf('<label for="custom_mapping_content">%s</label>', __('Target field', 'appq-integration-center-jira-addon'));
-                printf('<textarea class="form-control" name="value" id="custom_mapping_content" placeholder="%s"></textarea>', __('*Type*: {Bug.type} ...', 'appq-integration-center-jira-addon'));
-                ?>
+                <label for="custom_mapping_content"><?= __('Target field', 'appq-integration-center-jira-addon') ?></label>
+                <textarea class="form-control" rows="5" name="value" id="custom_mapping_content" placeholder="<?= __('*Type*: {Bug.type} ...', 'appq-integration-center-jira-addon') ?>"></textarea>
               </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-group pull-left mr-3 col-12">
-                    <label class="d-flex align-items-center">
-                      <input type="checkbox" class="form-control col-1 mr-2" name="sanitize">
-                      <?=  __('Needs sanitizing', 'appq-integration-center-jira-addon') ?>
-                    </label>
-                  </div>
-                  <div class="form-group pull-left mr-3 col-12">
-                    <label class="d-flex align-items-center">
-                      <input type="checkbox" class="form-control col-1 mr-2" name="is_json">
-                      <?=  __('Contains JSON', 'appq-integration-center-jira-addon') ?>
-                    </label>
-                  </div>
-                </div>
+
+              <div>
+                <label class="checkbox-inline checkbox-styled">
+                  <input type="checkbox" name="sanitize"><span><?= __('Needs sanitizing', 'appq-integration-center-jira-addon') ?></span>
+                </label>
               </div>
-              <div class="row mt-5 pb-4">
-                <div class="col-6 col-lg-4 offset-lg-2 text-right">
-                  <?php printf(
-                    '<button type="submit" id="add_new_mapping_field" class="btn btn-primary">%s</button>',
-                    __('Save field', 'appq-integration-center-jira-addon')
-                  ); ?>
-                </div>
-                <div class="col-6 col-lg-4">
-                  <?php printf('<button type="button" class="btn btn-link" data-dismiss="modal" aria-label="%1$s">%1$s</button>', __('Cancel', 'appq-integration-center-jira-addon')); ?>
-                </div>
+              <div>
+                <label class="checkbox-inline checkbox-styled">
+                  <input type="checkbox" name="is_json"><span><?= __('Contains JSON', 'appq-integration-center-jira-addon') ?></span>
+                </label>
               </div>
-            </form>
-          </div>
-          <div class="col-4" style="max-height:350px;overflow-y:scroll">
-            <h6 class="text-center">Click to copy</h6>
-            <ul style="list-style: none;">
-            <?php foreach ($api->mappings as $key => $value): ?>
-              <li class="mb-1" title="<?= esc_attr($value['description']) ?>">
-                <button style="text-transform: initial;" data-copy-to-clipboard class="btn btn-block btn-secondary"><?= $key ?></button>
-              </li>
-            <?php endforeach; ?>
-            </ul>
+
+
+            </div>
+
+            <div class="col-sm-4" style="max-height:350px;">
+              <h6 class="text-center">Click to copy</h6>
+              <ul class="list divider-full-bleed scroll height-6">
+                <?php foreach ($api->mappings as $key => $value) : ?>
+                  <li class="tile" title="<?= esc_attr($value['description']) ?>">
+                    <a class="tile-content ink-reaction copy-to-clipboard" data-clipboard-text="<?= $key ?>">
+                      <div class="tile-text" style="font-size: 13px;">
+                        <?= $key ?>
+                      </div>
+                    </a>
+                    <a class="btn btn-flat ink-reaction copy-to-clipboard btn-sm" data-clipboard-text="<?= $key ?>">
+                      <i class="fa fa-copy"></i>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" data-dismiss="modal">
+            <?= __('Cancel', 'appq-integration-center-jira-addon') ?>
+          </button>
+          <button type="submit" id="add_new_mapping_field" class="btn btn-primary">
+            <?= __('Save field', 'appq-integration-center-jira-addon'); ?>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

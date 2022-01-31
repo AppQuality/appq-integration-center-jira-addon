@@ -21,7 +21,7 @@ foreach ($api->basic_configuration as $key => $value) {
 </div>
 <div class="row">
 	<div class="col-sm-12">
-		<table class="table">
+		<table class="table table-banded">
 			<thead>
 				<tr>
 					<th>

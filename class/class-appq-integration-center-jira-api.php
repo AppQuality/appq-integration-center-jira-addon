@@ -96,11 +96,11 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 */
 	public function bug_data_replace_jira($bug, $value, $sanitize, $is_json = false)
 	{
-		global $wpdb;
+		global $tbdb;
 
 		if (strpos($value, '{Bug.media}') !== false)
 		{
-			$media =  $wpdb->get_results($wpdb->prepare('SELECT type,location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+			$media =  $tbdb->get_results($tbdb->prepare('SELECT type,location FROM ' . $tbdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 			$media_items = array();
 			foreach ($media as $media_item)
 			{
@@ -166,7 +166,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * @param  string $bugtracker_id
 	 */
 	public function delete_issue($bugtracker_id) {
-		global $wpdb;
+		global $tbdb;
 		if (empty($bugtracker_id)) {
 			return array(
 				'status' => false,
@@ -215,7 +215,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 		}
 
 		if ($delete_from_db) {
-			$wpdb->delete($wpdb->prefix . 'appq_integration_center_bugs',array(
+			$tbdb->delete($tbdb->prefix . 'appq_integration_center_bugs',array(
 				'bugtracker_id' => $bugtracker_id
 			));
 			return array(
@@ -249,7 +249,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 * 									}
 	 */
 	public function update_issue($bug,$key) {
-		global $wpdb;
+		global $tbdb;
 
 		// TODO: Remove this control when old bugtracker will be discontinued
 		$is_uploaded = $this->is_uploaded_with_old_bugtracker($bug->id);
@@ -293,7 +293,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 			if (property_exists($bug,'media')) {
 				$media = $bug->media;
 			} else {
-				$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+				$media =  $tbdb->get_col($tbdb->prepare('SELECT location FROM ' . $tbdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 			}
 			foreach ($media as $media_item)
 			{
@@ -318,9 +318,9 @@ class JiraRestApi extends IntegrationCenterRestApi
 	}
 
 	private function is_uploaded_with_old_bugtracker($bug_id) {
-		global $wpdb;
+		global $tbdb;
 
-		$is_uploaded = $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug_id));
+		$is_uploaded = $tbdb->get_var($tbdb->prepare('SELECT COUNT(*) FROM ' . $tbdb->prefix .'appq_evd_bugtracker_sync WHERE bug_id = %d AND bug_tracker = "Jira"', $bug_id));
 		$is_uploaded = intval($is_uploaded);
 
 		return $is_uploaded > 0;
@@ -338,7 +338,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 */
 	public function send_issue($bug)
 	{
-		global $wpdb;
+		global $tbdb;
 
 		// TODO: Remove this control when old bugtracker will be discontinued
 		$is_uploaded = $this->is_uploaded_with_old_bugtracker($bug->id);
@@ -376,7 +376,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 
 		if (property_exists($res, 'key'))
 		{
-			$wpdb->insert($wpdb->prefix . 'appq_integration_center_bugs', array(
+			$tbdb->insert($tbdb->prefix . 'appq_integration_center_bugs', array(
 				'bug_id' => $bug->id,
 				'bugtracker_id' => $res->key,
 				'integration' => $this->integration['slug']
@@ -390,7 +390,7 @@ class JiraRestApi extends IntegrationCenterRestApi
 				if (property_exists($bug,'media')) {
 					$media = $bug->media;
 				} else {
-					$media =  $wpdb->get_col($wpdb->prepare('SELECT location FROM ' . $wpdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
+					$media =  $tbdb->get_col($tbdb->prepare('SELECT location FROM ' . $tbdb->prefix . 'appq_evd_bug_media WHERE bug_id = %d', $bug->id));
 				}
 
 				$media_error = false;
@@ -462,11 +462,11 @@ class JiraRestApi extends IntegrationCenterRestApi
 	 */
 	public function get_issue_by_id($id)
 	{
-		global $wpdb;
+		global $tbdb;
 
-		$sql = $wpdb->prepare('SELECT bugtracker_id FROM wp_appq_integration_center_bugs 
+		$sql = $tbdb->prepare('SELECT bugtracker_id FROM wp_appq_integration_center_bugs 
 			WHERE bug_id = %d AND integration = "jira"',$id);
-		return $wpdb->get_var($sql);
+		return $tbdb->get_var($sql);
 	}
 
 
