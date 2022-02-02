@@ -16,16 +16,16 @@ $endpoint_data = !empty($config) && property_exists($config, 'endpoint') ? json_
 ?>
 <form class="form" id="jira_tracker_settings">
     <div class="form-group">
-        <label for="jira_endpoint"><?= __("Jira Endpoint", 'appq-integration-center-jira-addon'); ?></label>
         <input type="text" class="form-control" id="jira_endpoint" name="jira_endpoint" placeholder="<?= __('https://yourcompanyname.atlassian.com', 'appq-integration-center-jira-addon') ?>" value="<?= !empty($endpoint_data['endpoint']) ? $endpoint_data['endpoint'] : ''; ?>">
+        <label for="jira_endpoint"><?= __("Jira Endpoint", 'appq-integration-center-jira-addon'); ?></label>
     </div>
     <div class="form-group">
-        <label for="jira_apikey"><?= __("Authentication", 'appq-integration-center-jira-addon'); ?></label>
         <input type="text" class="form-control" id="jira_apikey" name="jira_apikey" placeholder="<?= __('email@adress.com:APITOKEN', 'appq-integration-center-jira-addon') ?>" value="<?= !empty($config) ? $config->apikey : ''; ?>">
+        <label for="jira_apikey"><?= __("Authentication", 'appq-integration-center-jira-addon'); ?></label>
     </div>
     <div class="form-group">
-        <label for="jira_project"><?= __('Project ID', 'appq-integration-center-jira-addon') ?></label>
         <input type="text" class="form-control" name="jira_project" id="jira_project" placeholder="<?= __('ABC', 'appq-integration-center-jira-addon') ?>" value="<?= !empty($endpoint_data) ? $endpoint_data['project'] : '' ?>">
+        <label for="jira_project"><?= __('Project ID', 'appq-integration-center-jira-addon') ?></label>
     </div>
     <small><?= __('Media preferences', 'appq-integration-center-jira-addon') ?></small>
     <div class="form-group">
