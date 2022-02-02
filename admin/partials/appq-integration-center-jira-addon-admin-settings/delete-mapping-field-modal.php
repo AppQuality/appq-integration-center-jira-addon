@@ -16,7 +16,7 @@
             <div class="modal-footer">
                 <form id="jira_delete_field">
                     <input type="hidden" name="field_key">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">
                         <?= __('Cancel', 'appq-integration-center-jira-addon') ?>
                     </button>
                     <button type="submit" id="delete_mapping_field" class="btn btn-primary confirm">
