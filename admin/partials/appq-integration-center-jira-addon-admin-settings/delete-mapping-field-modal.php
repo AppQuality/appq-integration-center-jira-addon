@@ -22,7 +22,6 @@
                     <button type="submit" id="delete_mapping_field" class="btn btn-primary confirm">
                         <?= __('Delete field', 'appq-integration-center-jira-addon'); ?>
                     </button>
-    
                 </form>
             </div><!-- END .modal-footer -->
 

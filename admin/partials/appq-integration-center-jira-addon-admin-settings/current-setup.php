@@ -13,11 +13,11 @@ $project  = isset(json_decode($campaign->bugtracker->endpoint)->project) ? json_
         );
         ?>
     </div>
-    <div class="col-sm-6 col-lg-3 col-xl-3 align-items-center justify-content-center">
+    <div class="col-sm-6 col-lg-3 col-xl-3 align-items-center justify-content-center text-center">
         <h6 class="text-primary"><?= __('Endpoint', 'appq-integration-center-jira-addon') ?></h6>
         <span title="<?= $endpoint ?>" class="text-info text-truncate full-width"><?= $endpoint ?></span>
     </div>
-    <div class="col-sm-6 col-lg-3 align-items-center justify-content-center">
+    <div class="col-sm-6 col-lg-3 align-items-center justify-content-center text-center">
         <?php $apikey = $campaign->bugtracker->apikey; ?>
         <h6 class="text-primary">
             <?= __('Authentication', 'appq-integration-center-jira-addon') ?>

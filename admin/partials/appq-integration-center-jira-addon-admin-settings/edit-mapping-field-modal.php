@@ -40,7 +40,7 @@
             </div>
 
             <div class="col-sm-4" style="max-height:350px;">
-              <h6 class="text-center">Click to copy</h6>
+              <h6 class="text-center"><?= __('Click to copy', 'appq-integration-center-jira-addon'); ?></h6>
               <ul class="list divider-full-bleed scroll height-6">
                 <?php foreach ($api->mappings as $key => $value) : ?>
                   <li class="tile" title="<?= esc_attr($value['description']) ?>">
